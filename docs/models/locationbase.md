@@ -1,0 +1,11 @@
+# LocationBase
+
+
+## Fields
+
+| Field                                                            | Type                                                             | Required                                                         | Description                                                      | Example                                                          |
+| ---------------------------------------------------------------- | ---------------------------------------------------------------- | ---------------------------------------------------------------- | ---------------------------------------------------------------- | ---------------------------------------------------------------- |
+| `country`                                                        | [models.Country](../models/country.md)                           | :heavy_check_mark:                                               | Country code and name from ISO 3166-1                            |                                                                  |
+| `level`                                                          | *Optional[int]*                                                  | :heavy_minus_sign:                                               | N/A                                                              | 1                                                                |
+| `subregion`                                                      | [OptionalNullable[models.SubRegion]](../models/subregion.md)     | :heavy_minus_sign:                                               | N/A                                                              | {<br/>"id": "US-TX",<br/>"name": "Texas"<br/>}                   |
+| `macroregion`                                                    | [OptionalNullable[models.MacroRegion]](../models/macroregion.md) | :heavy_minus_sign:                                               | N/A                                                              | {<br/>"id": "145",<br/>"name": "Western Asia"<br/>}              |
