@@ -18,7 +18,7 @@ class SearchQueryResponseTypedDict(TypedDict):
     - Normalizes `hits.total` when ES returns a bare integer.
     - Keeps ES-native field names through aliases and allows unknown fields to pass (`extra=\"allow\"`).
     - Applies light, non-destructive normalization to each hit's `_source`:
-    * Ensures `_source.int_id` falls back to `_source.dataset.int_id` if missing.
+    * Ensures `_source.int_id` falls back to `_source.dataset.int_id` (or `dataset.id`) if missing.
     * Ensures `_source.resources` is always a list (empty if missing/null).
     * If `_source.dataset.num_resources` is missing, sets it to `len(_source.resources)`.
     * Unifies `source` / `sources`:
@@ -43,7 +43,7 @@ class SearchQueryResponse(BaseModel):
     - Normalizes `hits.total` when ES returns a bare integer.
     - Keeps ES-native field names through aliases and allows unknown fields to pass (`extra=\"allow\"`).
     - Applies light, non-destructive normalization to each hit's `_source`:
-    * Ensures `_source.int_id` falls back to `_source.dataset.int_id` if missing.
+    * Ensures `_source.int_id` falls back to `_source.dataset.int_id` (or `dataset.id`) if missing.
     * Ensures `_source.resources` is always a list (empty if missing/null).
     * If `_source.dataset.num_resources` is missing, sets it to `len(_source.resources)`.
     * Unifies `source` / `sources`:

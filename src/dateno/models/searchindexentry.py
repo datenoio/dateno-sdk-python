@@ -15,7 +15,7 @@ from .searchindexsourcerecord import (
 )
 from dateno.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
 from pydantic import model_serializer
-from typing import List
+from typing import List, Optional
 from typing_extensions import NotRequired, TypedDict
 
 
@@ -23,8 +23,8 @@ class SearchIndexEntryTypedDict(TypedDict):
     id: str
     source: SearchIndexSourceRecordTypedDict
     dataset: SearchIndexDatasetRecordTypedDict
-    resources: List[SearchIndexResourceRecordTypedDict]
     int_id: NotRequired[Nullable[str]]
+    resources: NotRequired[List[SearchIndexResourceRecordTypedDict]]
 
 
 class SearchIndexEntry(BaseModel):
@@ -34,13 +34,13 @@ class SearchIndexEntry(BaseModel):
 
     dataset: SearchIndexDatasetRecord
 
-    resources: List[SearchIndexResourceRecord]
-
     int_id: OptionalNullable[str] = UNSET
+
+    resources: Optional[List[SearchIndexResourceRecord]] = None
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["int_id"]
+        optional_fields = ["int_id", "resources"]
         nullable_fields = ["int_id"]
         null_default_fields = []
 

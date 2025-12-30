@@ -3,15 +3,15 @@
 from __future__ import annotations
 from .indicator import Indicator, IndicatorTypedDict
 from dateno.types import BaseModel
-from typing import List
-from typing_extensions import TypedDict
+from typing import List, Optional
+from typing_extensions import NotRequired, TypedDict
 
 
 class PageIndicatorTypedDict(TypedDict):
     totals: int
     start: int
     limit: int
-    items: List[IndicatorTypedDict]
+    items: NotRequired[List[IndicatorTypedDict]]
 
 
 class PageIndicator(BaseModel):
@@ -21,4 +21,4 @@ class PageIndicator(BaseModel):
 
     limit: int
 
-    items: List[Indicator]
+    items: Optional[List[Indicator]] = None

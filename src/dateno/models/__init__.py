@@ -6,9 +6,9 @@ import builtins
 import sys
 
 if TYPE_CHECKING:
-    from .body_dataset_search_using_elastic_dsl_search_0_2_es_search_post import (
-        BodyDatasetSearchUsingElasticDSLSearch02EsSearchPost,
-        BodyDatasetSearchUsingElasticDSLSearch02EsSearchPostTypedDict,
+    from .body_search_datasets_dsl import (
+        BodySearchDatasetsDsl,
+        BodySearchDatasetsDslTypedDict,
     )
     from .country import Country, CountryTypedDict
     from .datacatalog import DataCatalog, DataCatalogTypedDict
@@ -20,84 +20,70 @@ if TYPE_CHECKING:
         DataCatalogSearchResponse,
         DataCatalogSearchResponseTypedDict,
     )
-    from .dataset_search_using_elastic_dsl_search_0_2_es_search_postop import (
-        DatasetSearchUsingElasticDSLSearch02EsSearchPostRequest,
-        DatasetSearchUsingElasticDSLSearch02EsSearchPostRequestTypedDict,
-    )
     from .dimensionspec import DimensionSpec, DimensionSpecTypedDict
     from .endpoint import Endpoint, EndpointTypedDict
-    from .export_timeseries_data_statsdb_0_1_ns_ns_id_ts_ts_id_export_fileext_getop import (
-        ExportTimeseriesDataStatsdb01NsNsIDTsTsIDExportFileextGetRequest,
-        ExportTimeseriesDataStatsdb01NsNsIDTsTsIDExportFileextGetRequestTypedDict,
-        ExportTimeseriesDataStatsdb01NsNsIDTsTsIDExportFileextGetResponse,
-        ExportTimeseriesDataStatsdb01NsNsIDTsTsIDExportFileextGetResponseResult,
-        ExportTimeseriesDataStatsdb01NsNsIDTsTsIDExportFileextGetResponseResultTypedDict,
-        ExportTimeseriesDataStatsdb01NsNsIDTsTsIDExportFileextGetResponseTypedDict,
+    from .export_timeseries_fileop import (
+        ExportTimeseriesFileRequest,
+        ExportTimeseriesFileRequestTypedDict,
+        ExportTimeseriesFileResponse,
+        ExportTimeseriesFileResponseResult,
+        ExportTimeseriesFileResponseResultTypedDict,
+        ExportTimeseriesFileResponseTypedDict,
     )
     from .facetinfo import FacetInfo, FacetInfoTypedDict
     from .facetitem import FacetItem, FacetItemTypedDict
     from .facetvaluesresponse import FacetValuesResponse, FacetValuesResponseTypedDict
     from .fieldspec import FieldSpec, FieldSpecTypedDict
-    from .get_data_catalog_record_registry_catalog_catalog_id_getop import (
-        GetDataCatalogRecordRegistryCatalogCatalogIDGetRequest,
-        GetDataCatalogRecordRegistryCatalogCatalogIDGetRequestTypedDict,
+    from .get_catalog_by_idop import (
+        GetCatalogByIDRequest,
+        GetCatalogByIDRequestTypedDict,
     )
-    from .get_facet_values_search_0_2_get_facet_getop import (
-        GetFacetValuesSearch02GetFacetGetRequest,
-        GetFacetValuesSearch02GetFacetGetRequestTypedDict,
+    from .get_dataset_by_entry_idop import (
+        GetDatasetByEntryIDRequest,
+        GetDatasetByEntryIDRequestTypedDict,
     )
-    from .get_indicator_metadata_statsdb_0_1_ns_ns_id_indicators_ind_id_getop import (
-        GetIndicatorMetadataStatsdb01NsNsIDIndicatorsIndIDGetRequest,
-        GetIndicatorMetadataStatsdb01NsNsIDIndicatorsIndIDGetRequestTypedDict,
+    from .get_namespace_indicatorop import (
+        GetNamespaceIndicatorRequest,
+        GetNamespaceIndicatorRequestTypedDict,
     )
-    from .get_namespace_database_metadata_statsdb_0_1_ns_ns_id_getop import (
-        GetNamespaceDatabaseMetadataStatsdb01NsNsIDGetRequest,
-        GetNamespaceDatabaseMetadataStatsdb01NsNsIDGetRequestTypedDict,
+    from .get_namespace_tableop import (
+        GetNamespaceTableRequest,
+        GetNamespaceTableRequestTypedDict,
     )
-    from .get_similar_datasets_search_0_2_similar_entry_id_getop import (
-        GetSimilarDatasetsSearch02SimilarEntryIDGetRequest,
-        GetSimilarDatasetsSearch02SimilarEntryIDGetRequestTypedDict,
+    from .get_namespaceop import GetNamespaceRequest, GetNamespaceRequestTypedDict
+    from .get_raw_entry_by_idop import (
+        GetRawEntryByIDRequest,
+        GetRawEntryByIDRequestTypedDict,
     )
-    from .get_single_dataset_record_by_entry_id_search_0_1_entry_entry_id_getop import (
-        GetSingleDatasetRecordByEntryIDSearch01EntryEntryIDGetRequest,
-        GetSingleDatasetRecordByEntryIDSearch01EntryEntryIDGetRequestTypedDict,
+    from .get_search_facet_valuesop import (
+        GetSearchFacetValuesRequest,
+        GetSearchFacetValuesRequestTypedDict,
     )
-    from .get_table_metadata_statsdb_0_1_ns_ns_id_tables_table_id_getop import (
-        GetTableMetadataStatsdb01NsNsIDTablesTableIDGetRequest,
-        GetTableMetadataStatsdb01NsNsIDTablesTableIDGetRequestTypedDict,
+    from .get_similar_datasetsop import (
+        GetSimilarDatasetsRequest,
+        GetSimilarDatasetsRequestTypedDict,
     )
-    from .get_timeseries_record_metadata_statsdb_0_1_ns_ns_id_ts_ts_id_getop import (
-        GetTimeseriesRecordMetadataStatsdb01NsNsIDTsTsIDGetRequest,
-        GetTimeseriesRecordMetadataStatsdb01NsNsIDTsTsIDGetRequestTypedDict,
-    )
+    from .get_timeseriesop import GetTimeseriesRequest, GetTimeseriesRequestTypedDict
     from .hit import Hit, HitTypedDict
     from .hits import Hits, HitsTypedDict, TotalUnion, TotalUnionTypedDict
     from .identifier import Identifier, IdentifierTypedDict
     from .indicator import Indicator, IndicatorTypedDict
-    from .list_exportable_formats_statsdb_0_1_list_exportable_formats_getop import (
-        ListExportableFormatsStatsdb01ListExportableFormatsGetRequest,
-        ListExportableFormatsStatsdb01ListExportableFormatsGetRequestTypedDict,
+    from .list_catalogsop import ListCatalogsRequest, ListCatalogsRequestTypedDict
+    from .list_export_formatsop import (
+        ListExportFormatsRequest,
+        ListExportFormatsRequestTypedDict,
     )
-    from .list_facets_search_0_2_list_facets_getop import (
-        ListFacetsSearch02ListFacetsGetRequest,
-        ListFacetsSearch02ListFacetsGetRequestTypedDict,
+    from .list_indicatorsop import ListIndicatorsRequest, ListIndicatorsRequestTypedDict
+    from .list_namespace_tablesop import (
+        ListNamespaceTablesRequest,
+        ListNamespaceTablesRequestTypedDict,
     )
-    from .list_indicators_statsdb_0_1_ns_ns_id_indicators_getop import (
-        ListIndicatorsStatsdb01NsNsIDIndicatorsGetRequest,
-        ListIndicatorsStatsdb01NsNsIDIndicatorsGetRequestTypedDict,
+    from .list_namespacesop import ListNamespacesRequest, ListNamespacesRequestTypedDict
+    from .list_search_facetsop import (
+        ListSearchFacetsRequest,
+        ListSearchFacetsRequestTypedDict,
     )
-    from .list_namespaces_databases_statsdb_0_1_ns_getop import (
-        ListNamespacesDatabasesStatsdb01NsGetRequest,
-        ListNamespacesDatabasesStatsdb01NsGetRequestTypedDict,
-    )
-    from .list_tables_statsdb_0_1_ns_ns_id_tables_getop import (
-        ListTablesStatsdb01NsNsIDTablesGetRequest,
-        ListTablesStatsdb01NsNsIDTablesGetRequestTypedDict,
-    )
-    from .list_timeseries_statsdb_0_1_ns_ns_id_ts_getop import (
-        ListTimeseriesStatsdb01NsNsIDTsGetRequest,
-        ListTimeseriesStatsdb01NsNsIDTsGetRequestTypedDict,
-    )
+    from .list_timeseriesop import ListTimeseriesRequest, ListTimeseriesRequestTypedDict
     from .location_output import LocationOutput, LocationOutputTypedDict
     from .locationbase import LocationBase, LocationBaseTypedDict
     from .macroregion import MacroRegion, MacroRegionTypedDict
@@ -108,14 +94,11 @@ if TYPE_CHECKING:
     from .page_namespace_ import PageNamespace, PageNamespaceTypedDict
     from .page_tablelistitem_ import PageTableListItem, PageTableListItemTypedDict
     from .page_timeseries_ import PageTimeseries, PageTimeseriesTypedDict
-    from .search_data_catalogs_registry_search_catalogs_getop import (
-        SearchDataCatalogsRegistrySearchCatalogsGetRequest,
-        SearchDataCatalogsRegistrySearchCatalogsGetRequestTypedDict,
+    from .search_datasets_dslop import (
+        SearchDatasetsDslRequest,
+        SearchDatasetsDslRequestTypedDict,
     )
-    from .search_datasets_search_0_2_query_getop import (
-        SearchDatasetsSearch02QueryGetRequest,
-        SearchDatasetsSearch02QueryGetRequestTypedDict,
-    )
+    from .search_datasetsop import SearchDatasetsRequest, SearchDatasetsRequestTypedDict
     from .searchindexdatasetrecord import (
         SearchIndexDatasetRecord,
         SearchIndexDatasetRecordID,
@@ -138,6 +121,7 @@ if TYPE_CHECKING:
     )
     from .searchmeta import SearchMeta, SearchMetaTypedDict
     from .searchqueryresponse import SearchQueryResponse, SearchQueryResponseTypedDict
+    from .security import Security, SecurityTypedDict
     from .shards import Shards, ShardsTypedDict
     from .similarhit import SimilarHit, SimilarHitTypedDict
     from .similarhitsresponse import SimilarHitsResponse, SimilarHitsResponseTypedDict
@@ -162,8 +146,8 @@ if TYPE_CHECKING:
     )
 
 __all__ = [
-    "BodyDatasetSearchUsingElasticDSLSearch02EsSearchPost",
-    "BodyDatasetSearchUsingElasticDSLSearch02EsSearchPostTypedDict",
+    "BodySearchDatasetsDsl",
+    "BodySearchDatasetsDslTypedDict",
     "Country",
     "CountryTypedDict",
     "DataCatalog",
@@ -172,20 +156,18 @@ __all__ = [
     "DataCatalogSearchResponse",
     "DataCatalogSearchResponseTypedDict",
     "DataCatalogTypedDict",
-    "DatasetSearchUsingElasticDSLSearch02EsSearchPostRequest",
-    "DatasetSearchUsingElasticDSLSearch02EsSearchPostRequestTypedDict",
     "Datasize",
     "DatasizeTypedDict",
     "DimensionSpec",
     "DimensionSpecTypedDict",
     "Endpoint",
     "EndpointTypedDict",
-    "ExportTimeseriesDataStatsdb01NsNsIDTsTsIDExportFileextGetRequest",
-    "ExportTimeseriesDataStatsdb01NsNsIDTsTsIDExportFileextGetRequestTypedDict",
-    "ExportTimeseriesDataStatsdb01NsNsIDTsTsIDExportFileextGetResponse",
-    "ExportTimeseriesDataStatsdb01NsNsIDTsTsIDExportFileextGetResponseResult",
-    "ExportTimeseriesDataStatsdb01NsNsIDTsTsIDExportFileextGetResponseResultTypedDict",
-    "ExportTimeseriesDataStatsdb01NsNsIDTsTsIDExportFileextGetResponseTypedDict",
+    "ExportTimeseriesFileRequest",
+    "ExportTimeseriesFileRequestTypedDict",
+    "ExportTimeseriesFileResponse",
+    "ExportTimeseriesFileResponseResult",
+    "ExportTimeseriesFileResponseResultTypedDict",
+    "ExportTimeseriesFileResponseTypedDict",
     "FacetInfo",
     "FacetInfoTypedDict",
     "FacetItem",
@@ -194,22 +176,24 @@ __all__ = [
     "FacetValuesResponseTypedDict",
     "FieldSpec",
     "FieldSpecTypedDict",
-    "GetDataCatalogRecordRegistryCatalogCatalogIDGetRequest",
-    "GetDataCatalogRecordRegistryCatalogCatalogIDGetRequestTypedDict",
-    "GetFacetValuesSearch02GetFacetGetRequest",
-    "GetFacetValuesSearch02GetFacetGetRequestTypedDict",
-    "GetIndicatorMetadataStatsdb01NsNsIDIndicatorsIndIDGetRequest",
-    "GetIndicatorMetadataStatsdb01NsNsIDIndicatorsIndIDGetRequestTypedDict",
-    "GetNamespaceDatabaseMetadataStatsdb01NsNsIDGetRequest",
-    "GetNamespaceDatabaseMetadataStatsdb01NsNsIDGetRequestTypedDict",
-    "GetSimilarDatasetsSearch02SimilarEntryIDGetRequest",
-    "GetSimilarDatasetsSearch02SimilarEntryIDGetRequestTypedDict",
-    "GetSingleDatasetRecordByEntryIDSearch01EntryEntryIDGetRequest",
-    "GetSingleDatasetRecordByEntryIDSearch01EntryEntryIDGetRequestTypedDict",
-    "GetTableMetadataStatsdb01NsNsIDTablesTableIDGetRequest",
-    "GetTableMetadataStatsdb01NsNsIDTablesTableIDGetRequestTypedDict",
-    "GetTimeseriesRecordMetadataStatsdb01NsNsIDTsTsIDGetRequest",
-    "GetTimeseriesRecordMetadataStatsdb01NsNsIDTsTsIDGetRequestTypedDict",
+    "GetCatalogByIDRequest",
+    "GetCatalogByIDRequestTypedDict",
+    "GetDatasetByEntryIDRequest",
+    "GetDatasetByEntryIDRequestTypedDict",
+    "GetNamespaceIndicatorRequest",
+    "GetNamespaceIndicatorRequestTypedDict",
+    "GetNamespaceRequest",
+    "GetNamespaceRequestTypedDict",
+    "GetNamespaceTableRequest",
+    "GetNamespaceTableRequestTypedDict",
+    "GetRawEntryByIDRequest",
+    "GetRawEntryByIDRequestTypedDict",
+    "GetSearchFacetValuesRequest",
+    "GetSearchFacetValuesRequestTypedDict",
+    "GetSimilarDatasetsRequest",
+    "GetSimilarDatasetsRequestTypedDict",
+    "GetTimeseriesRequest",
+    "GetTimeseriesRequestTypedDict",
     "Hit",
     "HitTypedDict",
     "Hits",
@@ -218,18 +202,20 @@ __all__ = [
     "IdentifierTypedDict",
     "Indicator",
     "IndicatorTypedDict",
-    "ListExportableFormatsStatsdb01ListExportableFormatsGetRequest",
-    "ListExportableFormatsStatsdb01ListExportableFormatsGetRequestTypedDict",
-    "ListFacetsSearch02ListFacetsGetRequest",
-    "ListFacetsSearch02ListFacetsGetRequestTypedDict",
-    "ListIndicatorsStatsdb01NsNsIDIndicatorsGetRequest",
-    "ListIndicatorsStatsdb01NsNsIDIndicatorsGetRequestTypedDict",
-    "ListNamespacesDatabasesStatsdb01NsGetRequest",
-    "ListNamespacesDatabasesStatsdb01NsGetRequestTypedDict",
-    "ListTablesStatsdb01NsNsIDTablesGetRequest",
-    "ListTablesStatsdb01NsNsIDTablesGetRequestTypedDict",
-    "ListTimeseriesStatsdb01NsNsIDTsGetRequest",
-    "ListTimeseriesStatsdb01NsNsIDTsGetRequestTypedDict",
+    "ListCatalogsRequest",
+    "ListCatalogsRequestTypedDict",
+    "ListExportFormatsRequest",
+    "ListExportFormatsRequestTypedDict",
+    "ListIndicatorsRequest",
+    "ListIndicatorsRequestTypedDict",
+    "ListNamespaceTablesRequest",
+    "ListNamespaceTablesRequestTypedDict",
+    "ListNamespacesRequest",
+    "ListNamespacesRequestTypedDict",
+    "ListSearchFacetsRequest",
+    "ListSearchFacetsRequestTypedDict",
+    "ListTimeseriesRequest",
+    "ListTimeseriesRequestTypedDict",
     "Loc",
     "LocTypedDict",
     "LocationBase",
@@ -253,10 +239,10 @@ __all__ = [
     "PageTimeseries",
     "PageTimeseriesTypedDict",
     "Relation",
-    "SearchDataCatalogsRegistrySearchCatalogsGetRequest",
-    "SearchDataCatalogsRegistrySearchCatalogsGetRequestTypedDict",
-    "SearchDatasetsSearch02QueryGetRequest",
-    "SearchDatasetsSearch02QueryGetRequestTypedDict",
+    "SearchDatasetsDslRequest",
+    "SearchDatasetsDslRequestTypedDict",
+    "SearchDatasetsRequest",
+    "SearchDatasetsRequestTypedDict",
     "SearchIndexDatasetRecord",
     "SearchIndexDatasetRecordID",
     "SearchIndexDatasetRecordIDTypedDict",
@@ -275,6 +261,8 @@ __all__ = [
     "SearchMetaTypedDict",
     "SearchQueryResponse",
     "SearchQueryResponseTypedDict",
+    "Security",
+    "SecurityTypedDict",
     "Shards",
     "ShardsTypedDict",
     "SimilarHit",
@@ -308,8 +296,8 @@ __all__ = [
 ]
 
 _dynamic_imports: dict[str, str] = {
-    "BodyDatasetSearchUsingElasticDSLSearch02EsSearchPost": ".body_dataset_search_using_elastic_dsl_search_0_2_es_search_post",
-    "BodyDatasetSearchUsingElasticDSLSearch02EsSearchPostTypedDict": ".body_dataset_search_using_elastic_dsl_search_0_2_es_search_post",
+    "BodySearchDatasetsDsl": ".body_search_datasets_dsl",
+    "BodySearchDatasetsDslTypedDict": ".body_search_datasets_dsl",
     "Country": ".country",
     "CountryTypedDict": ".country",
     "DataCatalog": ".datacatalog",
@@ -318,18 +306,16 @@ _dynamic_imports: dict[str, str] = {
     "DataCatalogSearchItemTypedDict": ".datacatalogsearchitem",
     "DataCatalogSearchResponse": ".datacatalogsearchresponse",
     "DataCatalogSearchResponseTypedDict": ".datacatalogsearchresponse",
-    "DatasetSearchUsingElasticDSLSearch02EsSearchPostRequest": ".dataset_search_using_elastic_dsl_search_0_2_es_search_postop",
-    "DatasetSearchUsingElasticDSLSearch02EsSearchPostRequestTypedDict": ".dataset_search_using_elastic_dsl_search_0_2_es_search_postop",
     "DimensionSpec": ".dimensionspec",
     "DimensionSpecTypedDict": ".dimensionspec",
     "Endpoint": ".endpoint",
     "EndpointTypedDict": ".endpoint",
-    "ExportTimeseriesDataStatsdb01NsNsIDTsTsIDExportFileextGetRequest": ".export_timeseries_data_statsdb_0_1_ns_ns_id_ts_ts_id_export_fileext_getop",
-    "ExportTimeseriesDataStatsdb01NsNsIDTsTsIDExportFileextGetRequestTypedDict": ".export_timeseries_data_statsdb_0_1_ns_ns_id_ts_ts_id_export_fileext_getop",
-    "ExportTimeseriesDataStatsdb01NsNsIDTsTsIDExportFileextGetResponse": ".export_timeseries_data_statsdb_0_1_ns_ns_id_ts_ts_id_export_fileext_getop",
-    "ExportTimeseriesDataStatsdb01NsNsIDTsTsIDExportFileextGetResponseResult": ".export_timeseries_data_statsdb_0_1_ns_ns_id_ts_ts_id_export_fileext_getop",
-    "ExportTimeseriesDataStatsdb01NsNsIDTsTsIDExportFileextGetResponseResultTypedDict": ".export_timeseries_data_statsdb_0_1_ns_ns_id_ts_ts_id_export_fileext_getop",
-    "ExportTimeseriesDataStatsdb01NsNsIDTsTsIDExportFileextGetResponseTypedDict": ".export_timeseries_data_statsdb_0_1_ns_ns_id_ts_ts_id_export_fileext_getop",
+    "ExportTimeseriesFileRequest": ".export_timeseries_fileop",
+    "ExportTimeseriesFileRequestTypedDict": ".export_timeseries_fileop",
+    "ExportTimeseriesFileResponse": ".export_timeseries_fileop",
+    "ExportTimeseriesFileResponseResult": ".export_timeseries_fileop",
+    "ExportTimeseriesFileResponseResultTypedDict": ".export_timeseries_fileop",
+    "ExportTimeseriesFileResponseTypedDict": ".export_timeseries_fileop",
     "FacetInfo": ".facetinfo",
     "FacetInfoTypedDict": ".facetinfo",
     "FacetItem": ".facetitem",
@@ -338,22 +324,24 @@ _dynamic_imports: dict[str, str] = {
     "FacetValuesResponseTypedDict": ".facetvaluesresponse",
     "FieldSpec": ".fieldspec",
     "FieldSpecTypedDict": ".fieldspec",
-    "GetDataCatalogRecordRegistryCatalogCatalogIDGetRequest": ".get_data_catalog_record_registry_catalog_catalog_id_getop",
-    "GetDataCatalogRecordRegistryCatalogCatalogIDGetRequestTypedDict": ".get_data_catalog_record_registry_catalog_catalog_id_getop",
-    "GetFacetValuesSearch02GetFacetGetRequest": ".get_facet_values_search_0_2_get_facet_getop",
-    "GetFacetValuesSearch02GetFacetGetRequestTypedDict": ".get_facet_values_search_0_2_get_facet_getop",
-    "GetIndicatorMetadataStatsdb01NsNsIDIndicatorsIndIDGetRequest": ".get_indicator_metadata_statsdb_0_1_ns_ns_id_indicators_ind_id_getop",
-    "GetIndicatorMetadataStatsdb01NsNsIDIndicatorsIndIDGetRequestTypedDict": ".get_indicator_metadata_statsdb_0_1_ns_ns_id_indicators_ind_id_getop",
-    "GetNamespaceDatabaseMetadataStatsdb01NsNsIDGetRequest": ".get_namespace_database_metadata_statsdb_0_1_ns_ns_id_getop",
-    "GetNamespaceDatabaseMetadataStatsdb01NsNsIDGetRequestTypedDict": ".get_namespace_database_metadata_statsdb_0_1_ns_ns_id_getop",
-    "GetSimilarDatasetsSearch02SimilarEntryIDGetRequest": ".get_similar_datasets_search_0_2_similar_entry_id_getop",
-    "GetSimilarDatasetsSearch02SimilarEntryIDGetRequestTypedDict": ".get_similar_datasets_search_0_2_similar_entry_id_getop",
-    "GetSingleDatasetRecordByEntryIDSearch01EntryEntryIDGetRequest": ".get_single_dataset_record_by_entry_id_search_0_1_entry_entry_id_getop",
-    "GetSingleDatasetRecordByEntryIDSearch01EntryEntryIDGetRequestTypedDict": ".get_single_dataset_record_by_entry_id_search_0_1_entry_entry_id_getop",
-    "GetTableMetadataStatsdb01NsNsIDTablesTableIDGetRequest": ".get_table_metadata_statsdb_0_1_ns_ns_id_tables_table_id_getop",
-    "GetTableMetadataStatsdb01NsNsIDTablesTableIDGetRequestTypedDict": ".get_table_metadata_statsdb_0_1_ns_ns_id_tables_table_id_getop",
-    "GetTimeseriesRecordMetadataStatsdb01NsNsIDTsTsIDGetRequest": ".get_timeseries_record_metadata_statsdb_0_1_ns_ns_id_ts_ts_id_getop",
-    "GetTimeseriesRecordMetadataStatsdb01NsNsIDTsTsIDGetRequestTypedDict": ".get_timeseries_record_metadata_statsdb_0_1_ns_ns_id_ts_ts_id_getop",
+    "GetCatalogByIDRequest": ".get_catalog_by_idop",
+    "GetCatalogByIDRequestTypedDict": ".get_catalog_by_idop",
+    "GetDatasetByEntryIDRequest": ".get_dataset_by_entry_idop",
+    "GetDatasetByEntryIDRequestTypedDict": ".get_dataset_by_entry_idop",
+    "GetNamespaceIndicatorRequest": ".get_namespace_indicatorop",
+    "GetNamespaceIndicatorRequestTypedDict": ".get_namespace_indicatorop",
+    "GetNamespaceTableRequest": ".get_namespace_tableop",
+    "GetNamespaceTableRequestTypedDict": ".get_namespace_tableop",
+    "GetNamespaceRequest": ".get_namespaceop",
+    "GetNamespaceRequestTypedDict": ".get_namespaceop",
+    "GetRawEntryByIDRequest": ".get_raw_entry_by_idop",
+    "GetRawEntryByIDRequestTypedDict": ".get_raw_entry_by_idop",
+    "GetSearchFacetValuesRequest": ".get_search_facet_valuesop",
+    "GetSearchFacetValuesRequestTypedDict": ".get_search_facet_valuesop",
+    "GetSimilarDatasetsRequest": ".get_similar_datasetsop",
+    "GetSimilarDatasetsRequestTypedDict": ".get_similar_datasetsop",
+    "GetTimeseriesRequest": ".get_timeseriesop",
+    "GetTimeseriesRequestTypedDict": ".get_timeseriesop",
     "Hit": ".hit",
     "HitTypedDict": ".hit",
     "Hits": ".hits",
@@ -364,18 +352,20 @@ _dynamic_imports: dict[str, str] = {
     "IdentifierTypedDict": ".identifier",
     "Indicator": ".indicator",
     "IndicatorTypedDict": ".indicator",
-    "ListExportableFormatsStatsdb01ListExportableFormatsGetRequest": ".list_exportable_formats_statsdb_0_1_list_exportable_formats_getop",
-    "ListExportableFormatsStatsdb01ListExportableFormatsGetRequestTypedDict": ".list_exportable_formats_statsdb_0_1_list_exportable_formats_getop",
-    "ListFacetsSearch02ListFacetsGetRequest": ".list_facets_search_0_2_list_facets_getop",
-    "ListFacetsSearch02ListFacetsGetRequestTypedDict": ".list_facets_search_0_2_list_facets_getop",
-    "ListIndicatorsStatsdb01NsNsIDIndicatorsGetRequest": ".list_indicators_statsdb_0_1_ns_ns_id_indicators_getop",
-    "ListIndicatorsStatsdb01NsNsIDIndicatorsGetRequestTypedDict": ".list_indicators_statsdb_0_1_ns_ns_id_indicators_getop",
-    "ListNamespacesDatabasesStatsdb01NsGetRequest": ".list_namespaces_databases_statsdb_0_1_ns_getop",
-    "ListNamespacesDatabasesStatsdb01NsGetRequestTypedDict": ".list_namespaces_databases_statsdb_0_1_ns_getop",
-    "ListTablesStatsdb01NsNsIDTablesGetRequest": ".list_tables_statsdb_0_1_ns_ns_id_tables_getop",
-    "ListTablesStatsdb01NsNsIDTablesGetRequestTypedDict": ".list_tables_statsdb_0_1_ns_ns_id_tables_getop",
-    "ListTimeseriesStatsdb01NsNsIDTsGetRequest": ".list_timeseries_statsdb_0_1_ns_ns_id_ts_getop",
-    "ListTimeseriesStatsdb01NsNsIDTsGetRequestTypedDict": ".list_timeseries_statsdb_0_1_ns_ns_id_ts_getop",
+    "ListCatalogsRequest": ".list_catalogsop",
+    "ListCatalogsRequestTypedDict": ".list_catalogsop",
+    "ListExportFormatsRequest": ".list_export_formatsop",
+    "ListExportFormatsRequestTypedDict": ".list_export_formatsop",
+    "ListIndicatorsRequest": ".list_indicatorsop",
+    "ListIndicatorsRequestTypedDict": ".list_indicatorsop",
+    "ListNamespaceTablesRequest": ".list_namespace_tablesop",
+    "ListNamespaceTablesRequestTypedDict": ".list_namespace_tablesop",
+    "ListNamespacesRequest": ".list_namespacesop",
+    "ListNamespacesRequestTypedDict": ".list_namespacesop",
+    "ListSearchFacetsRequest": ".list_search_facetsop",
+    "ListSearchFacetsRequestTypedDict": ".list_search_facetsop",
+    "ListTimeseriesRequest": ".list_timeseriesop",
+    "ListTimeseriesRequestTypedDict": ".list_timeseriesop",
     "LocationOutput": ".location_output",
     "LocationOutputTypedDict": ".location_output",
     "LocationBase": ".locationbase",
@@ -396,10 +386,10 @@ _dynamic_imports: dict[str, str] = {
     "PageTableListItemTypedDict": ".page_tablelistitem_",
     "PageTimeseries": ".page_timeseries_",
     "PageTimeseriesTypedDict": ".page_timeseries_",
-    "SearchDataCatalogsRegistrySearchCatalogsGetRequest": ".search_data_catalogs_registry_search_catalogs_getop",
-    "SearchDataCatalogsRegistrySearchCatalogsGetRequestTypedDict": ".search_data_catalogs_registry_search_catalogs_getop",
-    "SearchDatasetsSearch02QueryGetRequest": ".search_datasets_search_0_2_query_getop",
-    "SearchDatasetsSearch02QueryGetRequestTypedDict": ".search_datasets_search_0_2_query_getop",
+    "SearchDatasetsDslRequest": ".search_datasets_dslop",
+    "SearchDatasetsDslRequestTypedDict": ".search_datasets_dslop",
+    "SearchDatasetsRequest": ".search_datasetsop",
+    "SearchDatasetsRequestTypedDict": ".search_datasetsop",
     "SearchIndexDatasetRecord": ".searchindexdatasetrecord",
     "SearchIndexDatasetRecordID": ".searchindexdatasetrecord",
     "SearchIndexDatasetRecordIDTypedDict": ".searchindexdatasetrecord",
@@ -420,6 +410,8 @@ _dynamic_imports: dict[str, str] = {
     "SearchMetaTypedDict": ".searchmeta",
     "SearchQueryResponse": ".searchqueryresponse",
     "SearchQueryResponseTypedDict": ".searchqueryresponse",
+    "Security": ".security",
+    "SecurityTypedDict": ".security",
     "Shards": ".shards",
     "ShardsTypedDict": ".shards",
     "SimilarHit": ".similarhit",

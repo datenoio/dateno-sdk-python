@@ -4,9 +4,9 @@
 
 ### Available Operations
 
-* [healthz_healthz_get](#healthz_healthz_get) - Liveness probe
+* [get_healthz](#get_healthz) - Liveness probe
 
-## healthz_healthz_get
+## get_healthz
 
 Health check endpoint.
 
@@ -22,14 +22,16 @@ Always includes the application version from settings.
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="healthz_healthz_get" method="get" path="/healthz" -->
+<!-- UsageSnippet language="python" operationID="get_healthz" method="get" path="/healthz" -->
 ```python
 from dateno import SDK
 
 
-with SDK() as sdk:
+with SDK(
+    api_key_query="<YOUR_API_KEY_HERE>",
+) as sdk:
 
-    res = sdk.service.healthz_healthz_get()
+    res = sdk.service.get_healthz()
 
     # Handle response
     print(res)

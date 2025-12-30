@@ -25,11 +25,11 @@ class SearchIndexDatasetRecordTypedDict(TypedDict):
     url: NotRequired[Nullable[str]]
     short_text: NotRequired[Nullable[str]]
     description: NotRequired[Nullable[str]]
-    has_archive: NotRequired[Nullable[bool]]
+    has_archive: NotRequired[bool]
     r"""Is there a direct archive download link of the dataset?"""
     tags: NotRequired[Nullable[List[str]]]
-    formats: NotRequired[Nullable[List[str]]]
-    datatypes: NotRequired[Nullable[List[str]]]
+    formats: NotRequired[List[str]]
+    datatypes: NotRequired[List[str]]
     topics_original: NotRequired[Nullable[List[str]]]
     responsible: NotRequired[List[SearchIndexPartyTypedDict]]
     license_id: NotRequired[Nullable[str]]
@@ -50,14 +50,14 @@ class SearchIndexDatasetRecord(BaseModel):
 
     description: OptionalNullable[str] = UNSET
 
-    has_archive: OptionalNullable[bool] = UNSET
+    has_archive: Optional[bool] = False
     r"""Is there a direct archive download link of the dataset?"""
 
     tags: OptionalNullable[List[str]] = UNSET
 
-    formats: OptionalNullable[List[str]] = UNSET
+    formats: Optional[List[str]] = None
 
-    datatypes: OptionalNullable[List[str]] = UNSET
+    datatypes: Optional[List[str]] = None
 
     topics_original: OptionalNullable[List[str]] = UNSET
 
@@ -93,10 +93,7 @@ class SearchIndexDatasetRecord(BaseModel):
             "url",
             "short_text",
             "description",
-            "has_archive",
             "tags",
-            "formats",
-            "datatypes",
             "topics_original",
             "license_id",
             "license_name",

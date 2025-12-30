@@ -13,9 +13,7 @@ Developer-friendly & type-safe Python SDK specifically catered to leverage *date
 <!-- Start Summary [summary] -->
 ## Summary
 
-Dateno API: API access to open datasets worldwide. [Register here](https://my.dateno.io) to get your personal API key.
-
-
+Dateno API: 
 The Dateno API gives you a set of tools (called endpoints) that allow you to interact with a registry of data catalogs. This means you can access and explore different collections of datasets. Additionally, the API provides a search index, which helps you quickly find specific datasets based on your search criteria.
 
 ### Authentication Required
@@ -44,6 +42,7 @@ To obtain an API key, create an account at [my.dateno.io](https://my.dateno.io).
   * [SDK Installation](#sdk-installation)
   * [IDE Support](#ide-support)
   * [SDK Example Usage](#sdk-example-usage)
+  * [Authentication](#authentication)
   * [Available Resources and Operations](#available-resources-and-operations)
   * [Retries](#retries)
   * [Error Handling](#error-handling)
@@ -147,9 +146,11 @@ Generally, the SDK will work well with most IDEs out of the box. However, when u
 from dateno import SDK
 
 
-with SDK() as sdk:
+with SDK(
+    api_key_query="<YOUR_API_KEY_HERE>",
+) as sdk:
 
-    res = sdk.data_catalogs_api.get_data_catalog_record_registry_catalog_catalog_id_get(catalog_id="cdi00001616")
+    res = sdk.data_catalogs_api.get_catalog_by_id(catalog_id="cdi00001616")
 
     # Handle response
     print(res)
@@ -166,9 +167,11 @@ from dateno import SDK
 
 async def main():
 
-    async with SDK() as sdk:
+    async with SDK(
+        api_key_query="<YOUR_API_KEY_HERE>",
+    ) as sdk:
 
-        res = await sdk.data_catalogs_api.get_data_catalog_record_registry_catalog_catalog_id_get_async(catalog_id="cdi00001616")
+        res = await sdk.data_catalogs_api.get_catalog_by_id_async(catalog_id="cdi00001616")
 
         # Handle response
         print(res)
@@ -176,6 +179,34 @@ async def main():
 asyncio.run(main())
 ```
 <!-- End SDK Example Usage [usage] -->
+
+<!-- Start Authentication [security] -->
+## Authentication
+
+### Per-Client Security Schemes
+
+This SDK supports the following security scheme globally:
+
+| Name            | Type   | Scheme  |
+| --------------- | ------ | ------- |
+| `api_key_query` | apiKey | API key |
+
+To authenticate with the API the `api_key_query` parameter must be set when initializing the SDK client instance. For example:
+```python
+from dateno import SDK
+
+
+with SDK(
+    api_key_query="<YOUR_API_KEY_HERE>",
+) as sdk:
+
+    res = sdk.data_catalogs_api.get_catalog_by_id(catalog_id="cdi00001616")
+
+    # Handle response
+    print(res)
+
+```
+<!-- End Authentication [security] -->
 
 <!-- Start Available Resources and Operations [operations] -->
 ## Available Resources and Operations
@@ -185,34 +216,38 @@ asyncio.run(main())
 
 ### [DataCatalogsAPI](docs/sdks/datacatalogsapi/README.md)
 
-* [get_data_catalog_record_registry_catalog_catalog_id_get](docs/sdks/datacatalogsapi/README.md#get_data_catalog_record_registry_catalog_catalog_id_get) - Get Data Catalog Record
-* [search_data_catalogs_registry_search_catalogs_get](docs/sdks/datacatalogsapi/README.md#search_data_catalogs_registry_search_catalogs_get) - Search Data Catalogs
+* [get_catalog_by_id](docs/sdks/datacatalogsapi/README.md#get_catalog_by_id) - Get Data Catalog Record
+* [list_catalogs](docs/sdks/datacatalogsapi/README.md#list_catalogs) - Search Data Catalogs
+
+### [RawDataAccess](docs/sdks/rawdataaccess/README.md)
+
+* [get_raw_entry_by_id](docs/sdks/rawdataaccess/README.md#get_raw_entry_by_id) - Get Raw Dataset Entry By Id
 
 ### [SearchAPI](docs/sdks/searchapi/README.md)
 
-* [get_single_dataset_record_by_entry_id_search_0_1_entry_entry_id_get](docs/sdks/searchapi/README.md#get_single_dataset_record_by_entry_id_search_0_1_entry_entry_id_get) - Get Single Dataset Record By Entry Id
-* [search_datasets_search_0_2_query_get](docs/sdks/searchapi/README.md#search_datasets_search_0_2_query_get) - Search Datasets
-* [dataset_search_using_elastic_dsl_search_0_2_es_search_post](docs/sdks/searchapi/README.md#dataset_search_using_elastic_dsl_search_0_2_es_search_post) - Dataset Search Using Elastic Dsl
-* [list_facets_search_0_2_list_facets_get](docs/sdks/searchapi/README.md#list_facets_search_0_2_list_facets_get) - List Facets
-* [get_facet_values_search_0_2_get_facet_get](docs/sdks/searchapi/README.md#get_facet_values_search_0_2_get_facet_get) - Get Facet Values
-* [get_similar_datasets_search_0_2_similar_entry_id_get](docs/sdks/searchapi/README.md#get_similar_datasets_search_0_2_similar_entry_id_get) - Get Similar Datasets
+* [get_dataset_by_entry_id](docs/sdks/searchapi/README.md#get_dataset_by_entry_id) - Get Single Dataset Record By Entry Id
+* [search_datasets](docs/sdks/searchapi/README.md#search_datasets) - Search Datasets
+* [search_datasets_dsl](docs/sdks/searchapi/README.md#search_datasets_dsl) - Dataset Search Using Elastic Dsl
+* [list_search_facets](docs/sdks/searchapi/README.md#list_search_facets) - List Facets
+* [get_search_facet_values](docs/sdks/searchapi/README.md#get_search_facet_values) - Get Facet Values
+* [get_similar_datasets](docs/sdks/searchapi/README.md#get_similar_datasets) - Get Similar Datasets
 
 ### [Service](docs/sdks/service/README.md)
 
-* [healthz_healthz_get](docs/sdks/service/README.md#healthz_healthz_get) - Liveness probe
+* [get_healthz](docs/sdks/service/README.md#get_healthz) - Liveness probe
 
 ### [StatisticsAPI](docs/sdks/statisticsapi/README.md)
 
-* [list_namespaces_databases_statsdb_0_1_ns_get](docs/sdks/statisticsapi/README.md#list_namespaces_databases_statsdb_0_1_ns_get) - List Namespaces / Databases
-* [get_namespace_database_metadata_statsdb_0_1_ns_ns_id_get](docs/sdks/statisticsapi/README.md#get_namespace_database_metadata_statsdb_0_1_ns_ns_id_get) - Get Namespace / Database Metadata
-* [list_tables_statsdb_0_1_ns_ns_id_tables_get](docs/sdks/statisticsapi/README.md#list_tables_statsdb_0_1_ns_ns_id_tables_get) - List Tables
-* [get_table_metadata_statsdb_0_1_ns_ns_id_tables_table_id_get](docs/sdks/statisticsapi/README.md#get_table_metadata_statsdb_0_1_ns_ns_id_tables_table_id_get) - Get Table Metadata
-* [list_indicators_statsdb_0_1_ns_ns_id_indicators_get](docs/sdks/statisticsapi/README.md#list_indicators_statsdb_0_1_ns_ns_id_indicators_get) - List Indicators
-* [list_timeseries_statsdb_0_1_ns_ns_id_ts_get](docs/sdks/statisticsapi/README.md#list_timeseries_statsdb_0_1_ns_ns_id_ts_get) - List Timeseries
-* [get_indicator_metadata_statsdb_0_1_ns_ns_id_indicators_ind_id_get](docs/sdks/statisticsapi/README.md#get_indicator_metadata_statsdb_0_1_ns_ns_id_indicators_ind_id_get) - Get Indicator Metadata
-* [get_timeseries_record_metadata_statsdb_0_1_ns_ns_id_ts_ts_id_get](docs/sdks/statisticsapi/README.md#get_timeseries_record_metadata_statsdb_0_1_ns_ns_id_ts_ts_id_get) - Get Timeseries Record Metadata
-* [list_exportable_formats_statsdb_0_1_list_exportable_formats_get](docs/sdks/statisticsapi/README.md#list_exportable_formats_statsdb_0_1_list_exportable_formats_get) - List Exportable Formats
-* [export_timeseries_data_statsdb_0_1_ns_ns_id_ts_ts_id_export_fileext_get](docs/sdks/statisticsapi/README.md#export_timeseries_data_statsdb_0_1_ns_ns_id_ts_ts_id_export_fileext_get) - Export Timeseries Data
+* [list_namespaces](docs/sdks/statisticsapi/README.md#list_namespaces) - List Namespaces / Databases
+* [get_namespace](docs/sdks/statisticsapi/README.md#get_namespace) - Get Namespace / Database Metadata
+* [list_namespace_tables](docs/sdks/statisticsapi/README.md#list_namespace_tables) - List Tables
+* [get_namespace_table](docs/sdks/statisticsapi/README.md#get_namespace_table) - Get Table Metadata
+* [list_indicators](docs/sdks/statisticsapi/README.md#list_indicators) - List Indicators
+* [list_timeseries](docs/sdks/statisticsapi/README.md#list_timeseries) - List Timeseries
+* [get_namespace_indicator](docs/sdks/statisticsapi/README.md#get_namespace_indicator) - Get Indicator Metadata
+* [get_timeseries](docs/sdks/statisticsapi/README.md#get_timeseries) - Get Timeseries Record Metadata
+* [list_export_formats](docs/sdks/statisticsapi/README.md#list_export_formats) - List Exportable Formats
+* [export_timeseries_file](docs/sdks/statisticsapi/README.md#export_timeseries_file) - Export Timeseries Data
 
 </details>
 <!-- End Available Resources and Operations [operations] -->
@@ -228,9 +263,11 @@ from dateno import SDK
 from dateno.utils import BackoffStrategy, RetryConfig
 
 
-with SDK() as sdk:
+with SDK(
+    api_key_query="<YOUR_API_KEY_HERE>",
+) as sdk:
 
-    res = sdk.data_catalogs_api.get_data_catalog_record_registry_catalog_catalog_id_get(catalog_id="cdi00001616",
+    res = sdk.data_catalogs_api.get_catalog_by_id(catalog_id="cdi00001616",
         RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False))
 
     # Handle response
@@ -246,9 +283,10 @@ from dateno.utils import BackoffStrategy, RetryConfig
 
 with SDK(
     retry_config=RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False),
+    api_key_query="<YOUR_API_KEY_HERE>",
 ) as sdk:
 
-    res = sdk.data_catalogs_api.get_data_catalog_record_registry_catalog_catalog_id_get(catalog_id="cdi00001616")
+    res = sdk.data_catalogs_api.get_catalog_by_id(catalog_id="cdi00001616")
 
     # Handle response
     print(res)
@@ -275,11 +313,13 @@ with SDK(
 from dateno import SDK, errors
 
 
-with SDK() as sdk:
+with SDK(
+    api_key_query="<YOUR_API_KEY_HERE>",
+) as sdk:
     res = None
     try:
 
-        res = sdk.data_catalogs_api.get_data_catalog_record_registry_catalog_catalog_id_get(catalog_id="cdi00001616")
+        res = sdk.data_catalogs_api.get_catalog_by_id(catalog_id="cdi00001616")
 
         # Handle response
         print(res)
@@ -334,9 +374,10 @@ from dateno import SDK
 
 with SDK(
     server_url="https://api.dateno.io",
+    api_key_query="<YOUR_API_KEY_HERE>",
 ) as sdk:
 
-    res = sdk.data_catalogs_api.get_data_catalog_record_registry_catalog_catalog_id_get(catalog_id="cdi00001616")
+    res = sdk.data_catalogs_api.get_catalog_by_id(catalog_id="cdi00001616")
 
     # Handle response
     print(res)
@@ -436,14 +477,18 @@ The `SDK` class implements the context manager protocol and registers a finalize
 from dateno import SDK
 def main():
 
-    with SDK() as sdk:
+    with SDK(
+        api_key_query="<YOUR_API_KEY_HERE>",
+    ) as sdk:
         # Rest of application here...
 
 
 # Or when using async:
 async def amain():
 
-    async with SDK() as sdk:
+    async with SDK(
+        api_key_query="<YOUR_API_KEY_HERE>",
+    ) as sdk:
         # Rest of application here...
 ```
 <!-- End Resource Management [resource-management] -->

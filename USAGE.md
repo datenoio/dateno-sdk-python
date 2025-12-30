@@ -4,9 +4,11 @@
 from dateno import SDK
 
 
-with SDK() as sdk:
+with SDK(
+    api_key_query="<YOUR_API_KEY_HERE>",
+) as sdk:
 
-    res = sdk.data_catalogs_api.get_data_catalog_record_registry_catalog_catalog_id_get(catalog_id="cdi00001616")
+    res = sdk.data_catalogs_api.get_catalog_by_id(catalog_id="cdi00001616")
 
     # Handle response
     print(res)
@@ -23,9 +25,11 @@ from dateno import SDK
 
 async def main():
 
-    async with SDK() as sdk:
+    async with SDK(
+        api_key_query="<YOUR_API_KEY_HERE>",
+    ) as sdk:
 
-        res = await sdk.data_catalogs_api.get_data_catalog_record_registry_catalog_catalog_id_get_async(catalog_id="cdi00001616")
+        res = await sdk.data_catalogs_api.get_catalog_by_id_async(catalog_id="cdi00001616")
 
         # Handle response
         print(res)

@@ -13,7 +13,7 @@ class SearchAPI(BaseSDK):
     https://dateno.io/ - Dateno open search
     """
 
-    def get_single_dataset_record_by_entry_id_search_0_1_entry_entry_id_get(
+    def get_dataset_by_entry_id(
         self,
         *,
         entry_id: str,
@@ -44,7 +44,7 @@ class SearchAPI(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetSingleDatasetRecordByEntryIDSearch01EntryEntryIDGetRequest(
+        request = models.GetDatasetByEntryIDRequest(
             entry_id=entry_id,
             apikey=apikey,
         )
@@ -61,6 +61,7 @@ class SearchAPI(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
@@ -77,9 +78,9 @@ class SearchAPI(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="Get_single_dataset_record_by_entry_id_search_0_1_entry__entry_id__get",
+                operation_id="get_dataset_by_entry_id",
                 oauth2_scopes=None,
-                security_source=None,
+                security_source=self.sdk_configuration.security,
             ),
             request=req,
             error_status_codes=["404", "422", "4XX", "500", "502", "503", "5XX"],
@@ -109,7 +110,7 @@ class SearchAPI(BaseSDK):
 
         raise errors.SDKDefaultError("Unexpected response received", http_res)
 
-    async def get_single_dataset_record_by_entry_id_search_0_1_entry_entry_id_get_async(
+    async def get_dataset_by_entry_id_async(
         self,
         *,
         entry_id: str,
@@ -140,7 +141,7 @@ class SearchAPI(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetSingleDatasetRecordByEntryIDSearch01EntryEntryIDGetRequest(
+        request = models.GetDatasetByEntryIDRequest(
             entry_id=entry_id,
             apikey=apikey,
         )
@@ -157,6 +158,7 @@ class SearchAPI(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
@@ -173,9 +175,9 @@ class SearchAPI(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="Get_single_dataset_record_by_entry_id_search_0_1_entry__entry_id__get",
+                operation_id="get_dataset_by_entry_id",
                 oauth2_scopes=None,
-                security_source=None,
+                security_source=self.sdk_configuration.security,
             ),
             request=req,
             error_status_codes=["404", "422", "4XX", "500", "502", "503", "5XX"],
@@ -205,7 +207,7 @@ class SearchAPI(BaseSDK):
 
         raise errors.SDKDefaultError("Unexpected response received", http_res)
 
-    def search_datasets_search_0_2_query_get(
+    def search_datasets(
         self,
         *,
         q: Optional[str] = "",
@@ -244,7 +246,7 @@ class SearchAPI(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.SearchDatasetsSearch02QueryGetRequest(
+        request = models.SearchDatasetsRequest(
             q=q,
             filters=filters,
             limit=limit,
@@ -266,6 +268,7 @@ class SearchAPI(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
@@ -282,9 +285,9 @@ class SearchAPI(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="Search_datasets_search_0_2_query_get",
+                operation_id="search_datasets",
                 oauth2_scopes=None,
-                security_source=None,
+                security_source=self.sdk_configuration.security,
             ),
             request=req,
             error_status_codes=["400", "422", "4XX", "500", "502", "503", "5XX"],
@@ -314,7 +317,7 @@ class SearchAPI(BaseSDK):
 
         raise errors.SDKDefaultError("Unexpected response received", http_res)
 
-    async def search_datasets_search_0_2_query_get_async(
+    async def search_datasets_async(
         self,
         *,
         q: Optional[str] = "",
@@ -353,7 +356,7 @@ class SearchAPI(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.SearchDatasetsSearch02QueryGetRequest(
+        request = models.SearchDatasetsRequest(
             q=q,
             filters=filters,
             limit=limit,
@@ -375,6 +378,7 @@ class SearchAPI(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
@@ -391,9 +395,9 @@ class SearchAPI(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="Search_datasets_search_0_2_query_get",
+                operation_id="search_datasets",
                 oauth2_scopes=None,
-                security_source=None,
+                security_source=self.sdk_configuration.security,
             ),
             request=req,
             error_status_codes=["400", "422", "4XX", "500", "502", "503", "5XX"],
@@ -423,7 +427,7 @@ class SearchAPI(BaseSDK):
 
         raise errors.SDKDefaultError("Unexpected response received", http_res)
 
-    def dataset_search_using_elastic_dsl_search_0_2_es_search_post(
+    def search_datasets_dsl(
         self,
         *,
         limit: Optional[int] = 20,
@@ -432,10 +436,7 @@ class SearchAPI(BaseSDK):
         sortby: Optional[str] = "_score",
         apikey: OptionalNullable[str] = UNSET,
         body: Optional[
-            Union[
-                models.BodyDatasetSearchUsingElasticDSLSearch02EsSearchPost,
-                models.BodyDatasetSearchUsingElasticDSLSearch02EsSearchPostTypedDict,
-            ]
+            Union[models.BodySearchDatasetsDsl, models.BodySearchDatasetsDslTypedDict]
         ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -465,16 +466,13 @@ class SearchAPI(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DatasetSearchUsingElasticDSLSearch02EsSearchPostRequest(
+        request = models.SearchDatasetsDslRequest(
             limit=limit,
             offset=offset,
             facets=facets,
             sortby=sortby,
             apikey=apikey,
-            body=utils.get_pydantic_model(
-                body,
-                Optional[models.BodyDatasetSearchUsingElasticDSLSearch02EsSearchPost],
-            ),
+            body=utils.get_pydantic_model(body, Optional[models.BodySearchDatasetsDsl]),
         )
 
         req = self._build_request(
@@ -489,12 +487,13 @@ class SearchAPI(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.body,
                 False,
                 True,
                 "json",
-                Optional[models.BodyDatasetSearchUsingElasticDSLSearch02EsSearchPost],
+                Optional[models.BodySearchDatasetsDsl],
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -512,9 +511,9 @@ class SearchAPI(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="Dataset_search_using_Elastic_DSL_search_0_2_es_search_post",
+                operation_id="search_datasets_dsl",
                 oauth2_scopes=None,
-                security_source=None,
+                security_source=self.sdk_configuration.security,
             ),
             request=req,
             error_status_codes=["400", "422", "4XX", "500", "502", "503", "5XX"],
@@ -544,7 +543,7 @@ class SearchAPI(BaseSDK):
 
         raise errors.SDKDefaultError("Unexpected response received", http_res)
 
-    async def dataset_search_using_elastic_dsl_search_0_2_es_search_post_async(
+    async def search_datasets_dsl_async(
         self,
         *,
         limit: Optional[int] = 20,
@@ -553,10 +552,7 @@ class SearchAPI(BaseSDK):
         sortby: Optional[str] = "_score",
         apikey: OptionalNullable[str] = UNSET,
         body: Optional[
-            Union[
-                models.BodyDatasetSearchUsingElasticDSLSearch02EsSearchPost,
-                models.BodyDatasetSearchUsingElasticDSLSearch02EsSearchPostTypedDict,
-            ]
+            Union[models.BodySearchDatasetsDsl, models.BodySearchDatasetsDslTypedDict]
         ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -586,16 +582,13 @@ class SearchAPI(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DatasetSearchUsingElasticDSLSearch02EsSearchPostRequest(
+        request = models.SearchDatasetsDslRequest(
             limit=limit,
             offset=offset,
             facets=facets,
             sortby=sortby,
             apikey=apikey,
-            body=utils.get_pydantic_model(
-                body,
-                Optional[models.BodyDatasetSearchUsingElasticDSLSearch02EsSearchPost],
-            ),
+            body=utils.get_pydantic_model(body, Optional[models.BodySearchDatasetsDsl]),
         )
 
         req = self._build_request_async(
@@ -610,12 +603,13 @@ class SearchAPI(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.body,
                 False,
                 True,
                 "json",
-                Optional[models.BodyDatasetSearchUsingElasticDSLSearch02EsSearchPost],
+                Optional[models.BodySearchDatasetsDsl],
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -633,9 +627,9 @@ class SearchAPI(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="Dataset_search_using_Elastic_DSL_search_0_2_es_search_post",
+                operation_id="search_datasets_dsl",
                 oauth2_scopes=None,
-                security_source=None,
+                security_source=self.sdk_configuration.security,
             ),
             request=req,
             error_status_codes=["400", "422", "4XX", "500", "502", "503", "5XX"],
@@ -665,7 +659,7 @@ class SearchAPI(BaseSDK):
 
         raise errors.SDKDefaultError("Unexpected response received", http_res)
 
-    def list_facets_search_0_2_list_facets_get(
+    def list_search_facets(
         self,
         *,
         apikey: OptionalNullable[str] = UNSET,
@@ -694,7 +688,7 @@ class SearchAPI(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.ListFacetsSearch02ListFacetsGetRequest(
+        request = models.ListSearchFacetsRequest(
             apikey=apikey,
         )
 
@@ -710,6 +704,7 @@ class SearchAPI(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
@@ -726,9 +721,9 @@ class SearchAPI(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="List_facets_search_0_2_list_facets_get",
+                operation_id="list_search_facets",
                 oauth2_scopes=None,
-                security_source=None,
+                security_source=self.sdk_configuration.security,
             ),
             request=req,
             error_status_codes=["422", "4XX", "500", "5XX"],
@@ -755,7 +750,7 @@ class SearchAPI(BaseSDK):
 
         raise errors.SDKDefaultError("Unexpected response received", http_res)
 
-    async def list_facets_search_0_2_list_facets_get_async(
+    async def list_search_facets_async(
         self,
         *,
         apikey: OptionalNullable[str] = UNSET,
@@ -784,7 +779,7 @@ class SearchAPI(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.ListFacetsSearch02ListFacetsGetRequest(
+        request = models.ListSearchFacetsRequest(
             apikey=apikey,
         )
 
@@ -800,6 +795,7 @@ class SearchAPI(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
@@ -816,9 +812,9 @@ class SearchAPI(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="List_facets_search_0_2_list_facets_get",
+                operation_id="list_search_facets",
                 oauth2_scopes=None,
-                security_source=None,
+                security_source=self.sdk_configuration.security,
             ),
             request=req,
             error_status_codes=["422", "4XX", "500", "5XX"],
@@ -845,7 +841,7 @@ class SearchAPI(BaseSDK):
 
         raise errors.SDKDefaultError("Unexpected response received", http_res)
 
-    def get_facet_values_search_0_2_get_facet_get(
+    def get_search_facet_values(
         self,
         *,
         key: Optional[str] = "source.catalog_type",
@@ -879,7 +875,7 @@ class SearchAPI(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetFacetValuesSearch02GetFacetGetRequest(
+        request = models.GetSearchFacetValuesRequest(
             key=key,
             apikey=apikey,
         )
@@ -896,6 +892,7 @@ class SearchAPI(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
@@ -912,9 +909,9 @@ class SearchAPI(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="Get_facet_values_search_0_2_get_facet_get",
+                operation_id="get_search_facet_values",
                 oauth2_scopes=None,
-                security_source=None,
+                security_source=self.sdk_configuration.security,
             ),
             request=req,
             error_status_codes=["400", "422", "4XX", "500", "503", "5XX"],
@@ -944,7 +941,7 @@ class SearchAPI(BaseSDK):
 
         raise errors.SDKDefaultError("Unexpected response received", http_res)
 
-    async def get_facet_values_search_0_2_get_facet_get_async(
+    async def get_search_facet_values_async(
         self,
         *,
         key: Optional[str] = "source.catalog_type",
@@ -978,7 +975,7 @@ class SearchAPI(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetFacetValuesSearch02GetFacetGetRequest(
+        request = models.GetSearchFacetValuesRequest(
             key=key,
             apikey=apikey,
         )
@@ -995,6 +992,7 @@ class SearchAPI(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
@@ -1011,9 +1009,9 @@ class SearchAPI(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="Get_facet_values_search_0_2_get_facet_get",
+                operation_id="get_search_facet_values",
                 oauth2_scopes=None,
-                security_source=None,
+                security_source=self.sdk_configuration.security,
             ),
             request=req,
             error_status_codes=["400", "422", "4XX", "500", "503", "5XX"],
@@ -1043,7 +1041,7 @@ class SearchAPI(BaseSDK):
 
         raise errors.SDKDefaultError("Unexpected response received", http_res)
 
-    def get_similar_datasets_search_0_2_similar_entry_id_get(
+    def get_similar_datasets(
         self,
         *,
         entry_id: str,
@@ -1078,7 +1076,7 @@ class SearchAPI(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetSimilarDatasetsSearch02SimilarEntryIDGetRequest(
+        request = models.GetSimilarDatasetsRequest(
             entry_id=entry_id,
             limit=limit,
             fields=fields,
@@ -1097,6 +1095,7 @@ class SearchAPI(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
@@ -1113,9 +1112,9 @@ class SearchAPI(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="Get_similar_datasets_search_0_2_similar__entry_id__get",
+                operation_id="get_similar_datasets",
                 oauth2_scopes=None,
-                security_source=None,
+                security_source=self.sdk_configuration.security,
             ),
             request=req,
             error_status_codes=["400", "404", "422", "4XX", "500", "503", "5XX"],
@@ -1145,7 +1144,7 @@ class SearchAPI(BaseSDK):
 
         raise errors.SDKDefaultError("Unexpected response received", http_res)
 
-    async def get_similar_datasets_search_0_2_similar_entry_id_get_async(
+    async def get_similar_datasets_async(
         self,
         *,
         entry_id: str,
@@ -1180,7 +1179,7 @@ class SearchAPI(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetSimilarDatasetsSearch02SimilarEntryIDGetRequest(
+        request = models.GetSimilarDatasetsRequest(
             entry_id=entry_id,
             limit=limit,
             fields=fields,
@@ -1199,6 +1198,7 @@ class SearchAPI(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
@@ -1215,9 +1215,9 @@ class SearchAPI(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="Get_similar_datasets_search_0_2_similar__entry_id__get",
+                operation_id="get_similar_datasets",
                 oauth2_scopes=None,
-                security_source=None,
+                security_source=self.sdk_configuration.security,
             ),
             request=req,
             error_status_codes=["400", "404", "422", "4XX", "500", "503", "5XX"],

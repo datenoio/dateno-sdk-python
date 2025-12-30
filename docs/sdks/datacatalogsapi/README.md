@@ -9,10 +9,10 @@ Dateno catalog registry
 
 ### Available Operations
 
-* [get_data_catalog_record_registry_catalog_catalog_id_get](#get_data_catalog_record_registry_catalog_catalog_id_get) - Get Data Catalog Record
-* [search_data_catalogs_registry_search_catalogs_get](#search_data_catalogs_registry_search_catalogs_get) - Search Data Catalogs
+* [get_catalog_by_id](#get_catalog_by_id) - Get Data Catalog Record
+* [list_catalogs](#list_catalogs) - Search Data Catalogs
 
-## get_data_catalog_record_registry_catalog_catalog_id_get
+## get_catalog_by_id
 
 This endpoint fetches a single item from the data catalog registry using its unique ID (UID). The full record will be returned. If the catalog has been merged into another catalog canonical entity, 
 the request will automatically redirect to the new one.
@@ -21,14 +21,16 @@ the request will automatically redirect to the new one.
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="Get_data_catalog_record_registry_catalog__catalog_id__get" method="get" path="/registry/catalog/{catalog_id}" -->
+<!-- UsageSnippet language="python" operationID="get_catalog_by_id" method="get" path="/registry/catalog/{catalog_id}" -->
 ```python
 from dateno import SDK
 
 
-with SDK() as sdk:
+with SDK(
+    api_key_query="<YOUR_API_KEY_HERE>",
+) as sdk:
 
-    res = sdk.data_catalogs_api.get_data_catalog_record_registry_catalog_catalog_id_get(catalog_id="cdi00001616")
+    res = sdk.data_catalogs_api.get_catalog_by_id(catalog_id="cdi00001616")
 
     # Handle response
     print(res)
@@ -56,7 +58,7 @@ with SDK() as sdk:
 | errors.ErrorResponse       | 500                        | application/json           |
 | errors.SDKDefaultError     | 4XX, 5XX                   | \*/\*                      |
 
-## search_data_catalogs_registry_search_catalogs_get
+## list_catalogs
 
 Get a list of items from the data catalog.
 
@@ -64,14 +66,16 @@ Intro: [Dateno catalog registry](https://dateno.io/registry/).
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="Search_data_catalogs_registry_search_catalogs__get" method="get" path="/registry/search/catalogs/" -->
+<!-- UsageSnippet language="python" operationID="list_catalogs" method="get" path="/registry/search/catalogs/" -->
 ```python
 from dateno import SDK
 
 
-with SDK() as sdk:
+with SDK(
+    api_key_query="<YOUR_API_KEY_HERE>",
+) as sdk:
 
-    res = sdk.data_catalogs_api.search_data_catalogs_registry_search_catalogs_get(q="", limit=10, offset=0)
+    res = sdk.data_catalogs_api.list_catalogs(q="", limit=10, offset=0)
 
     # Handle response
     print(res)

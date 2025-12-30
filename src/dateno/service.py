@@ -9,7 +9,7 @@ from typing import Any, Dict, Mapping, Optional
 
 
 class Service(BaseSDK):
-    def healthz_healthz_get(
+    def get_healthz(
         self,
         *,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -53,10 +53,11 @@ class Service(BaseSDK):
             request=None,
             request_body_required=False,
             request_has_path_params=False,
-            request_has_query_params=False,
+            request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
@@ -73,9 +74,9 @@ class Service(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="healthz_healthz_get",
+                operation_id="get_healthz",
                 oauth2_scopes=None,
-                security_source=None,
+                security_source=self.sdk_configuration.security,
             ),
             request=req,
             error_status_codes=["4XX", "503", "5XX"],
@@ -93,7 +94,7 @@ class Service(BaseSDK):
 
         raise errors.SDKDefaultError("Unexpected response received", http_res)
 
-    async def healthz_healthz_get_async(
+    async def get_healthz_async(
         self,
         *,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -137,10 +138,11 @@ class Service(BaseSDK):
             request=None,
             request_body_required=False,
             request_has_path_params=False,
-            request_has_query_params=False,
+            request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
@@ -157,9 +159,9 @@ class Service(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="healthz_healthz_get",
+                operation_id="get_healthz",
                 oauth2_scopes=None,
-                security_source=None,
+                security_source=self.sdk_configuration.security,
             ),
             request=req,
             error_status_codes=["4XX", "503", "5XX"],

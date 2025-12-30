@@ -3,15 +3,15 @@
 from __future__ import annotations
 from .timeseries import Timeseries, TimeseriesTypedDict
 from dateno.types import BaseModel
-from typing import List
-from typing_extensions import TypedDict
+from typing import List, Optional
+from typing_extensions import NotRequired, TypedDict
 
 
 class PageTimeseriesTypedDict(TypedDict):
     totals: int
     start: int
     limit: int
-    items: List[TimeseriesTypedDict]
+    items: NotRequired[List[TimeseriesTypedDict]]
 
 
 class PageTimeseries(BaseModel):
@@ -21,4 +21,4 @@ class PageTimeseries(BaseModel):
 
     limit: int
 
-    items: List[Timeseries]
+    items: Optional[List[Timeseries]] = None

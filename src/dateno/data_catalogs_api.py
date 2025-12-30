@@ -13,7 +13,7 @@ class DataCatalogsAPI(BaseSDK):
     https://dateno.io/registry - Dateno catalog registry
     """
 
-    def get_data_catalog_record_registry_catalog_catalog_id_get(
+    def get_catalog_by_id(
         self,
         *,
         catalog_id: str,
@@ -47,7 +47,7 @@ class DataCatalogsAPI(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetDataCatalogRecordRegistryCatalogCatalogIDGetRequest(
+        request = models.GetCatalogByIDRequest(
             catalog_id=catalog_id,
             apikey=apikey,
         )
@@ -64,6 +64,7 @@ class DataCatalogsAPI(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
@@ -80,9 +81,9 @@ class DataCatalogsAPI(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="Get_data_catalog_record_registry_catalog__catalog_id__get",
+                operation_id="get_catalog_by_id",
                 oauth2_scopes=None,
-                security_source=None,
+                security_source=self.sdk_configuration.security,
             ),
             request=req,
             error_status_codes=["400", "404", "422", "4XX", "500", "5XX"],
@@ -112,7 +113,7 @@ class DataCatalogsAPI(BaseSDK):
 
         raise errors.SDKDefaultError("Unexpected response received", http_res)
 
-    async def get_data_catalog_record_registry_catalog_catalog_id_get_async(
+    async def get_catalog_by_id_async(
         self,
         *,
         catalog_id: str,
@@ -146,7 +147,7 @@ class DataCatalogsAPI(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetDataCatalogRecordRegistryCatalogCatalogIDGetRequest(
+        request = models.GetCatalogByIDRequest(
             catalog_id=catalog_id,
             apikey=apikey,
         )
@@ -163,6 +164,7 @@ class DataCatalogsAPI(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
@@ -179,9 +181,9 @@ class DataCatalogsAPI(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="Get_data_catalog_record_registry_catalog__catalog_id__get",
+                operation_id="get_catalog_by_id",
                 oauth2_scopes=None,
-                security_source=None,
+                security_source=self.sdk_configuration.security,
             ),
             request=req,
             error_status_codes=["400", "404", "422", "4XX", "500", "5XX"],
@@ -211,7 +213,7 @@ class DataCatalogsAPI(BaseSDK):
 
         raise errors.SDKDefaultError("Unexpected response received", http_res)
 
-    def search_data_catalogs_registry_search_catalogs_get(
+    def list_catalogs(
         self,
         *,
         q: Optional[str] = "",
@@ -258,7 +260,7 @@ class DataCatalogsAPI(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.SearchDataCatalogsRegistrySearchCatalogsGetRequest(
+        request = models.ListCatalogsRequest(
             q=q,
             limit=limit,
             offset=offset,
@@ -282,6 +284,7 @@ class DataCatalogsAPI(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
@@ -298,9 +301,9 @@ class DataCatalogsAPI(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="Search_data_catalogs_registry_search_catalogs__get",
+                operation_id="list_catalogs",
                 oauth2_scopes=None,
-                security_source=None,
+                security_source=self.sdk_configuration.security,
             ),
             request=req,
             error_status_codes=["404", "422", "4XX", "500", "5XX"],
@@ -330,7 +333,7 @@ class DataCatalogsAPI(BaseSDK):
 
         raise errors.SDKDefaultError("Unexpected response received", http_res)
 
-    async def search_data_catalogs_registry_search_catalogs_get_async(
+    async def list_catalogs_async(
         self,
         *,
         q: Optional[str] = "",
@@ -377,7 +380,7 @@ class DataCatalogsAPI(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.SearchDataCatalogsRegistrySearchCatalogsGetRequest(
+        request = models.ListCatalogsRequest(
             q=q,
             limit=limit,
             offset=offset,
@@ -401,6 +404,7 @@ class DataCatalogsAPI(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
@@ -417,9 +421,9 @@ class DataCatalogsAPI(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="Search_data_catalogs_registry_search_catalogs__get",
+                operation_id="list_catalogs",
                 oauth2_scopes=None,
-                security_source=None,
+                security_source=self.sdk_configuration.security,
             ),
             request=req,
             error_status_codes=["404", "422", "4XX", "500", "5XX"],

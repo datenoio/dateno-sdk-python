@@ -15,3 +15,9 @@ value: models.Total = /* values here */
 value: int = /* values here */
 ```
 
+### `Dict[str, Any]`
+
+```python
+value: Dict[str, Any] = /* values here */
+```
+

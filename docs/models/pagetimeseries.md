@@ -3,9 +3,9 @@
 
 ## Fields
 
-| Field                                              | Type                                               | Required                                           | Description                                        |
-| -------------------------------------------------- | -------------------------------------------------- | -------------------------------------------------- | -------------------------------------------------- |
-| `totals`                                           | *int*                                              | :heavy_check_mark:                                 | N/A                                                |
-| `start`                                            | *int*                                              | :heavy_check_mark:                                 | N/A                                                |
-| `limit`                                            | *int*                                              | :heavy_check_mark:                                 | N/A                                                |
-| `items`                                            | List[[models.Timeseries](../models/timeseries.md)] | :heavy_check_mark:                                 | N/A                                                |
+| Field                                              | Type                                               | Required                                           | Description                                        | Example                                            |
+| -------------------------------------------------- | -------------------------------------------------- | -------------------------------------------------- | -------------------------------------------------- | -------------------------------------------------- |
+| `totals`                                           | *int*                                              | :heavy_check_mark:                                 | N/A                                                | 1520                                               |
+| `start`                                            | *int*                                              | :heavy_check_mark:                                 | N/A                                                | 0                                                  |
+| `limit`                                            | *int*                                              | :heavy_check_mark:                                 | N/A                                                | 100                                                |
+| `items`                                            | List[[models.Timeseries](../models/timeseries.md)] | :heavy_minus_sign:                                 | N/A                                                |                                                    |

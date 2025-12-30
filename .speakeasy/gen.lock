@@ -1,16 +1,16 @@
 lockVersion: 2.0.0
 id: 0307b6cc-c261-4549-897f-8853e91d7ac5
 management:
-  docChecksum: f5c0d1bebc9c845685d31ca5bc739e7c
+  docChecksum: a1e35ff1180e4a245721a99d72e64c00
   docVersion: 0.2.0
-  speakeasyVersion: 1.680.5
+  speakeasyVersion: 1.680.10
   generationVersion: 2.788.7
-  releaseVersion: 0.0.1
-  configChecksum: de5618c1abfcaa5bc507feff44995952
+  releaseVersion: 0.2.0
+  configChecksum: 7a8616db01605cc8a517c5fbd749e3c0
 persistentEdits:
-  generation_id: 6790e085-5e6c-4015-8392-910bdfc5b1b2
-  pristine_commit_hash: ac40ce271fec64764eb6ca113b92b9ec4b6ca3ea
-  pristine_tree_hash: 379a331275d1780f5104917f878e5b172fe48879
+  generation_id: fe45b226-6677-487e-aaea-3664f6bf251b
+  pristine_commit_hash: 3f3b4876eb372345fac98113fbcbee66509e07bf
+  pristine_tree_hash: 2bfef9c36a6ca21e1f6bbaa9b18b495a985b3251
 features:
   python:
     acceptHeaders: 3.0.0
@@ -23,7 +23,9 @@ features:
     enumUnions: 0.1.0
     envVarSecurityUsage: 0.3.2
     flattening: 3.1.1
+    globalSecurity: 3.0.4
     globalSecurityCallbacks: 1.0.0
+    globalSecurityFlattening: 1.0.0
     globalServerURLs: 3.2.0
     methodArguments: 1.0.2
     nullables: 1.0.1
@@ -42,8 +44,8 @@ trackedFiles:
     pristine_git_object: 8d79f0abb72526f1fb34a4c03e5bba612c6ba2ae
   USAGE.md:
     id: 3aed33ce6e6f
-    last_write_checksum: sha1:fcf94506f43eb0c36596d861065d68860cdcb906
-    pristine_git_object: 291448fb06f3d5b34ee553ae7fbc7a1dc5928444
+    last_write_checksum: sha1:c827820bc19cf282ae6a5a7feff606b9a61529a0
+    pristine_git_object: 36d1977ec049558a0d02ee4f716971a4e849896d
   docs/errors/errorresponse.md:
     id: 910ef333346b
     last_write_checksum: sha1:d56a885802713220d574b65cb3fb2a3e8f1a7fe0
@@ -52,54 +54,50 @@ trackedFiles:
     id: 7fe2e5327e07
     last_write_checksum: sha1:277a46811144643262651853dc6176d21b33573e
     pristine_git_object: 712a148c3e2305dca4c702851865f9f8c8e674cc
-  docs/models/bodydatasetsearchusingelasticdslsearch02essearchpost.md:
-    id: b81ff74d68fc
-    last_write_checksum: sha1:a0bf73788c6ecbf6a1dce06100bd235bed0c2cad
-    pristine_git_object: 9887321e4bf6f56f5b9b8eb395803f44af164d84
+  docs/models/bodysearchdatasetsdsl.md:
+    id: 9b43ef93702e
+    last_write_checksum: sha1:422e2e7df065f2ae09014d51dc2294ca72828103
+    pristine_git_object: f3d4c3b771ee4959a3dd207f5ab4f65774a58b4b
   docs/models/country.md:
     id: a9be7df1a5df
     last_write_checksum: sha1:79af1dd679f89d2c4a5ac1e1c91e4cc4fa1bf35a
     pristine_git_object: 33a783b62b5fe630ef17bbbd2bd9e90a04cd8432
   docs/models/datacatalog.md:
     id: c8b5c08dca20
-    last_write_checksum: sha1:5d493e7e0170ee0de60ee0a4a31c59fd89d91fb8
-    pristine_git_object: fc3dbea3a33a5347f6f9e548d6ca63d6da2320dc
+    last_write_checksum: sha1:5dd12567eb2407e6a3b396cf9d269486366f84b8
+    pristine_git_object: a03a32f4b3aa855b71236a4816142567b1df5ba9
   docs/models/datacatalogsearchitem.md:
     id: cc7a0fbc5594
     last_write_checksum: sha1:ed59ac82cc3c4f0a3b5dfdf0143801fa15488abd
     pristine_git_object: 87aa58b7b5373f1a6a76b2df1ad97685c345aece
   docs/models/datacatalogsearchresponse.md:
     id: 16074403693a
-    last_write_checksum: sha1:ebacc502c57b580fcd3033ab8e796428816fb9bf
-    pristine_git_object: d27b07fb5e856f23ed86cb1bd5ba4b0495c7b39f
-  docs/models/datasetsearchusingelasticdslsearch02essearchpostrequest.md:
-    id: ca8e001c4d32
-    last_write_checksum: sha1:4b3554b1803c795ade3e077e14ebceee46ccaebe
-    pristine_git_object: 1b4f69abc48d747e5747cd5e6cf20c161af2d41b
+    last_write_checksum: sha1:080025af76f8180b037def2c137411cfb67c80e3
+    pristine_git_object: 7ab02ffac78040f74d05c2ad1888a7d491e10d2e
   docs/models/datasize.md:
     id: 06f73f44bb41
     last_write_checksum: sha1:869c2447402c8330b78b6d2f37d8c802f0f0ee1f
     pristine_git_object: 3eb0505fc42eed6a5642a0ab924f50645ccad626
   docs/models/dimensionspec.md:
     id: cde649639687
-    last_write_checksum: sha1:d20ed5057fd362c2a7da4231aa321a25e64d00dc
-    pristine_git_object: cdce0ac695b4a2f218aadf6cc314c5616608c0dd
+    last_write_checksum: sha1:1cedbbc7d75802623bd301bf5a0cd3dec65f9774
+    pristine_git_object: e4f9414a6f9124354458d1f62fe4c1d32cb0a8dc
   docs/models/endpoint.md:
     id: dc72b5fd04e3
-    last_write_checksum: sha1:de240abd61058691963768bdf2d4fd1347959c45
-    pristine_git_object: fbcc7cdf4b2de5ead821629425bc63a5f701cf1d
-  docs/models/exporttimeseriesdatastatsdb01nsnsidtstsidexportfileextgetrequest.md:
-    id: af4aca45dda8
-    last_write_checksum: sha1:38970ebbb15e2df5ca85e15a5a4f405ff08780e7
-    pristine_git_object: 1a8e4bad176c64f1ae6df3bbb731a875ece1b83f
-  docs/models/exporttimeseriesdatastatsdb01nsnsidtstsidexportfileextgetresponse.md:
-    id: 7a0ea4c46791
-    last_write_checksum: sha1:cc9a833cbed0288e148927b703738cdfc0145a85
-    pristine_git_object: e3176fb4767ffd903ee35062c4cc3a9cfb6853af
-  docs/models/exporttimeseriesdatastatsdb01nsnsidtstsidexportfileextgetresponseresult.md:
-    id: 71f2a7ede002
-    last_write_checksum: sha1:e1566f6634bb38a15c80a47789e65cfadfe17602
-    pristine_git_object: d55ca650b56684d0b13621663ddc4c82d6003dcf
+    last_write_checksum: sha1:e0dd453b20532b3c9405f313da57b92c736b6b08
+    pristine_git_object: b77d69093db5a1ca6c6fbd23bec337ebed99054e
+  docs/models/exporttimeseriesfilerequest.md:
+    id: efb9bf966c70
+    last_write_checksum: sha1:38605bb785fb7af3f7551af179fd24317c667c9f
+    pristine_git_object: a9db030a962292174f4ee8a22eb554f94144cd43
+  docs/models/exporttimeseriesfileresponse.md:
+    id: 39e731c4204b
+    last_write_checksum: sha1:74cea717fba01e85b76055c93664729ca2f28076
+    pristine_git_object: e4abc022510098cde1080db87919c6e09a02774d
+  docs/models/exporttimeseriesfileresponseresult.md:
+    id: b72312b037da
+    last_write_checksum: sha1:289e45d1d1f3e262ce44e77505a857c2ca7472c1
+    pristine_git_object: 8ad51c2be7ea870f0647a6cae125857baf716d68
   docs/models/facetinfo.md:
     id: 990d3e7ce06f
     last_write_checksum: sha1:41f304682cd906f77bee5230ea24a7593518f1d0
@@ -114,40 +112,44 @@ trackedFiles:
     pristine_git_object: 254de646f457fe2da3fa178587afe3007951f1f2
   docs/models/fieldspec.md:
     id: 0ab0c3b30496
-    last_write_checksum: sha1:f1bfad7e0220288b577fd849fdc3a0cbe623174c
-    pristine_git_object: 107a8a0bf9e8faf150568e53e2136be483548661
-  docs/models/getdatacatalogrecordregistrycatalogcatalogidgetrequest.md:
-    id: e184eae0c50e
-    last_write_checksum: sha1:b855956226820473ae252ccdbfb4d72fffe01bd8
-    pristine_git_object: 822e60626b1a25a3e2d5421101bde9a99db8fd6a
-  docs/models/getfacetvaluessearch02getfacetgetrequest.md:
-    id: 4cbc93854e21
-    last_write_checksum: sha1:ab49807d882d5770d288ba57678ff8ddd0e9adf4
-    pristine_git_object: 55e1cdd8c95b2804b0f85c8134f8f1442da1eefd
-  docs/models/getindicatormetadatastatsdb01nsnsidindicatorsindidgetrequest.md:
-    id: 7bda09e26547
-    last_write_checksum: sha1:3900fb5986ac7814ea2920134012d88c81a11e7f
-    pristine_git_object: c41671f7cead0e14664dcfbe50b56b5039adf699
-  docs/models/getnamespacedatabasemetadatastatsdb01nsnsidgetrequest.md:
-    id: 3377ffcf3516
-    last_write_checksum: sha1:3ec07667bc460c2b0d07595eab15e217718467df
-    pristine_git_object: 3493a53b8ef22f37cfcf79f5837302f3bd8b028f
-  docs/models/getsimilardatasetssearch02similarentryidgetrequest.md:
-    id: b08f3642e0b2
-    last_write_checksum: sha1:4b2894db3e945e998e2ea91a453d7d6f7d7611b5
-    pristine_git_object: cb2a1f270dfcbff99995bea26610d817d8e6a949
-  docs/models/getsingledatasetrecordbyentryidsearch01entryentryidgetrequest.md:
-    id: 1adf2ceb6bc9
-    last_write_checksum: sha1:40d7733eeda9f502749ebd97c8ccb63fe8b5c89e
-    pristine_git_object: 2bc087fdbabe7256b00c91568a69f9202607ff3e
-  docs/models/gettablemetadatastatsdb01nsnsidtablestableidgetrequest.md:
-    id: 54c536b3b924
-    last_write_checksum: sha1:90a3e24a4ffd46aabccc03ec93462bbee44719b8
-    pristine_git_object: 893eec37b1aef75a461f7e92595d10ae130b37a5
-  docs/models/gettimeseriesrecordmetadatastatsdb01nsnsidtstsidgetrequest.md:
-    id: f59a8794116f
-    last_write_checksum: sha1:cde05c82a3743a7b204882437d6235885c3abb33
-    pristine_git_object: 8447a38b50b64dd9e9797b7581c60e65b8972b0a
+    last_write_checksum: sha1:500c05c3a27cc7972b6057cf25a755fd1da71bdc
+    pristine_git_object: 2b03b201b95dc2e2bac08717c896c793e712aac0
+  docs/models/getcatalogbyidrequest.md:
+    id: e37d8d188eb1
+    last_write_checksum: sha1:c9e41feb9f349b9aa6108b25e8e157a212897ac4
+    pristine_git_object: 3572d480f1a62267236fb674f30e3aeebc7a837c
+  docs/models/getdatasetbyentryidrequest.md:
+    id: c98ce114ab2d
+    last_write_checksum: sha1:b0983f0fdc2cbdb18616156606a30fd03a66992e
+    pristine_git_object: dfea5b731afa2cd95bccf9cc3715c27f1e988bad
+  docs/models/getnamespaceindicatorrequest.md:
+    id: 0a905b89514f
+    last_write_checksum: sha1:885d2e338a5c1bd94eb6480a6cffd82ca8ae81a8
+    pristine_git_object: d5d9b64ab27d634668fb6ce190bac5383a0fb05d
+  docs/models/getnamespacerequest.md:
+    id: 81542e982fb9
+    last_write_checksum: sha1:137c3f3d53ca439482c4325609f4032d49096cc2
+    pristine_git_object: 0f810ad8c470a552e84aa3419affa51009e9869b
+  docs/models/getnamespacetablerequest.md:
+    id: a898642e09ae
+    last_write_checksum: sha1:76223dd84f74827c9ba5b61a341cbce9fad86a37
+    pristine_git_object: c34de824e030b8e253b858b6917a171e3cc32b3f
+  docs/models/getrawentrybyidrequest.md:
+    id: 39bd4f395ccd
+    last_write_checksum: sha1:8b6c639c78ee9850c0bc73cf4e9d4f0c21cf7a47
+    pristine_git_object: 21afb7cf24b35cb525805e99bcb8cc6126adfa0a
+  docs/models/getsearchfacetvaluesrequest.md:
+    id: 74ec2db77e41
+    last_write_checksum: sha1:5ff24562d5dbb85d00dee45b2b2e538677fab9b7
+    pristine_git_object: 7d26637a13fb94c91af3e30cd22804415cde2bc9
+  docs/models/getsimilardatasetsrequest.md:
+    id: 08f976023473
+    last_write_checksum: sha1:e9be3163a761352736345dedfcea82bfc2b76651
+    pristine_git_object: 09ecb90876ccd9f122a9e129f8c60c06154fc9fd
+  docs/models/gettimeseriesrequest.md:
+    id: fc9fe4ae6853
+    last_write_checksum: sha1:7979ca1e769f483a9aeec4ef4d6afc71669d80c6
+    pristine_git_object: b3638ca72631462ae811228135c6e39808c750ff
   docs/models/hit.md:
     id: 5a762e7f41ee
     last_write_checksum: sha1:7f3919910c211dfcfc222fdc06812e9b5ca55980
@@ -158,36 +160,40 @@ trackedFiles:
     pristine_git_object: cfbddd80ac45aec5e07ed4def60930059c65f2b2
   docs/models/identifier.md:
     id: c153cfa779eb
-    last_write_checksum: sha1:77496e2b58250e95d6f4b3a8489f3c5d178a9aed
-    pristine_git_object: e9a66d3c1290888d8e6f5b80d182a159f43a6b13
+    last_write_checksum: sha1:82026d972c92d9c9837123f147f25a9a7e417b81
+    pristine_git_object: 658dfc4b10295ced691ebf50c7688d0bedf5b531
   docs/models/indicator.md:
     id: fcb49db1808a
     last_write_checksum: sha1:2c06306bc1e512cb756a9cb6358fa0ce60b24dea
     pristine_git_object: d3393712dc368353d6c36ad47cddabef8b2acbf6
-  docs/models/listexportableformatsstatsdb01listexportableformatsgetrequest.md:
-    id: 8703b44563c9
-    last_write_checksum: sha1:a57cd067a3aec6793e79fc373adf8165c85083c3
-    pristine_git_object: 8a124cdcf8c238e9e7d3cf058e985fb088acbd61
-  docs/models/listfacetssearch02listfacetsgetrequest.md:
-    id: fbc98108f15a
-    last_write_checksum: sha1:dac49799ecc5b2c4effa53909a4b36c36190a0bb
-    pristine_git_object: a8dc2f62708efd02ffde09f05be5bdb542eb06eb
-  docs/models/listindicatorsstatsdb01nsnsidindicatorsgetrequest.md:
-    id: 70180bd55dbe
-    last_write_checksum: sha1:c724dd4145d9c4e060f868274ddaa2a94ed35af1
-    pristine_git_object: c58aa1d1f95f6402c0b30558d4c4a09b1ca10861
-  docs/models/listnamespacesdatabasesstatsdb01nsgetrequest.md:
-    id: 72b90bd39218
-    last_write_checksum: sha1:a9757b72d44e9c597137e6e8fef0d231f4aa8018
-    pristine_git_object: ee62b48b5bedcfcc26b974eb505726615a96476b
-  docs/models/listtablesstatsdb01nsnsidtablesgetrequest.md:
-    id: 8a1d488c3f09
-    last_write_checksum: sha1:f94fc3b2d72b09caf28a99fd2fd6b92925e4f905
-    pristine_git_object: dc7ec4a20863da7371e09ed9b055826052c4b41a
-  docs/models/listtimeseriesstatsdb01nsnsidtsgetrequest.md:
-    id: 5551f93dc742
-    last_write_checksum: sha1:f51fe96c0a174ae7c507d548edf84ff465be445c
-    pristine_git_object: 47251336e3372fdb5d7d7b8f0707071845f4354a
+  docs/models/listcatalogsrequest.md:
+    id: 3f4b357cb9ca
+    last_write_checksum: sha1:df4adbec774413ef269226b8e0e838fbaeb1138d
+    pristine_git_object: 0e1acbfaa2cb23ed2ccc5853ed89c00482b00f71
+  docs/models/listexportformatsrequest.md:
+    id: 2d8040d90f8f
+    last_write_checksum: sha1:5009b2095f7f14f9b598483cf96565e450c8cdca
+    pristine_git_object: 93a57dd1ca9f8df6edf53227730c650af7715f7e
+  docs/models/listindicatorsrequest.md:
+    id: 15c7a9082b6d
+    last_write_checksum: sha1:3ffaa7e78195e72c7d8f93b8aa89eb0cecd4cd53
+    pristine_git_object: 6b69dcfb938b040d8a70b876f30c221d821a3276
+  docs/models/listnamespacesrequest.md:
+    id: a827a876f3a0
+    last_write_checksum: sha1:e3cdc7f6c3e44107ea7617220294beab50296b8e
+    pristine_git_object: f3045e332614eb9ab32e7137a5878bdd24414022
+  docs/models/listnamespacetablesrequest.md:
+    id: 15618ddb62d8
+    last_write_checksum: sha1:15ecea63e916820400af6995fd3d170d268dc428
+    pristine_git_object: db6c77e17257c72cd3915f3bc3ba04d0a15c4023
+  docs/models/listsearchfacetsrequest.md:
+    id: 2d21de0f7d8a
+    last_write_checksum: sha1:eacdbad99b708492cba4844366b8011d0e126476
+    pristine_git_object: 05c1b4a65fec96d6560076358bcc9388035221cb
+  docs/models/listtimeseriesrequest.md:
+    id: 885b25d5def2
+    last_write_checksum: sha1:2a65130db56abadd0ffb8d5b89a275078c03b481
+    pristine_git_object: b21973da7f6522d43f19f3f934f5907c5b672dbf
   docs/models/loc.md:
     id: b071d5a509cc
     last_write_checksum: sha1:09a04749333ab50ae806c3ac6adcaa90d54df0f1
@@ -218,44 +224,44 @@ trackedFiles:
     pristine_git_object: fd095feb60ef9ecd5ba23c4cbb8e074126fa93f6
   docs/models/pageindicator.md:
     id: a92c123c24f4
-    last_write_checksum: sha1:7ea8db606eeb47b1665f5bff4ad79aa4ea5e2a59
-    pristine_git_object: ca3f95e1cd8f7c3b01f1c233ed12cb00c9dd3341
+    last_write_checksum: sha1:7e7dc766ebfdef30a584f6e4f74606a5edaa456d
+    pristine_git_object: e85595c8077a5fdedf21c0f23358b73ef1db2fda
   docs/models/pagenamespace.md:
     id: 6772ef83c046
-    last_write_checksum: sha1:0c8414793fb2c7facde78fdf1f6b08e46533df16
-    pristine_git_object: ea0486e8b83f44b0ae20f6b024fc526d5d4fb2bb
+    last_write_checksum: sha1:a176be3632e0b932fdfe780bcde4b18dbe752422
+    pristine_git_object: a5b4a52d4a3f7112c22f7627f44e9a2050832315
   docs/models/pagetablelistitem.md:
     id: d20edc5a53f8
-    last_write_checksum: sha1:2d4c9b89ef3020b1589019285b0825410869a6bd
-    pristine_git_object: 2a4a9c03b7323b698dd405cf343c375dfd255355
+    last_write_checksum: sha1:19b21731db186aacd43d3a1f335bef1cee226002
+    pristine_git_object: d78108bb70f08c0498b7408c0caca250b016f3c9
   docs/models/pagetimeseries.md:
     id: cc0d9b8b38dc
-    last_write_checksum: sha1:17ac9f0b39d5c5f7e95ed271783be1b0b972d125
-    pristine_git_object: 69246972f1888e247002d8e5b4fc15ccb880bbbc
+    last_write_checksum: sha1:7bd0a191b618aa2d854b927c635f8dead9c17a83
+    pristine_git_object: e591fafa98ecc94e83fbcd7aeef86f17c8914e60
   docs/models/relation.md:
     id: bd62bd10e24e
     last_write_checksum: sha1:2ea87b5ff8bac97d5dd36d534c46f99a726e602e
     pristine_git_object: e4b795bfcc8c0ed7796921d4e96fc21f23d37acb
-  docs/models/searchdatacatalogsregistrysearchcatalogsgetrequest.md:
-    id: 77e3ddeb4071
-    last_write_checksum: sha1:12d595158daa0c173103fb442d683d8a8cd31322
-    pristine_git_object: 288c85f3ddf5f467912e8595a71c3e64bf4894f8
-  docs/models/searchdatasetssearch02querygetrequest.md:
-    id: 5bdc84ef2f50
-    last_write_checksum: sha1:1ca04e982de96ea35cc9cde9c861bb2be929ea0c
-    pristine_git_object: 1182ebb5e13dcbc677ae9cc9075700f61f650f3f
+  docs/models/searchdatasetsdslrequest.md:
+    id: 7f70c40833cb
+    last_write_checksum: sha1:c6e9ef9132199acf49de1fb6807128c389d4081f
+    pristine_git_object: e42bbf37ab8e3dc4e42919e57614058ce891a489
+  docs/models/searchdatasetsrequest.md:
+    id: 8540a4cdb06a
+    last_write_checksum: sha1:34e198314c0104bc6caa7783d2b2a8a24bde1ad1
+    pristine_git_object: 4aa6a48beb9fca6a49a080efd7611b49b0c3e644
   docs/models/searchindexdatasetrecord.md:
     id: 235ea417d953
-    last_write_checksum: sha1:85c16056308a1375b58ccb17e839bb36eb98f421
-    pristine_git_object: 1633fc52efc604216b724fd2c01a0b8e28a71275
+    last_write_checksum: sha1:6df43a36f3514e4c248c57415c597afec3b17a33
+    pristine_git_object: 8ad70b1b37442e95ecd905b872ec2c76121dbfed
   docs/models/searchindexdatasetrecordid.md:
     id: 84fc32e43d74
     last_write_checksum: sha1:ae04380db7032afaa3714b9c18678bbabf9ad8b2
     pristine_git_object: 59fe3bb54d0ad595546a90408a403c28513b5b7e
   docs/models/searchindexentry.md:
     id: d941e1f330ab
-    last_write_checksum: sha1:e2b154bfb5776a1ef232f39ef0c20fb911caed9f
-    pristine_git_object: fed37186a8dd74bfbba17a81281d797a77dc62d5
+    last_write_checksum: sha1:90035e391d6c1416ab17f129c1970afc36cd7402
+    pristine_git_object: a76ff16cf679f673664b7e618739b05d4674340b
   docs/models/searchindexparty.md:
     id: 291639123a18
     last_write_checksum: sha1:7d8dc14d076306d437db14538919972730ae4cc2
@@ -270,16 +276,20 @@ trackedFiles:
     pristine_git_object: 56b59b644c0afec81953b77093cd662a178871dc
   docs/models/searchindexsourcerecord.md:
     id: 90f3bbcf45a5
-    last_write_checksum: sha1:6031b84d2f5af53466d1516fd436f2fb25696375
-    pristine_git_object: a48d872a0011b4ae2b554620b52fa1a818bb763f
+    last_write_checksum: sha1:0caa1acb8045e9f1d8afa27183f4e066beda3eba
+    pristine_git_object: f626bbaf4f6a18d0343bc4e3bf931021d7e179a1
   docs/models/searchmeta.md:
     id: 17f9bc2447ae
     last_write_checksum: sha1:57467ff7a28295b7b0f4857f072c4f3075ae68f5
     pristine_git_object: 6846dadfdaa37afacaa6a44f09a2429748f87f09
   docs/models/searchqueryresponse.md:
     id: fb6b0986ba66
-    last_write_checksum: sha1:d7176c80c88b0ba6ff0de6c01038472ce653b01a
-    pristine_git_object: 583433cc94a29549286bfd0cce41dee6aee00b60
+    last_write_checksum: sha1:17c13622493db9f5cbac91f7e4cb2aa97ee22d2b
+    pristine_git_object: d3772ca73a55f6c0ecb699e07c642e721ea7188f
+  docs/models/security.md:
+    id: 452e4d4eb67a
+    last_write_checksum: sha1:ccdedd4a7ff3de9cd98e51bd2033adca93a2dfca
+    pristine_git_object: 4118c2c9e01e062f06fa38310f1f38a952ff2ae1
   docs/models/shards.md:
     id: f70d226aaa25
     last_write_checksum: sha1:0bbfa181130c9880ddb83f683dc83a2a94755b13
@@ -298,24 +308,24 @@ trackedFiles:
     pristine_git_object: 584678dde6c991b049dbde65a89188e8c07a58be
   docs/models/software.md:
     id: 6f0c4c1afdd0
-    last_write_checksum: sha1:54553f8625336254e23287b39994e1e1ad21f3f8
-    pristine_git_object: 015190610adda1a38a04e57eae5bded78598d4e6
+    last_write_checksum: sha1:f93cd8b1e3cc101b38fa06c6dd66ddd86a6e1e7f
+    pristine_git_object: f61cf3531c0b62b1e7225e3db9b9d0d835d4a8bf
   docs/models/spokenlanguage.md:
     id: d8ace0943a57
     last_write_checksum: sha1:261e16a8b90eb78713a91783930698c8acec011d
     pristine_git_object: 6b83e3619b2745e6aaafecaffe6dea64256e1817
   docs/models/subregion.md:
     id: a19d8fff7583
-    last_write_checksum: sha1:f859a25dbaddb11f802a5ebfbe4d0425cb999005
-    pristine_git_object: 345a48d9f900cf06f750bf17b98777db9265abcb
+    last_write_checksum: sha1:56d787e28c3396bce771512a0c26c4aec107986f
+    pristine_git_object: 3b4f6db58bd6d56697e889921f54122602d75d20
   docs/models/tablelistitem.md:
     id: ff75702beada
     last_write_checksum: sha1:1e4696730def01975e390a881a30d4a86d3e024d
     pristine_git_object: 02175406a54e0695341c194578e1cd6583155991
   docs/models/tablewithschema.md:
     id: e00c2bde57ba
-    last_write_checksum: sha1:8a5c60ea05a4f47659238a9bf3d25b55d3e69b96
-    pristine_git_object: bc8b95f20fd99fadbaabe8d6bfbff571161c3edd
+    last_write_checksum: sha1:f35380c756e6ac44e9b26f265ce40ee0f813c20d
+    pristine_git_object: 89b20ce617e152f9ff1d545beebaad836370d4ec
   docs/models/timeseries.md:
     id: a5416b34c748
     last_write_checksum: sha1:5d5f7e882c09c5a4a6f5e403fdbb2efe57dd74d5
@@ -326,16 +336,16 @@ trackedFiles:
     pristine_git_object: 48361debff0e7a39c443ff6d633620dfb3b4b3de
   docs/models/topic.md:
     id: 90cd548d9f3f
-    last_write_checksum: sha1:6f4c1ea7adde0e82391d4451d10f5dc7cc8e8260
-    pristine_git_object: 46dc00185b551d205e089b1fded46e61b72d6748
+    last_write_checksum: sha1:ab1240a46bcea3e53a7023e0a1a84bb0b44b9489
+    pristine_git_object: aa4c23a139ed9e08ba87509eb9de92addc8ae591
   docs/models/total.md:
     id: f4060c3b4657
     last_write_checksum: sha1:8b3da2038afc83944ba4394baa4bf2f09e12cbcd
     pristine_git_object: 9bd2e0ad3aeeb905c9f72d09ea06a95fea3a2b1b
   docs/models/totalunion.md:
     id: 1dfc4d6bafa2
-    last_write_checksum: sha1:3b894f87f0271ad18b8e634e120a0ba4a19bfe57
-    pristine_git_object: b72e55a9bafc9fb2ef57d8e74ce9f13e0f6f42d9
+    last_write_checksum: sha1:af967f0aca9fb8a9f518e1278556db991f6a6862
+    pristine_git_object: 52a3a809b08f7c59a858732ba1b35ea96b03e938
   docs/models/utils/retryconfig.md:
     id: 4343ac43161c
     last_write_checksum: sha1:562c0f21e308ad10c27f85f75704c15592c6929d
@@ -346,20 +356,24 @@ trackedFiles:
     pristine_git_object: 7a1654a1a5cfb3ab92360b361e8e962bf2db4582
   docs/sdks/datacatalogsapi/README.md:
     id: f510a63f1779
-    last_write_checksum: sha1:b2877a177081720cf48bffed72f860b8275166a8
-    pristine_git_object: 150a3f49a909161ab74006617adce6bf8bc3a0ff
+    last_write_checksum: sha1:2c83acf7b4ce5818f49b0afe5ffcc3a98569450c
+    pristine_git_object: 116e58659d78dca429ddfb89cdf4f29bf6046bba
+  docs/sdks/rawdataaccess/README.md:
+    id: 250cc7a568dd
+    last_write_checksum: sha1:8a1b3d0e2e4fa86ebf319f25d3cd3bd35a601068
+    pristine_git_object: 3704ca3b253eec57ea379a4924a4f41add2eea3e
   docs/sdks/searchapi/README.md:
     id: 7b2c58e29882
-    last_write_checksum: sha1:2c4006698d725040f5b9c9b14dc072dbeb2f129c
-    pristine_git_object: dd3c0d7c211d7f456deb178365fb33ebd3d9155a
+    last_write_checksum: sha1:e0cf3f1d5e7bb6887b3fd66dbec9bae68e7f0eb3
+    pristine_git_object: 5ee755df20171ec91c9f61ef01ee0fcebc76d502
   docs/sdks/service/README.md:
     id: d161cb00129d
-    last_write_checksum: sha1:eb479ad3351cb58b8a473466d014345d9e5d606a
-    pristine_git_object: 1988fa3cb9906bcee4dda8085c2e5bd590389df4
+    last_write_checksum: sha1:227c9cdab2d1a0876d772f05a73fc3ebb13d37ce
+    pristine_git_object: 3bcfabaca6c25c98b2580715c099edcca89d8d7c
   docs/sdks/statisticsapi/README.md:
     id: 4c69b4f00e3c
-    last_write_checksum: sha1:cb9166da633d024ed6a754e35173448fa54a5961
-    pristine_git_object: 1728248c396fc0602af0db1322d998d7ee661796
+    last_write_checksum: sha1:bf076f9c3860b48035d8dfa97d79eba36649103f
+    pristine_git_object: c3ea3726aca659049372072a32b59908a6614067
   py.typed:
     id: 258c3ed47ae4
     last_write_checksum: sha1:8efc425ffe830805ffcc0f3055871bdcdc542c60
@@ -370,8 +384,8 @@ trackedFiles:
     pristine_git_object: 2406caf9b5683d0b7e72cbfb13d22d6626274bc1
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:1ec8fbcf99614187afc2d302c46d111ed5d5e11a
-    pristine_git_object: d65f129c0917c9170f4028fa0f12a3e19aaf17bc
+    last_write_checksum: sha1:6401265bd1d3393157f37b81eaac4fe5464603ba
+    pristine_git_object: 7176e6f4967462aa1e946b58838651a4c8cc2e9e
   scripts/publish.sh:
     id: fe273b08f514
     last_write_checksum: sha1:adc9b741c12ad1591ab4870eabe20f0d0a86cd1a
@@ -394,16 +408,16 @@ trackedFiles:
     pristine_git_object: e6f34b6952d02778f6a1cf7168ba404cae864fdc
   src/dateno/_version.py:
     id: d4be4dde16be
-    last_write_checksum: sha1:434804b91136fb60188e18c2812ea68462e5088b
-    pristine_git_object: e503b0d29ad977f39b62c425af2c1e313b052903
+    last_write_checksum: sha1:234b66c8d8fbbc1b4c8d73242c0d53be1b881354
+    pristine_git_object: 56286e552426485ee0fba4826c15959a5ab6fad5
   src/dateno/basesdk.py:
     id: b01c19ccd73c
     last_write_checksum: sha1:f17e7fbea964d98f1a6da92bc21a2b17940b17bb
     pristine_git_object: 89287c76bb002fc353ceaa6546fe497f713ef94f
   src/dateno/data_catalogs_api.py:
     id: af96f2ee9712
-    last_write_checksum: sha1:be99e545a9dd48051c3c16545562b51f774e3f59
-    pristine_git_object: ba59383bb2c97a6f9c050154bc2b8f48558daf7a
+    last_write_checksum: sha1:b527ea57ca211833061f979fcf2d7b633c12447f
+    pristine_git_object: 1162cbebf1e3aef0542fb78a334b8181c6b59323
   src/dateno/errors/__init__.py:
     id: 611dcf4f203c
     last_write_checksum: sha1:69e4baa0de5b57a02cae50581c7ab4babf295e47
@@ -438,44 +452,40 @@ trackedFiles:
     pristine_git_object: 89560b566073785535643e694c112bedbd3db13d
   src/dateno/models/__init__.py:
     id: 475a9e0eb311
-    last_write_checksum: sha1:3d42c34cde015bcea4eab54d58974cb3e2bca8a9
-    pristine_git_object: 9d7325cb633e5a5ec77646aa969842609985e9cf
-  src/dateno/models/body_dataset_search_using_elastic_dsl_search_0_2_es_search_post.py:
-    id: cebf061d7b78
-    last_write_checksum: sha1:1ab6afd1e1a3b06f1370b304270d7a6ee2dabfa8
-    pristine_git_object: 4caa0fcf085e629ba589dc39de67a99b07284638
+    last_write_checksum: sha1:3cfe2e4d904e0a90950df43cc368f06c78b878c2
+    pristine_git_object: 7812e673ed71b84b5c0276a0ebddebcf4f77d77c
+  src/dateno/models/body_search_datasets_dsl.py:
+    id: d16f87ab87c0
+    last_write_checksum: sha1:f60a0302872e8edb9f4a47f54401c599a382f591
+    pristine_git_object: 8aa4ef904fccae140b49fc37f346da16880d9899
   src/dateno/models/country.py:
     id: 7b32d6d71243
     last_write_checksum: sha1:cf15d1b950befa2a36f2003fe9a657f90a009eb4
     pristine_git_object: f903e6199e1cf447a72a9038346a41f008e57bbc
   src/dateno/models/datacatalog.py:
     id: d14da4b34e2f
-    last_write_checksum: sha1:d3764cb721e863232111c560c018ad6f60d8df73
-    pristine_git_object: 87fb074e19affcaeac501445efdb64afc7b84149
+    last_write_checksum: sha1:fb1d06868a19f7cff936c8a2f5ae4929a9ba1b44
+    pristine_git_object: 429e88b54252a9754723d0b7f75de83fcc57650e
   src/dateno/models/datacatalogsearchitem.py:
     id: c4e94442e7bc
     last_write_checksum: sha1:ecffec784a85f7568ef490c4dc3cc61f0d539cc6
     pristine_git_object: b2283328b2398a892871e5d17f4aaf720bcc85c9
   src/dateno/models/datacatalogsearchresponse.py:
     id: e6873bb9ae9c
-    last_write_checksum: sha1:2b25d04e14ac15a4a7bf2602d20abf0b59b4d0a2
-    pristine_git_object: ffd9f61d69f2710fd9752e3f51d76bac6fe6ea6d
-  src/dateno/models/dataset_search_using_elastic_dsl_search_0_2_es_search_postop.py:
-    id: a57819d9a9f4
-    last_write_checksum: sha1:2eedf893c9cce1820731c169cffba2df61d00120
-    pristine_git_object: 684b7130cf666ee4a7febd8a1315e827f2d26fd6
+    last_write_checksum: sha1:17d0198f93a638bf13e316b37c372cc2095b958b
+    pristine_git_object: 0ba32f107436e1e363c6a068b0c77f01366d28c4
   src/dateno/models/dimensionspec.py:
     id: 90bcccba75b9
-    last_write_checksum: sha1:4ce259de27c4de527a4d6ad097e9dcff364d69c0
-    pristine_git_object: 39030a2bf2f8441f9f0220473ad6e2c7b3f17fb8
+    last_write_checksum: sha1:919fb75650b2e477bdd81800119366f5fae6b745
+    pristine_git_object: 170d7954677319436d8c0c4633c414afa1361ff6
   src/dateno/models/endpoint.py:
     id: 7b3b03238273
     last_write_checksum: sha1:01367c2cb4ffebf9a8f6b5e216c5acf252c4ac5b
     pristine_git_object: d800de55dcc163ae9a796807a4b747f80f9392bb
-  src/dateno/models/export_timeseries_data_statsdb_0_1_ns_ns_id_ts_ts_id_export_fileext_getop.py:
-    id: 4abf8660909c
-    last_write_checksum: sha1:81d667944124e292da2b41fb8be8df86f06785bf
-    pristine_git_object: b4a49ba3f0f1fcbb039d62cf42ae6e01fecbc082
+  src/dateno/models/export_timeseries_fileop.py:
+    id: 1bf59b1bd35e
+    last_write_checksum: sha1:eb8b5d8347f3f40b424c24c743b1b9ff7f7356a6
+    pristine_git_object: 3b61ba24638fc72fcb4945b0a0d591984c80c119
   src/dateno/models/facetinfo.py:
     id: 8e59cd98aa71
     last_write_checksum: sha1:e0162d04d6e7cd8dc50fb9e05b9d8d49adb0be2d
@@ -490,80 +500,88 @@ trackedFiles:
     pristine_git_object: b8e0107449dd4b61f3395f10d430ffa5c617d7df
   src/dateno/models/fieldspec.py:
     id: a80c04014e36
-    last_write_checksum: sha1:7ae1d37ef833c625a490c85160783c429e486a44
-    pristine_git_object: 4092d40f79ffb075aae111ba4cee8837957b9f18
-  src/dateno/models/get_data_catalog_record_registry_catalog_catalog_id_getop.py:
-    id: 993522d8b4b4
-    last_write_checksum: sha1:6c00d1219ccd394d85f9e6f329f641a3921d1854
-    pristine_git_object: 2afa1d736a2014a5888cfeeed44e026ffab8821b
-  src/dateno/models/get_facet_values_search_0_2_get_facet_getop.py:
-    id: 5fc47249fe70
-    last_write_checksum: sha1:8fd92eee7149ad035cb7d7ae01b2479f7ee45474
-    pristine_git_object: 658ba0cd62957c44094ff89b8aef2a62a253e2c6
-  src/dateno/models/get_indicator_metadata_statsdb_0_1_ns_ns_id_indicators_ind_id_getop.py:
-    id: 74ee29fb3fb8
-    last_write_checksum: sha1:73e7223d37faafab22d092908ec19ec636d5277a
-    pristine_git_object: 33693ef54f4bdedd7f467573a12ce89c8421f95a
-  src/dateno/models/get_namespace_database_metadata_statsdb_0_1_ns_ns_id_getop.py:
-    id: d47572b7b6c1
-    last_write_checksum: sha1:b2d51c102c162ca354bb7f158f940aa33113a1a4
-    pristine_git_object: 634a1b1ef7b4438250a48eb8e69c7c49b032448e
-  src/dateno/models/get_similar_datasets_search_0_2_similar_entry_id_getop.py:
-    id: 5f141271bb6f
-    last_write_checksum: sha1:dd7b2026987dfb257245edc0643d9bfef3bf3c20
-    pristine_git_object: cdd5e64c81e0f4a17e20b7dabe142ca4544930d2
-  src/dateno/models/get_single_dataset_record_by_entry_id_search_0_1_entry_entry_id_getop.py:
-    id: 2987ed709202
-    last_write_checksum: sha1:b5a1dfe748c01e7c5d6ece22ef2f4ea015cb4aa3
-    pristine_git_object: 7c0b9fbae8428df4645bf61efadf982e18bd8973
-  src/dateno/models/get_table_metadata_statsdb_0_1_ns_ns_id_tables_table_id_getop.py:
-    id: 50863ad3ba96
-    last_write_checksum: sha1:619dc345857b2016e63f8b340d90961f2ac69766
-    pristine_git_object: 197a2d5402090b076923211a843e8dd41a654cf5
-  src/dateno/models/get_timeseries_record_metadata_statsdb_0_1_ns_ns_id_ts_ts_id_getop.py:
-    id: c513f6fcdde3
-    last_write_checksum: sha1:15b54e29ffb1ca611f3be7cd821995beab9b5ded
-    pristine_git_object: 9f1111f10ea08b115da314deb1dc3c4f657ec678
+    last_write_checksum: sha1:7e55045fdaa1af390a88231f1f7d0051872694c7
+    pristine_git_object: 774310af123e4e97a8a985a4cdaed17429a08ce5
+  src/dateno/models/get_catalog_by_idop.py:
+    id: 3d752d5b43e4
+    last_write_checksum: sha1:de367e36e2ed29d02c83dee554a252a9c34ff5be
+    pristine_git_object: 2efbb9e99db0631f0054d753905f89c1a7e5dda3
+  src/dateno/models/get_dataset_by_entry_idop.py:
+    id: 0c39e2de821c
+    last_write_checksum: sha1:d7a13f52a33d61e3b8e7a66f420407561b428581
+    pristine_git_object: 76b1614a5ef5999af41cf34eabba56450e4ab1a4
+  src/dateno/models/get_namespace_indicatorop.py:
+    id: cf62619d2ef7
+    last_write_checksum: sha1:32ab848fd6d76c5346413b9bdea713e3e656b93a
+    pristine_git_object: d58e817cfc627c12fa39c988bc739a1b54732c10
+  src/dateno/models/get_namespace_tableop.py:
+    id: 2dcc5f6f711b
+    last_write_checksum: sha1:4b63a8f2cfd97e6adbc8f3ee787bde33f1e81db6
+    pristine_git_object: b8de1e29e951272e44969ce2e9fde735b9aba69d
+  src/dateno/models/get_namespaceop.py:
+    id: 727d464680fa
+    last_write_checksum: sha1:487feadc77bd080b7f0c3e9c91d1ecb2a8083576
+    pristine_git_object: e0f8799dc7a59fa5056ea8a080097265add371a8
+  src/dateno/models/get_raw_entry_by_idop.py:
+    id: 6e9e6a38ad1d
+    last_write_checksum: sha1:000bf25af6e57297ad00d10f0c2d87698fe0151f
+    pristine_git_object: b2e5a2df4ee9621cd763c21a6b47496d01753b45
+  src/dateno/models/get_search_facet_valuesop.py:
+    id: dc7f266f7c45
+    last_write_checksum: sha1:027f85104b1ad43d5d8323a60bbffea4b8519064
+    pristine_git_object: 65b0f8f8757d06a5943f5f423caf4336491ec4a2
+  src/dateno/models/get_similar_datasetsop.py:
+    id: a6188a3ba8ee
+    last_write_checksum: sha1:1389b1e27cd7032b4e42289762e452078f9eab99
+    pristine_git_object: d21771bd5f0dac12df1564699f3ce1dc8c7bbc3b
+  src/dateno/models/get_timeseriesop.py:
+    id: 7fc02bd00f95
+    last_write_checksum: sha1:d2f8dfad76cfafce87da5812766e8ada833b158c
+    pristine_git_object: 09e9867e13ce505fd1f91a69c3d469def41eb105
   src/dateno/models/hit.py:
     id: 40e7b95aa77d
     last_write_checksum: sha1:67cb12a1b0eabae24f3afb6bd8119938f8c3008a
     pristine_git_object: 43a015404fe65089a67f13cfae694770cc3a3e6e
   src/dateno/models/hits.py:
     id: 7262f057f243
-    last_write_checksum: sha1:3e4b5c1a98c2cb79e560fa8e9452665747de7bad
-    pristine_git_object: 696a02a5c4ddcaa0584e95ba689a676952f4c07d
+    last_write_checksum: sha1:d9e2999ae9d35294fe7518c9a243a0baa034c6af
+    pristine_git_object: 06008b1edca542e17bd217c47fa8549f93ddb16d
   src/dateno/models/identifier.py:
     id: a5330b0db1f2
-    last_write_checksum: sha1:3dd9a2046ead98c36ef692789d893e45226ec895
-    pristine_git_object: 309c24af5b464a9cf77661f53b9b5f3e3eda5d27
+    last_write_checksum: sha1:8b6e8ea1a1088654be96dacf1bebaec7d820c5f3
+    pristine_git_object: 2b2150bc35ca379ca3fd6e0880406f0ebeac51fa
   src/dateno/models/indicator.py:
     id: 2230b425839c
-    last_write_checksum: sha1:989815d6ac34ad185ea80720527f8db844250e67
-    pristine_git_object: dd67763669963a79f8ed045a49f59f3ead2ec51d
-  src/dateno/models/list_exportable_formats_statsdb_0_1_list_exportable_formats_getop.py:
-    id: 0b1cc906656c
-    last_write_checksum: sha1:8ac8ed43028bbf0cfeebabf06f8eb273300afda2
-    pristine_git_object: 098a67cd698d5537b9f7cc0101a5656c2071ab85
-  src/dateno/models/list_facets_search_0_2_list_facets_getop.py:
-    id: 92deff85eb63
-    last_write_checksum: sha1:b16e33355c03741d469a8d9722b733b2ee1dc867
-    pristine_git_object: 8ebb59e4087493e0ff4a36345d1c39412cb89e77
-  src/dateno/models/list_indicators_statsdb_0_1_ns_ns_id_indicators_getop.py:
-    id: e8f57851f538
-    last_write_checksum: sha1:c3b4d9727ba3321de4f73d9ed013c3ea3eb0bfc5
-    pristine_git_object: b5168a0fbe05e25ba368e438c81b6331ccb3d9e9
-  src/dateno/models/list_namespaces_databases_statsdb_0_1_ns_getop.py:
-    id: 9803ff6338ba
-    last_write_checksum: sha1:78df6c3b2e16fc65ec600156574b4931f5228f91
-    pristine_git_object: 4de5f979a784000adb8fd3e888d728dfe1bbda08
-  src/dateno/models/list_tables_statsdb_0_1_ns_ns_id_tables_getop.py:
-    id: 36e9586c867e
-    last_write_checksum: sha1:e17855fc61de4ad4f7fa9f97a8819358ee5268ca
-    pristine_git_object: 85ac3124d8e6578465d3696f8b5e4feb201f8ebb
-  src/dateno/models/list_timeseries_statsdb_0_1_ns_ns_id_ts_getop.py:
-    id: 7940b4e5f68a
-    last_write_checksum: sha1:c7edea5b254f6693cd79edcb1a7da5cb57f8c741
-    pristine_git_object: 709e756dd8dfbd507c6561f139717240e13f799a
+    last_write_checksum: sha1:dce43aa9885689dc8d005dfecb53d1c4f70347f0
+    pristine_git_object: 0758eebc9505cbfb0548ae8afcd4a8d7a81031cd
+  src/dateno/models/list_catalogsop.py:
+    id: e01d5fedaafd
+    last_write_checksum: sha1:dac394c7f0e102e2a9db8f767cd41cc347bba68b
+    pristine_git_object: 128149cf63a86b2bd28501c59aa71f9b7ff6735f
+  src/dateno/models/list_export_formatsop.py:
+    id: 9efffecc30d1
+    last_write_checksum: sha1:76c69fef14137cedc4e098ac1cc933db814fcc1e
+    pristine_git_object: af82818d3482c76699c6956e3e49029ff1572bfb
+  src/dateno/models/list_indicatorsop.py:
+    id: 9a0136b62236
+    last_write_checksum: sha1:ea7d52971789d837b8ae5871fbd991cac62b2eab
+    pristine_git_object: d3d931066f44f9390f3dd04241c800a749d006da
+  src/dateno/models/list_namespace_tablesop.py:
+    id: 4e44132c58e8
+    last_write_checksum: sha1:8aa794c0cad0741634d054c4473190887d6d3c20
+    pristine_git_object: b2d61d1afe9f3824d2b9c59f7f0868f0a9a6c419
+  src/dateno/models/list_namespacesop.py:
+    id: c5dbb8c5de12
+    last_write_checksum: sha1:2d25a7010b4546735b0cfac5ba32f248463f8296
+    pristine_git_object: d43b12cf0801c586b61769b1befb9358e49fa9c7
+  src/dateno/models/list_search_facetsop.py:
+    id: b68dd1332708
+    last_write_checksum: sha1:f727d07ca9c8baf31ddd5963e9a1d24813c9cacd
+    pristine_git_object: d66b7036c4ab0f137cc0aab8261d765e40016e86
+  src/dateno/models/list_timeseriesop.py:
+    id: d209baaa157a
+    last_write_checksum: sha1:cee921c2192d7a9139cfd18754eb7b58be4fbd2a
+    pristine_git_object: 3e221885bfc4c25f2fc1d3205546a374327cf87f
   src/dateno/models/location_output.py:
     id: 02ef1539081c
     last_write_checksum: sha1:ea1de38fd5ff8cf65e4286ac75ea4e2150d8418b
@@ -582,44 +600,44 @@ trackedFiles:
     pristine_git_object: c90e1e8414ff671573c4632e310f85988d75f2c0
   src/dateno/models/namespace.py:
     id: 56f4a019f77f
-    last_write_checksum: sha1:5095625bc3dd39c18afb9ad4d898b3d6cb088ae3
-    pristine_git_object: 24ebe121ba03adf926c1f10eff4911e84e3578f2
+    last_write_checksum: sha1:42e8b9164203461012bb034f3cc59961cdbbb838
+    pristine_git_object: a6b452314cb55b9a655b9c67d6cbcf702a607b63
   src/dateno/models/organization_output.py:
     id: 9924a2c61e11
     last_write_checksum: sha1:1d02959b92636a2742e3efa89bfc873586c77292
     pristine_git_object: f278ad917acf3c11c10a922ccbc37358fd51f656
   src/dateno/models/page_indicator_.py:
     id: 0a162300dd3a
-    last_write_checksum: sha1:ab4b60eaaa638916aee48db9579a0e6b355d95d7
-    pristine_git_object: 093aedf58710877afadfc7922e161f207227773f
+    last_write_checksum: sha1:abeaae91d99a80a26763d00da4b81939d7c2361d
+    pristine_git_object: ec90fca08bda480cf810f934eb8175353069b16f
   src/dateno/models/page_namespace_.py:
     id: a05a8a280334
-    last_write_checksum: sha1:6469ca05460f1a492cbb8f89b58dbfb569bd6ad7
-    pristine_git_object: 72254012f4922c5556ef46e4757f56a2b0f71541
+    last_write_checksum: sha1:6cd215a26d7dc4398729c522687ccd5d0335610d
+    pristine_git_object: e616ccc48824f8f8af1e12e742f2ec087f686912
   src/dateno/models/page_tablelistitem_.py:
     id: c2d309c4665a
-    last_write_checksum: sha1:50d7692b786e9a8bc02c5e8e039b675712b6a945
-    pristine_git_object: b55d1ea97bf2bede9003fd5b858b4b4a4a923498
+    last_write_checksum: sha1:11837efde3a390527801f8bde27eb4d445304064
+    pristine_git_object: 6c59aa89d6db9197d35525d54264f5445ba4e6a3
   src/dateno/models/page_timeseries_.py:
     id: dce7118e7bf8
-    last_write_checksum: sha1:2eebb7cae506106c7851ca9f0c8154d3d822dea3
-    pristine_git_object: 6a77266af4016bf5eac5db174f3156d148ff903e
-  src/dateno/models/search_data_catalogs_registry_search_catalogs_getop.py:
-    id: e09337918805
-    last_write_checksum: sha1:6bd3c996c07ccb7eda685dd89f96f3719f21ebd4
-    pristine_git_object: 9d26edbf834405672b7da279801e5985847f2362
-  src/dateno/models/search_datasets_search_0_2_query_getop.py:
-    id: aa25a3a168b6
-    last_write_checksum: sha1:9a0b091ddbd389856d9d8c8bcdb0204ecef49f3d
-    pristine_git_object: 578e3a95927833a47cdb2814fdd4b70075376f7d
+    last_write_checksum: sha1:7a919f215228f79a8840fc118e75decf20fcb995
+    pristine_git_object: 65f48cae607253dadc61624edc55ecd25ca71938
+  src/dateno/models/search_datasets_dslop.py:
+    id: d587b38a73f3
+    last_write_checksum: sha1:3d4c6be6ecf78cab2a18160bba8e7399adfda3c3
+    pristine_git_object: 303613b70af2b7310c1ef078eddf4b55bdd86bbc
+  src/dateno/models/search_datasetsop.py:
+    id: ce0e437f28cf
+    last_write_checksum: sha1:10eba2257c02f732331368ca30b7b8c28b8af864
+    pristine_git_object: 2bdf943a762b2cc3fc3cdc95adfb73d31a603494
   src/dateno/models/searchindexdatasetrecord.py:
     id: ac994724fcf1
-    last_write_checksum: sha1:89d401071f278cf50d4a7a07a132864e1be2d3a1
-    pristine_git_object: 8b7c2b614da918ac8be8a8280df3413028e5ce88
+    last_write_checksum: sha1:514dfd689fbe9e4a6b3e5aa3994ad6ad7dddcebc
+    pristine_git_object: e0cd35618fad875a585a96bf70bf6f9790ee4f22
   src/dateno/models/searchindexentry.py:
     id: b566ff417b1d
-    last_write_checksum: sha1:7d5b6ced4c78044fec2d14afed125abe02b8be4c
-    pristine_git_object: d2b3b348ae0c61b07e7c097ee0bc1bc19ae6e313
+    last_write_checksum: sha1:9304f2a53259e0889b7898b8d1cbedb8db3d54d4
+    pristine_git_object: 5bff3547aad87fb193ce388655e77cbad9f75a0b
   src/dateno/models/searchindexparty.py:
     id: a87e067739d1
     last_write_checksum: sha1:fb35d5e34e77b63b179d63717343793d7a074ecb
@@ -638,8 +656,12 @@ trackedFiles:
     pristine_git_object: 25d943504ae2c36c173346db45450700f38c3821
   src/dateno/models/searchqueryresponse.py:
     id: 7e99dc13db5b
-    last_write_checksum: sha1:4813c13e9595e0a94189e57415652813e9d9c7bc
-    pristine_git_object: b8992d4f0ef3326d704fc10542c4e33fb1b26df5
+    last_write_checksum: sha1:aa8aebf5da41dbe1a22e0d4d0481ae0a95a49c31
+    pristine_git_object: 7feff54a09b2e76933f1057f10085575fbae1f5b
+  src/dateno/models/security.py:
+    id: 7fcdfe36bdf4
+    last_write_checksum: sha1:9bdb6e11079d9ee6990603fd71c2663120db6e3b
+    pristine_git_object: 29cc831c9144a8c5f57923dab2e60f6ce03997c7
   src/dateno/models/shards.py:
     id: df4aabecb3e7
     last_write_checksum: sha1:86a4816c705c54bcd322ba52000597afbeef5216
@@ -658,8 +680,8 @@ trackedFiles:
     pristine_git_object: 1cbef51f3107d7d007510f77f1d7a8204bde8714
   src/dateno/models/software.py:
     id: 02d872bb3473
-    last_write_checksum: sha1:c1c1fb6a137409af957355c7ffd9087960ecb1f3
-    pristine_git_object: 2c6f0883e37c98fba38af4603430f4a98d8e86a7
+    last_write_checksum: sha1:53b08a62e6885c422d2ff22232fde9b795ae7e97
+    pristine_git_object: 02acd7ad81b81643f479a68cfc8719008842a615
   src/dateno/models/spokenlanguage.py:
     id: e4ec2851ae9e
     last_write_checksum: sha1:10e30778a30914eab22cb7265de72c7ee67fb58d
@@ -674,20 +696,20 @@ trackedFiles:
     pristine_git_object: c0555350b5ba9bffafc4d063d860de2123e7ebcb
   src/dateno/models/tablewithschema.py:
     id: 849cd36e9950
-    last_write_checksum: sha1:3ac6a1461cbd3d126dd5cb452a06426326182dea
-    pristine_git_object: 2c7543fd420980506f04d102d2445916849de14d
+    last_write_checksum: sha1:cc4f9a6caf197fa0ced9d48cb490288778be8bc5
+    pristine_git_object: 0d7243947f8d30e54021313ec72fa24e8b5151d5
   src/dateno/models/timeseries.py:
     id: b90c4498e958
-    last_write_checksum: sha1:e9a65ce9becad64c04950fd8fe92f8d1f30118ed
-    pristine_git_object: 5c6266a2ae0dfedcfaf05c48aefc593e6c5e7094
+    last_write_checksum: sha1:c41e41ace904de007e7e1b08e9a0e5cc428aa0d4
+    pristine_git_object: 37e9b82465f2107d5573688e492d6ecde78d926c
   src/dateno/models/timeserieswithschema.py:
     id: c43e8e27fbe9
-    last_write_checksum: sha1:23ba3fdf5224aba51821484c5d6553e40b788db9
-    pristine_git_object: 7fcee1e1ff461a936f5fca3db44125a608ff3b87
+    last_write_checksum: sha1:b2a8cf63832363f4c6c3486a2f74bdc3c2ecb321
+    pristine_git_object: 2e8a2cfc1e2bcab0e92eddcf18584449bd69ade2
   src/dateno/models/topic.py:
     id: 985e40ab1fbc
-    last_write_checksum: sha1:a93fcb68581ee0b2ae680a266de5ae0ed322f1c3
-    pristine_git_object: dd6391d7fb76604c5de5041428131f0f2272b628
+    last_write_checksum: sha1:cfaed8519283e14c1b5fd80394d41c5637b7c634
+    pristine_git_object: dd7b3ed2ecadd54a63f5481dc76ab593535ca28b
   src/dateno/models/total.py:
     id: f9a12bcc049e
     last_write_checksum: sha1:889cefa735fc074d33d7caafb7ba01f5aacb34e7
@@ -700,26 +722,30 @@ trackedFiles:
     id: ff2ade4b147c
     last_write_checksum: sha1:8efc425ffe830805ffcc0f3055871bdcdc542c60
     pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
+  src/dateno/raw_data_access.py:
+    id: e1704c8c9ea7
+    last_write_checksum: sha1:406a83305692028a3f4652c07312d88d9ecdc3e1
+    pristine_git_object: f7fe9afa2ccdf6c9877cfaa5f385f0542b4aee2f
   src/dateno/sdk.py:
     id: 85db3da672dc
-    last_write_checksum: sha1:be8044b0fcb812016f69c0719220387dfe3abb26
-    pristine_git_object: e8a2ee0667546de4e0bf25a644f3f8ce3be271a1
+    last_write_checksum: sha1:b780217bcc60614265e55aac9b6954b0ac417e42
+    pristine_git_object: bacd89aea057aec8c6f6cc0691638bc75e03b250
   src/dateno/sdkconfiguration.py:
     id: 08f3fe541420
-    last_write_checksum: sha1:548150934081fba57e94f36e13efae082bbf7aaa
-    pristine_git_object: d6861356ddf4c9606bd329d014cc4c285980afec
+    last_write_checksum: sha1:329189434acfa98a1b01a172d8eb2732b146be5a
+    pristine_git_object: 0fdf502946a2f286ce7485fd151aac226c7cdce5
   src/dateno/search_api.py:
     id: 27bf295f8ac0
-    last_write_checksum: sha1:caebbaff0733390eb7a335902e8eaf318bb461c3
-    pristine_git_object: e25ca9c30674a6842102b2a99f4928426e12f16c
+    last_write_checksum: sha1:5fc06eb25f5009521ee3ffc377cb4f75d8c9f31a
+    pristine_git_object: 918abb01d52c641152ed55ceaa5bd2bdf74e4050
   src/dateno/service.py:
     id: 6b30a486a045
-    last_write_checksum: sha1:8c8bd822ba93daf89be0d176dbc49af3891328ed
-    pristine_git_object: 7677f40a6e128605a4cb4a1d80c248b4be096e71
+    last_write_checksum: sha1:e9aeedebd8b1690c4a3e5dc65ee22379704650c3
+    pristine_git_object: 99f77d95f90411edce99558f299a5ae23f3b6596
   src/dateno/statistics_api.py:
     id: e3a6072dfe7e
-    last_write_checksum: sha1:f44384a9ca941f010dc35185c09d773085264fe9
-    pristine_git_object: 7a32af4028c693f2edc59acc6270e452a9db483a
+    last_write_checksum: sha1:ec5164846f8c009e54a58bbc7fc4c2869e4f27a0
+    pristine_git_object: 4cc794d203a39b2f3f2804b2cf2677d3671868c6
   src/dateno/types/__init__.py:
     id: 14611cd06698
     last_write_checksum: sha1:140ebdd01a46f92ffc710c52c958c4eba3cf68ed
@@ -1075,4 +1101,296 @@ examples:
       responses:
         "200":
           application/json: {"key": "<value>", "key1": "<value>", "key2": "<value>"}
+  get_catalog_by_id:
+    speakeasy-default-get-catalog-by-id:
+      parameters:
+        path:
+          catalog_id: "cdi00001616"
+      responses:
+        "200":
+          application/json: {"id": "catalogdatagov....", "uid": "cdi00001616", "name": "Data.gov portal", "link": "https://catalog.data.gov", "catalog_type": "Open data portal", "properties": {"transferable_topics": true}, "api": false, "api_status": "uncertain", "access_mode": ["dataset"], "langs": [{"id": "EN", "name": "English"}], "tags": ["biota", "life", "geology"], "content_types": ["dataset"], "coverage": [{"location": {"country": {"id": "AE", "name": "United Arab Emirates"}, "level": 1, "macroregion": {"id": "145", "name": "Western Asia"}}}], "endpoints": [{"type": "ckan:package-search", "url": "https://catalog.data.gov/api/3/action/package_search", "version": "3.0"}], "identifiers": [{"id": "wikidata", "url": "https://www.wikidata.org/wiki/Q5227102", "value": "Q5227102"}], "owner": {"name": "USA Government", "link": "https://www.whitehouse.gov", "type": "Federal government", "location": {"country": {"id": "ZM", "name": "Zambia"}, "level": 1, "subregion": {"id": "US-TX", "name": "Texas"}, "macroregion": {"id": "145", "name": "Western Asia"}}}, "software": {"id": "ckan", "name": "CKAN", "url": "https://ckan.org"}, "status": "uncertain", "topics": [{"id": "SOCI", "name": "Population and society", "type": "eudatatheme"}]}
+        "400":
+          application/json: {"detail": "Detailed error message"}
+        "422":
+          application/json: {}
+        "500":
+          application/json: {"detail": "Detailed error message"}
+  list_catalogs:
+    speakeasy-default-list-catalogs:
+      parameters:
+        query:
+          q: ""
+          limit: 10
+          offset: 0
+      responses:
+        "200":
+          application/json: {"source": "api", "meta": {"offset": 0, "limit": 100, "num": 15, "total": 1520}, "data": [{"uid": "cdi00001616", "name": "Data.gov portal", "link": "https://catalog.data.gov"}]}
+        "404":
+          application/json: {"detail": "Detailed error message"}
+        "422":
+          application/json: {}
+        "500":
+          application/json: {"detail": "Detailed error message"}
+  list_namespaces:
+    speakeasy-default-list-namespaces:
+      parameters:
+        query:
+          start: 0
+          limit: 100
+      responses:
+        "200":
+          application/json: {"totals": 1520, "start": 0, "limit": 100, "items": [{"id": "whoint", "name": "WHO", "metadata": [{"name": "source_url", "value": "https://data.worldbank.org"}]}]}
+        "422":
+          application/json: {}
+        "500":
+          application/json: {"detail": "Detailed error message"}
+  get_namespace:
+    speakeasy-default-get-namespace:
+      parameters:
+        path:
+          ns_id: "ilostat"
+      responses:
+        "200":
+          application/json: {"id": "whoint", "name": "WHO", "metadata": [{"name": "source_url", "value": "https://data.worldbank.org"}]}
+        "404":
+          application/json: {"detail": "Detailed error message"}
+        "422":
+          application/json: {}
+        "500":
+          application/json: {"detail": "Detailed error message"}
+  list_namespace_tables:
+    speakeasy-default-list-namespace-tables:
+      parameters:
+        path:
+          ns_id: "ilostat"
+        query:
+          start: 0
+          limit: 20
+      responses:
+        "200":
+          application/json: {"totals": 1520, "start": 0, "limit": 100, "items": [{"id": "CCF_XOXR_CUR_RT_A", "name": "CCF_XOXR_CUR_RT_A", "ns": "ilostat"}]}
+        "400":
+          application/json: {"detail": "Detailed error message"}
+        "422":
+          application/json: {}
+        "500":
+          application/json: {"detail": "Detailed error message"}
+  get_namespace_table:
+    speakeasy-default-get-namespace-table:
+      parameters:
+        path:
+          ns_id: "ilostat"
+          table_id: "CCF_XOXR_CUR_RT_A"
+      responses:
+        "200":
+          application/json: {"id": "forest17", "name": "Measurements", "fields": [{"name": "dataset_uid", "ftype": "BOOL", "is_array": true, "is_dim": true, "semtype": "geo", "description": "Company location address"}], "ttype": "data", "num_rows": 76998, "ind_key": "indicator", "dimensions": [{"id": "SpatialDim", "name": "Spatial dimension"}], "metadata": [{"name": "source_url", "value": "https://data.worldbank.org"}], "schema": [{"name": "dataset_uid", "ftype": "BOOL", "is_array": true, "is_dim": true, "semtype": "geo", "description": "Company location address"}]}
+        "404":
+          application/json: {"detail": "Detailed error message"}
+        "422":
+          application/json: {}
+        "500":
+          application/json: {"detail": "Detailed error message"}
+  list_indicators:
+    speakeasy-default-list-indicators:
+      parameters:
+        path:
+          ns_id: "ilostat"
+        query:
+          start: 0
+          limit: 100
+      responses:
+        "200":
+          application/json: {"totals": 1520, "start": 0, "limit": 100, "items": [{"id": "MORT_200", "table": "MORT_200", "name": "Mortality", "metadata": [{"name": "source_url", "value": "https://data.worldbank.org"}]}]}
+        "400":
+          application/json: {"detail": "Detailed error message"}
+        "422":
+          application/json: {}
+        "500":
+          application/json: {"detail": "Detailed error message"}
+  list_timeseries:
+    speakeasy-default-list-timeseries:
+      parameters:
+        path:
+          ns_id: "ilostat"
+        query:
+          start: 0
+          limit: 100
+      responses:
+        "200":
+          application/json: {"totals": 1520, "start": 0, "limit": 100, "items": [{"id": "WHOINT_MORT_200_AFR", "indicator": "MORT_200", "table": "MORT_200", "name": "Mortality - Africa", "metadata": [{"name": "source_url", "value": "https://data.worldbank.org"}]}]}
+        "400":
+          application/json: {"detail": "Detailed error message"}
+        "422":
+          application/json: {}
+        "500":
+          application/json: {"detail": "Detailed error message"}
+  get_namespace_indicator:
+    speakeasy-default-get-namespace-indicator:
+      parameters:
+        path:
+          ns_id: "ilostat"
+          ind_id: "WBL_XVET_SEX_EDU_NB"
+      responses:
+        "200":
+          application/json: {"id": "MORT_200", "table": "MORT_200", "name": "Mortality", "metadata": [{"name": "source_url", "value": "https://data.worldbank.org"}]}
+        "404":
+          application/json: {"detail": "Detailed error message"}
+        "422":
+          application/json: {}
+        "500":
+          application/json: {"detail": "Detailed error message"}
+  get_timeseries:
+    speakeasy-default-get-timeseries:
+      parameters:
+        path:
+          ns_id: "ilostat"
+          ts_id: "WBL_XVET_SEX_EDU_NB.CAN"
+      responses:
+        "200":
+          application/json: {"id": "WHOINT_MORT_200_AFR", "indicator": "MORT_200", "table": "MORT_200", "name": "Mortality - Africa", "metadata": [{"name": "source_url", "value": "https://data.worldbank.org"}], "schema": [{"name": "dataset_uid", "ftype": "BOOL", "is_array": true, "is_dim": true, "semtype": "geo", "description": "Company location address"}]}
+        "404":
+          application/json: {"detail": "Detailed error message"}
+        "422":
+          application/json: {}
+        "500":
+          application/json: {"detail": "Detailed error message"}
+  list_export_formats:
+    speakeasy-default-list-export-formats:
+      responses:
+        "200":
+          application/json: {"key": "<value>", "key1": "<value>"}
+        "422":
+          application/json: {}
+        "500":
+          application/json: {"detail": "Detailed error message"}
+  export_timeseries_file:
+    speakeasy-default-export-timeseries-file:
+      parameters:
+        path:
+          ns_id: "ilostat"
+          ts_id: "WBL_XVET_SEX_EDU_NB.CAN"
+          fileext: "csv"
+      responses:
+        "200":
+          application/octet-stream: "x-file: example.file"
+          text/csv: "x-file: example.file"
+          application/vnd.openxmlformats-officedocument.spreadsheetml.sheet: "x-file: example.file"
+          application/json: "x-file: example.file"
+        "400":
+          application/json: {"detail": "Detailed error message"}
+        "422":
+          application/json: {}
+        "500":
+          application/json: {"detail": "Detailed error message"}
+  get_dataset_by_entry_id:
+    speakeasy-default-get-dataset-by-entry-id:
+      parameters:
+        path:
+          entry_id: "c4a88574-7a2a-4048-bc9f-07de0559e7b7"
+      responses:
+        "200":
+          application/json: {"id": "cdi00000002-c4a88574-7a2a-4048-bc9f-07de0559e7b7", "int_id": "c4a88574-7a2a-4048-bc9f-07de0559e7b7", "source": {"uid": "cdi00001616", "name": "Data.gov portal", "url": "https://catalog.data.gov", "catalog_type": "Open data portal", "langs": [{"id": "EN", "name": "English"}], "owner_name": "USA Government", "owner_type": "Central government", "software": {"id": "ckan", "name": "CKAN", "url": "https://ckan.org"}, "countries": [{"id": "AE", "name": "United Arab Emirates"}], "macroregions": [{"id": "145", "name": "Western Asia"}], "subregions": [{"id": "US-TX", "name": "Texas"}]}, "dataset": {"id": "c4a88574-7a2a-4048-bc9f-07de0559e7b7", "title": "Name of the dataset", "num_resources": 1, "url": "https://data.bayanat.ae/dataset/open-field-exposed-vegetable-crops", "short_text": "Short plain text, extracted from description", "description": "Some dataset text description. Originally could be HTML or any other text", "has_archive": false, "tags": ["Farm", "Crops"], "formats": ["XLSX", "CSV"], "datatypes": ["data", "geodata"], "topics_original": ["Farm", "Crops"], "responsible": [], "license_id": "cc-by", "license_name": "Creative Commons Attribution", "license_url": "https://creativecommons.org/licenses/by/4.0/"}, "resources": []}
+        "404":
+          application/json: {"detail": "Detailed error message"}
+        "422":
+          application/json: {}
+        "500":
+          application/json: {"detail": "Detailed error message"}
+  search_datasets:
+    speakeasy-default-search-datasets:
+      parameters:
+        query:
+          q: "Atlantic salmon"
+          filters: ["\"source.catalog_type\"=\"Geoportal\""]
+          limit: 20
+          offset: 0
+          facets: true
+          sort_by: "_score"
+      responses:
+        "200":
+          application/json: {"hits": {"total": {"key": "<value>", "key1": "<value>"}, "hits": [{"_id": "<id>", "_source": {"key": "<value>", "key1": "<value>"}}]}}
+        "400":
+          application/json: {"detail": "Detailed error message"}
+        "422":
+          application/json: {}
+        "500":
+          application/json: {"detail": "Detailed error message"}
+  search_datasets_dsl:
+    speakeasy-default-search-datasets-dsl:
+      parameters:
+        query:
+          limit: 20
+          offset: 0
+          facets: true
+          sortby: "_score"
+      requestBody:
+        application/json: {"query": {"match": {"title": "salmon"}}, "post_filter": {"term": {"source.catalog_type": {"value": "Geoportal"}}}}
+      responses:
+        "200":
+          application/json: {"hits": {"total": 293192, "hits": []}}
+        "400":
+          application/json: {"detail": "Detailed error message"}
+        "422":
+          application/json: {}
+        "500":
+          application/json: {"detail": "Detailed error message"}
+  list_search_facets:
+    speakeasy-default-list-search-facets:
+      responses:
+        "200":
+          application/json: [{"key": "source.catalog_type", "name": "Data catalog type"}]
+        "422":
+          application/json: {}
+        "500":
+          application/json: {"detail": "Detailed error message"}
+  get_search_facet_values:
+    speakeasy-default-get-search-facet-values:
+      parameters:
+        query:
+          key: "source.catalog_type"
+      responses:
+        "200":
+          application/json: {"facet_key": "source.catalog_type", "items": [{"key": "Geoportal", "num": 123}]}
+        "400":
+          application/json: {"detail": "Detailed error message"}
+        "422":
+          application/json: {}
+        "500":
+          application/json: {"detail": "Detailed error message"}
+  get_similar_datasets:
+    speakeasy-default-get-similar-datasets:
+      parameters:
+        path:
+          entry_id: "c4a88574-7a2a-4048-bc9f-07de0559e7b7"
+        query:
+          limit: 5
+          fields: ["dataset.title", "source.topics"]
+      responses:
+        "200":
+          application/json: {"total": {"value": 672512, "relation": "<value>"}}
+        "400":
+          application/json: {"detail": "Detailed error message"}
+        "422":
+          application/json: {}
+        "500":
+          application/json: {"detail": "Detailed error message"}
+  get_healthz:
+    speakeasy-default-get-healthz:
+      responses:
+        "200":
+          application/json: {"key": "<value>", "key1": "<value>", "key2": "<value>"}
+  get_raw_entry_by_id:
+    speakeasy-default-get-raw-entry-by-id:
+      parameters:
+        path:
+          entry_id: "c4a88574-7a2a-4048-bc9f-07de0559e7b7"
+      responses:
+        "200":
+          application/json: {"id": "cdi00000002-c4a88574-7a2a-4048-bc9f-07de0559e7b7", "int_id": "c4a88574-7a2a-4048-bc9f-07de0559e7b7", "source": {"uid": "cdi00001616", "name": "Data.gov portal", "url": "https://catalog.data.gov", "catalog_type": "Open data portal", "langs": [{"id": "EN", "name": "English"}], "owner_name": "USA Government", "owner_type": "Central government", "software": {"id": "ckan", "name": "CKAN", "url": "https://ckan.org"}, "countries": [{"id": "AE", "name": "United Arab Emirates"}], "macroregions": [{"id": "145", "name": "Western Asia"}], "subregions": [{"id": "US-TX", "name": "Texas"}]}, "dataset": {"id": "c4a88574-7a2a-4048-bc9f-07de0559e7b7", "title": "Name of the dataset", "num_resources": 1, "url": "https://data.bayanat.ae/dataset/open-field-exposed-vegetable-crops", "short_text": "Short plain text, extracted from description", "description": "Some dataset text description. Originally could be HTML or any other text", "has_archive": false, "tags": ["Farm", "Crops"], "formats": ["XLSX", "CSV"], "datatypes": ["data", "geodata"], "topics_original": ["Farm", "Crops"], "responsible": [], "license_id": "cc-by", "license_name": "Creative Commons Attribution", "license_url": "https://creativecommons.org/licenses/by/4.0/"}, "resources": []}
+        "404":
+          application/json: {"detail": "Detailed error message"}
+        "422":
+          application/json: {}
+        "500":
+          application/json: {"detail": "Detailed error message"}
 examplesVersion: 1.0.2

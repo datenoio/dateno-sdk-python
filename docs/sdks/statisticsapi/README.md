@@ -4,31 +4,33 @@
 
 ### Available Operations
 
-* [list_namespaces_databases_statsdb_0_1_ns_get](#list_namespaces_databases_statsdb_0_1_ns_get) - List Namespaces / Databases
-* [get_namespace_database_metadata_statsdb_0_1_ns_ns_id_get](#get_namespace_database_metadata_statsdb_0_1_ns_ns_id_get) - Get Namespace / Database Metadata
-* [list_tables_statsdb_0_1_ns_ns_id_tables_get](#list_tables_statsdb_0_1_ns_ns_id_tables_get) - List Tables
-* [get_table_metadata_statsdb_0_1_ns_ns_id_tables_table_id_get](#get_table_metadata_statsdb_0_1_ns_ns_id_tables_table_id_get) - Get Table Metadata
-* [list_indicators_statsdb_0_1_ns_ns_id_indicators_get](#list_indicators_statsdb_0_1_ns_ns_id_indicators_get) - List Indicators
-* [list_timeseries_statsdb_0_1_ns_ns_id_ts_get](#list_timeseries_statsdb_0_1_ns_ns_id_ts_get) - List Timeseries
-* [get_indicator_metadata_statsdb_0_1_ns_ns_id_indicators_ind_id_get](#get_indicator_metadata_statsdb_0_1_ns_ns_id_indicators_ind_id_get) - Get Indicator Metadata
-* [get_timeseries_record_metadata_statsdb_0_1_ns_ns_id_ts_ts_id_get](#get_timeseries_record_metadata_statsdb_0_1_ns_ns_id_ts_ts_id_get) - Get Timeseries Record Metadata
-* [list_exportable_formats_statsdb_0_1_list_exportable_formats_get](#list_exportable_formats_statsdb_0_1_list_exportable_formats_get) - List Exportable Formats
-* [export_timeseries_data_statsdb_0_1_ns_ns_id_ts_ts_id_export_fileext_get](#export_timeseries_data_statsdb_0_1_ns_ns_id_ts_ts_id_export_fileext_get) - Export Timeseries Data
+* [list_namespaces](#list_namespaces) - List Namespaces / Databases
+* [get_namespace](#get_namespace) - Get Namespace / Database Metadata
+* [list_namespace_tables](#list_namespace_tables) - List Tables
+* [get_namespace_table](#get_namespace_table) - Get Table Metadata
+* [list_indicators](#list_indicators) - List Indicators
+* [list_timeseries](#list_timeseries) - List Timeseries
+* [get_namespace_indicator](#get_namespace_indicator) - Get Indicator Metadata
+* [get_timeseries](#get_timeseries) - Get Timeseries Record Metadata
+* [list_export_formats](#list_export_formats) - List Exportable Formats
+* [export_timeseries_file](#export_timeseries_file) - Export Timeseries Data
 
-## list_namespaces_databases_statsdb_0_1_ns_get
+## list_namespaces
 
 Return list of available namespaces / databases.
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="List_namespaces___databases_statsdb_0_1_ns_get" method="get" path="/statsdb/0.1/ns" -->
+<!-- UsageSnippet language="python" operationID="list_namespaces" method="get" path="/statsdb/0.1/ns" -->
 ```python
 from dateno import SDK
 
 
-with SDK() as sdk:
+with SDK(
+    api_key_query="<YOUR_API_KEY_HERE>",
+) as sdk:
 
-    res = sdk.statistics_api.list_namespaces_databases_statsdb_0_1_ns_get(start=0, limit=100)
+    res = sdk.statistics_api.list_namespaces(start=0, limit=100)
 
     # Handle response
     print(res)
@@ -56,20 +58,22 @@ with SDK() as sdk:
 | errors.ErrorResponse       | 500                        | application/json           |
 | errors.SDKDefaultError     | 4XX, 5XX                   | \*/\*                      |
 
-## get_namespace_database_metadata_statsdb_0_1_ns_ns_id_get
+## get_namespace
 
 Return namespace / database metadata (tables list).
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="Get_namespace___database_metadata_statsdb_0_1_ns__ns_id__get" method="get" path="/statsdb/0.1/ns/{ns_id}" -->
+<!-- UsageSnippet language="python" operationID="get_namespace" method="get" path="/statsdb/0.1/ns/{ns_id}" -->
 ```python
 from dateno import SDK
 
 
-with SDK() as sdk:
+with SDK(
+    api_key_query="<YOUR_API_KEY_HERE>",
+) as sdk:
 
-    res = sdk.statistics_api.get_namespace_database_metadata_statsdb_0_1_ns_ns_id_get(ns_id="ilostat")
+    res = sdk.statistics_api.get_namespace(ns_id="ilostat")
 
     # Handle response
     print(res)
@@ -97,20 +101,22 @@ with SDK() as sdk:
 | errors.ErrorResponse       | 500                        | application/json           |
 | errors.SDKDefaultError     | 4XX, 5XX                   | \*/\*                      |
 
-## list_tables_statsdb_0_1_ns_ns_id_tables_get
+## list_namespace_tables
 
 Return list of available tables by namespace.
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="List_tables_statsdb_0_1_ns__ns_id__tables_get" method="get" path="/statsdb/0.1/ns/{ns_id}/tables" -->
+<!-- UsageSnippet language="python" operationID="list_namespace_tables" method="get" path="/statsdb/0.1/ns/{ns_id}/tables" -->
 ```python
 from dateno import SDK
 
 
-with SDK() as sdk:
+with SDK(
+    api_key_query="<YOUR_API_KEY_HERE>",
+) as sdk:
 
-    res = sdk.statistics_api.list_tables_statsdb_0_1_ns_ns_id_tables_get(ns_id="ilostat", start=0, limit=20)
+    res = sdk.statistics_api.list_namespace_tables(ns_id="ilostat", start=0, limit=20)
 
     # Handle response
     print(res)
@@ -140,20 +146,22 @@ with SDK() as sdk:
 | errors.ErrorResponse       | 500                        | application/json           |
 | errors.SDKDefaultError     | 4XX, 5XX                   | \*/\*                      |
 
-## get_table_metadata_statsdb_0_1_ns_ns_id_tables_table_id_get
+## get_namespace_table
 
 Get Table Metadata
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="Get_table_metadata_statsdb_0_1_ns__ns_id__tables__table_id__get" method="get" path="/statsdb/0.1/ns/{ns_id}/tables/{table_id}" -->
+<!-- UsageSnippet language="python" operationID="get_namespace_table" method="get" path="/statsdb/0.1/ns/{ns_id}/tables/{table_id}" -->
 ```python
 from dateno import SDK
 
 
-with SDK() as sdk:
+with SDK(
+    api_key_query="<YOUR_API_KEY_HERE>",
+) as sdk:
 
-    res = sdk.statistics_api.get_table_metadata_statsdb_0_1_ns_ns_id_tables_table_id_get(ns_id="ilostat", table_id="CCF_XOXR_CUR_RT_A")
+    res = sdk.statistics_api.get_namespace_table(ns_id="ilostat", table_id="CCF_XOXR_CUR_RT_A")
 
     # Handle response
     print(res)
@@ -182,20 +190,22 @@ with SDK() as sdk:
 | errors.ErrorResponse       | 500                        | application/json           |
 | errors.SDKDefaultError     | 4XX, 5XX                   | \*/\*                      |
 
-## list_indicators_statsdb_0_1_ns_ns_id_indicators_get
+## list_indicators
 
 Return list of indicators metadata.
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="List_indicators_statsdb_0_1_ns__ns_id__indicators_get" method="get" path="/statsdb/0.1/ns/{ns_id}/indicators" -->
+<!-- UsageSnippet language="python" operationID="list_indicators" method="get" path="/statsdb/0.1/ns/{ns_id}/indicators" -->
 ```python
 from dateno import SDK
 
 
-with SDK() as sdk:
+with SDK(
+    api_key_query="<YOUR_API_KEY_HERE>",
+) as sdk:
 
-    res = sdk.statistics_api.list_indicators_statsdb_0_1_ns_ns_id_indicators_get(ns_id="ilostat", start=0, limit=100)
+    res = sdk.statistics_api.list_indicators(ns_id="ilostat", start=0, limit=100)
 
     # Handle response
     print(res)
@@ -225,20 +235,22 @@ with SDK() as sdk:
 | errors.ErrorResponse       | 500                        | application/json           |
 | errors.SDKDefaultError     | 4XX, 5XX                   | \*/\*                      |
 
-## list_timeseries_statsdb_0_1_ns_ns_id_ts_get
+## list_timeseries
 
 Return list of timeseries metadata.
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="List_timeseries_statsdb_0_1_ns__ns_id__ts_get" method="get" path="/statsdb/0.1/ns/{ns_id}/ts" -->
+<!-- UsageSnippet language="python" operationID="list_timeseries" method="get" path="/statsdb/0.1/ns/{ns_id}/ts" -->
 ```python
 from dateno import SDK
 
 
-with SDK() as sdk:
+with SDK(
+    api_key_query="<YOUR_API_KEY_HERE>",
+) as sdk:
 
-    res = sdk.statistics_api.list_timeseries_statsdb_0_1_ns_ns_id_ts_get(ns_id="ilostat", start=0, limit=100)
+    res = sdk.statistics_api.list_timeseries(ns_id="ilostat", start=0, limit=100)
 
     # Handle response
     print(res)
@@ -268,20 +280,22 @@ with SDK() as sdk:
 | errors.ErrorResponse       | 500                        | application/json           |
 | errors.SDKDefaultError     | 4XX, 5XX                   | \*/\*                      |
 
-## get_indicator_metadata_statsdb_0_1_ns_ns_id_indicators_ind_id_get
+## get_namespace_indicator
 
 Return indicator metadata (with optional metadata fields).
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="Get_indicator_metadata_statsdb_0_1_ns__ns_id__indicators__ind_id__get" method="get" path="/statsdb/0.1/ns/{ns_id}/indicators/{ind_id}" -->
+<!-- UsageSnippet language="python" operationID="get_namespace_indicator" method="get" path="/statsdb/0.1/ns/{ns_id}/indicators/{ind_id}" -->
 ```python
 from dateno import SDK
 
 
-with SDK() as sdk:
+with SDK(
+    api_key_query="<YOUR_API_KEY_HERE>",
+) as sdk:
 
-    res = sdk.statistics_api.get_indicator_metadata_statsdb_0_1_ns_ns_id_indicators_ind_id_get(ns_id="ilostat", ind_id="WBL_XVET_SEX_EDU_NB")
+    res = sdk.statistics_api.get_namespace_indicator(ns_id="ilostat", ind_id="WBL_XVET_SEX_EDU_NB")
 
     # Handle response
     print(res)
@@ -310,20 +324,22 @@ with SDK() as sdk:
 | errors.ErrorResponse       | 500                        | application/json           |
 | errors.SDKDefaultError     | 4XX, 5XX                   | \*/\*                      |
 
-## get_timeseries_record_metadata_statsdb_0_1_ns_ns_id_ts_ts_id_get
+## get_timeseries
 
 Get Timeseries Record Metadata
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="Get_timeseries_record_metadata_statsdb_0_1_ns__ns_id__ts__ts_id__get" method="get" path="/statsdb/0.1/ns/{ns_id}/ts/{ts_id}" -->
+<!-- UsageSnippet language="python" operationID="get_timeseries" method="get" path="/statsdb/0.1/ns/{ns_id}/ts/{ts_id}" -->
 ```python
 from dateno import SDK
 
 
-with SDK() as sdk:
+with SDK(
+    api_key_query="<YOUR_API_KEY_HERE>",
+) as sdk:
 
-    res = sdk.statistics_api.get_timeseries_record_metadata_statsdb_0_1_ns_ns_id_ts_ts_id_get(ns_id="ilostat", ts_id="WBL_XVET_SEX_EDU_NB.CAN")
+    res = sdk.statistics_api.get_timeseries(ns_id="ilostat", ts_id="WBL_XVET_SEX_EDU_NB.CAN")
 
     # Handle response
     print(res)
@@ -352,20 +368,22 @@ with SDK() as sdk:
 | errors.ErrorResponse       | 500                        | application/json           |
 | errors.SDKDefaultError     | 4XX, 5XX                   | \*/\*                      |
 
-## list_exportable_formats_statsdb_0_1_list_exportable_formats_get
+## list_export_formats
 
 List exportable formats that could be used to export timeseries.
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="List_exportable_formats_statsdb_0_1_list_exportable_formats_get" method="get" path="/statsdb/0.1/list_exportable_formats" -->
+<!-- UsageSnippet language="python" operationID="list_export_formats" method="get" path="/statsdb/0.1/list_exportable_formats" -->
 ```python
 from dateno import SDK
 
 
-with SDK() as sdk:
+with SDK(
+    api_key_query="<YOUR_API_KEY_HERE>",
+) as sdk:
 
-    res = sdk.statistics_api.list_exportable_formats_statsdb_0_1_list_exportable_formats_get()
+    res = sdk.statistics_api.list_export_formats()
 
     # Handle response
     print(res)
@@ -391,20 +409,22 @@ with SDK() as sdk:
 | errors.ErrorResponse       | 500                        | application/json           |
 | errors.SDKDefaultError     | 4XX, 5XX                   | \*/\*                      |
 
-## export_timeseries_data_statsdb_0_1_ns_ns_id_ts_ts_id_export_fileext_get
+## export_timeseries_file
 
 Export data as file.
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="Export_timeseries_data_statsdb_0_1_ns__ns_id__ts__ts_id__export__fileext__get" method="get" path="/statsdb/0.1/ns/{ns_id}/ts/{ts_id}/export.{fileext}" -->
+<!-- UsageSnippet language="python" operationID="export_timeseries_file" method="get" path="/statsdb/0.1/ns/{ns_id}/ts/{ts_id}/export.{fileext}" -->
 ```python
 from dateno import SDK
 
 
-with SDK() as sdk:
+with SDK(
+    api_key_query="<YOUR_API_KEY_HERE>",
+) as sdk:
 
-    res = sdk.statistics_api.export_timeseries_data_statsdb_0_1_ns_ns_id_ts_ts_id_export_fileext_get(ns_id="ilostat", ts_id="WBL_XVET_SEX_EDU_NB.CAN", fileext="csv")
+    res = sdk.statistics_api.export_timeseries_file(ns_id="ilostat", ts_id="WBL_XVET_SEX_EDU_NB.CAN", fileext="csv")
 
     # Handle response
     print(res)
@@ -423,7 +443,7 @@ with SDK() as sdk:
 
 ### Response
 
-**[models.ExportTimeseriesDataStatsdb01NsNsIDTsTsIDExportFileextGetResponse](../../models/exporttimeseriesdatastatsdb01nsnsidtstsidexportfileextgetresponse.md)**
+**[models.ExportTimeseriesFileResponse](../../models/exporttimeseriesfileresponse.md)**
 
 ### Errors
 

@@ -10,10 +10,12 @@ from typing import Any, Dict, List, Union
 from typing_extensions import NotRequired, TypeAliasType, TypedDict
 
 
-TotalUnionTypedDict = TypeAliasType("TotalUnionTypedDict", Union[TotalTypedDict, int])
+TotalUnionTypedDict = TypeAliasType(
+    "TotalUnionTypedDict", Union[TotalTypedDict, int, Dict[str, Any]]
+)
 
 
-TotalUnion = TypeAliasType("TotalUnion", Union[Total, int])
+TotalUnion = TypeAliasType("TotalUnion", Union[Total, int, Dict[str, Any]])
 
 
 class HitsTypedDict(TypedDict):

@@ -3,15 +3,15 @@
 from __future__ import annotations
 from .tablelistitem import TableListItem, TableListItemTypedDict
 from dateno.types import BaseModel
-from typing import List
-from typing_extensions import TypedDict
+from typing import List, Optional
+from typing_extensions import NotRequired, TypedDict
 
 
 class PageTableListItemTypedDict(TypedDict):
     totals: int
     start: int
     limit: int
-    items: List[TableListItemTypedDict]
+    items: NotRequired[List[TableListItemTypedDict]]
 
 
 class PageTableListItem(BaseModel):
@@ -21,4 +21,4 @@ class PageTableListItem(BaseModel):
 
     limit: int
 
-    items: List[TableListItem]
+    items: Optional[List[TableListItem]] = None

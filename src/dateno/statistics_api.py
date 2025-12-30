@@ -9,7 +9,7 @@ from enum import Enum
 from typing import Any, Dict, Mapping, Optional
 
 
-class ExportTimeseriesDataStatsdb01NsNsIdTsTsIdExportFileextGetAcceptEnum(str, Enum):
+class ExportTimeseriesFileAcceptEnum(str, Enum):
     APPLICATION_JSON = "application/json"
     TEXT_CSV = "text/csv"
     APPLICATION_OCTET_STREAM = "application/octet-stream"
@@ -19,7 +19,7 @@ class ExportTimeseriesDataStatsdb01NsNsIdTsTsIdExportFileextGetAcceptEnum(str, E
 
 
 class StatisticsAPI(BaseSDK):
-    def list_namespaces_databases_statsdb_0_1_ns_get(
+    def list_namespaces(
         self,
         *,
         start: Optional[int] = 0,
@@ -52,7 +52,7 @@ class StatisticsAPI(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.ListNamespacesDatabasesStatsdb01NsGetRequest(
+        request = models.ListNamespacesRequest(
             start=start,
             limit=limit,
             apikey=apikey,
@@ -70,6 +70,7 @@ class StatisticsAPI(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
@@ -86,9 +87,9 @@ class StatisticsAPI(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="List_namespaces___databases_statsdb_0_1_ns_get",
+                operation_id="list_namespaces",
                 oauth2_scopes=None,
-                security_source=None,
+                security_source=self.sdk_configuration.security,
             ),
             request=req,
             error_status_codes=["422", "4XX", "500", "5XX"],
@@ -115,7 +116,7 @@ class StatisticsAPI(BaseSDK):
 
         raise errors.SDKDefaultError("Unexpected response received", http_res)
 
-    async def list_namespaces_databases_statsdb_0_1_ns_get_async(
+    async def list_namespaces_async(
         self,
         *,
         start: Optional[int] = 0,
@@ -148,7 +149,7 @@ class StatisticsAPI(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.ListNamespacesDatabasesStatsdb01NsGetRequest(
+        request = models.ListNamespacesRequest(
             start=start,
             limit=limit,
             apikey=apikey,
@@ -166,6 +167,7 @@ class StatisticsAPI(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
@@ -182,9 +184,9 @@ class StatisticsAPI(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="List_namespaces___databases_statsdb_0_1_ns_get",
+                operation_id="list_namespaces",
                 oauth2_scopes=None,
-                security_source=None,
+                security_source=self.sdk_configuration.security,
             ),
             request=req,
             error_status_codes=["422", "4XX", "500", "5XX"],
@@ -211,7 +213,7 @@ class StatisticsAPI(BaseSDK):
 
         raise errors.SDKDefaultError("Unexpected response received", http_res)
 
-    def get_namespace_database_metadata_statsdb_0_1_ns_ns_id_get(
+    def get_namespace(
         self,
         *,
         ns_id: str,
@@ -242,7 +244,7 @@ class StatisticsAPI(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetNamespaceDatabaseMetadataStatsdb01NsNsIDGetRequest(
+        request = models.GetNamespaceRequest(
             ns_id=ns_id,
             apikey=apikey,
         )
@@ -259,6 +261,7 @@ class StatisticsAPI(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
@@ -275,9 +278,9 @@ class StatisticsAPI(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="Get_namespace___database_metadata_statsdb_0_1_ns__ns_id__get",
+                operation_id="get_namespace",
                 oauth2_scopes=None,
-                security_source=None,
+                security_source=self.sdk_configuration.security,
             ),
             request=req,
             error_status_codes=["404", "422", "4XX", "500", "5XX"],
@@ -307,7 +310,7 @@ class StatisticsAPI(BaseSDK):
 
         raise errors.SDKDefaultError("Unexpected response received", http_res)
 
-    async def get_namespace_database_metadata_statsdb_0_1_ns_ns_id_get_async(
+    async def get_namespace_async(
         self,
         *,
         ns_id: str,
@@ -338,7 +341,7 @@ class StatisticsAPI(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetNamespaceDatabaseMetadataStatsdb01NsNsIDGetRequest(
+        request = models.GetNamespaceRequest(
             ns_id=ns_id,
             apikey=apikey,
         )
@@ -355,6 +358,7 @@ class StatisticsAPI(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
@@ -371,9 +375,9 @@ class StatisticsAPI(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="Get_namespace___database_metadata_statsdb_0_1_ns__ns_id__get",
+                operation_id="get_namespace",
                 oauth2_scopes=None,
-                security_source=None,
+                security_source=self.sdk_configuration.security,
             ),
             request=req,
             error_status_codes=["404", "422", "4XX", "500", "5XX"],
@@ -403,7 +407,7 @@ class StatisticsAPI(BaseSDK):
 
         raise errors.SDKDefaultError("Unexpected response received", http_res)
 
-    def list_tables_statsdb_0_1_ns_ns_id_tables_get(
+    def list_namespace_tables(
         self,
         *,
         ns_id: str,
@@ -438,7 +442,7 @@ class StatisticsAPI(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.ListTablesStatsdb01NsNsIDTablesGetRequest(
+        request = models.ListNamespaceTablesRequest(
             ns_id=ns_id,
             start=start,
             limit=limit,
@@ -457,6 +461,7 @@ class StatisticsAPI(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
@@ -473,9 +478,9 @@ class StatisticsAPI(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="List_tables_statsdb_0_1_ns__ns_id__tables_get",
+                operation_id="list_namespace_tables",
                 oauth2_scopes=None,
-                security_source=None,
+                security_source=self.sdk_configuration.security,
             ),
             request=req,
             error_status_codes=["400", "404", "422", "4XX", "500", "5XX"],
@@ -505,7 +510,7 @@ class StatisticsAPI(BaseSDK):
 
         raise errors.SDKDefaultError("Unexpected response received", http_res)
 
-    async def list_tables_statsdb_0_1_ns_ns_id_tables_get_async(
+    async def list_namespace_tables_async(
         self,
         *,
         ns_id: str,
@@ -540,7 +545,7 @@ class StatisticsAPI(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.ListTablesStatsdb01NsNsIDTablesGetRequest(
+        request = models.ListNamespaceTablesRequest(
             ns_id=ns_id,
             start=start,
             limit=limit,
@@ -559,6 +564,7 @@ class StatisticsAPI(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
@@ -575,9 +581,9 @@ class StatisticsAPI(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="List_tables_statsdb_0_1_ns__ns_id__tables_get",
+                operation_id="list_namespace_tables",
                 oauth2_scopes=None,
-                security_source=None,
+                security_source=self.sdk_configuration.security,
             ),
             request=req,
             error_status_codes=["400", "404", "422", "4XX", "500", "5XX"],
@@ -607,7 +613,7 @@ class StatisticsAPI(BaseSDK):
 
         raise errors.SDKDefaultError("Unexpected response received", http_res)
 
-    def get_table_metadata_statsdb_0_1_ns_ns_id_tables_table_id_get(
+    def get_namespace_table(
         self,
         *,
         ns_id: str,
@@ -638,7 +644,7 @@ class StatisticsAPI(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetTableMetadataStatsdb01NsNsIDTablesTableIDGetRequest(
+        request = models.GetNamespaceTableRequest(
             ns_id=ns_id,
             table_id=table_id,
             apikey=apikey,
@@ -656,6 +662,7 @@ class StatisticsAPI(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
@@ -672,9 +679,9 @@ class StatisticsAPI(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="Get_table_metadata_statsdb_0_1_ns__ns_id__tables__table_id__get",
+                operation_id="get_namespace_table",
                 oauth2_scopes=None,
-                security_source=None,
+                security_source=self.sdk_configuration.security,
             ),
             request=req,
             error_status_codes=["404", "422", "4XX", "500", "5XX"],
@@ -704,7 +711,7 @@ class StatisticsAPI(BaseSDK):
 
         raise errors.SDKDefaultError("Unexpected response received", http_res)
 
-    async def get_table_metadata_statsdb_0_1_ns_ns_id_tables_table_id_get_async(
+    async def get_namespace_table_async(
         self,
         *,
         ns_id: str,
@@ -735,7 +742,7 @@ class StatisticsAPI(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetTableMetadataStatsdb01NsNsIDTablesTableIDGetRequest(
+        request = models.GetNamespaceTableRequest(
             ns_id=ns_id,
             table_id=table_id,
             apikey=apikey,
@@ -753,6 +760,7 @@ class StatisticsAPI(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
@@ -769,9 +777,9 @@ class StatisticsAPI(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="Get_table_metadata_statsdb_0_1_ns__ns_id__tables__table_id__get",
+                operation_id="get_namespace_table",
                 oauth2_scopes=None,
-                security_source=None,
+                security_source=self.sdk_configuration.security,
             ),
             request=req,
             error_status_codes=["404", "422", "4XX", "500", "5XX"],
@@ -801,7 +809,7 @@ class StatisticsAPI(BaseSDK):
 
         raise errors.SDKDefaultError("Unexpected response received", http_res)
 
-    def list_indicators_statsdb_0_1_ns_ns_id_indicators_get(
+    def list_indicators(
         self,
         *,
         ns_id: str,
@@ -836,7 +844,7 @@ class StatisticsAPI(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.ListIndicatorsStatsdb01NsNsIDIndicatorsGetRequest(
+        request = models.ListIndicatorsRequest(
             ns_id=ns_id,
             start=start,
             limit=limit,
@@ -855,6 +863,7 @@ class StatisticsAPI(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
@@ -871,9 +880,9 @@ class StatisticsAPI(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="List_indicators_statsdb_0_1_ns__ns_id__indicators_get",
+                operation_id="list_indicators",
                 oauth2_scopes=None,
-                security_source=None,
+                security_source=self.sdk_configuration.security,
             ),
             request=req,
             error_status_codes=["400", "404", "422", "4XX", "500", "5XX"],
@@ -903,7 +912,7 @@ class StatisticsAPI(BaseSDK):
 
         raise errors.SDKDefaultError("Unexpected response received", http_res)
 
-    async def list_indicators_statsdb_0_1_ns_ns_id_indicators_get_async(
+    async def list_indicators_async(
         self,
         *,
         ns_id: str,
@@ -938,7 +947,7 @@ class StatisticsAPI(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.ListIndicatorsStatsdb01NsNsIDIndicatorsGetRequest(
+        request = models.ListIndicatorsRequest(
             ns_id=ns_id,
             start=start,
             limit=limit,
@@ -957,6 +966,7 @@ class StatisticsAPI(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
@@ -973,9 +983,9 @@ class StatisticsAPI(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="List_indicators_statsdb_0_1_ns__ns_id__indicators_get",
+                operation_id="list_indicators",
                 oauth2_scopes=None,
-                security_source=None,
+                security_source=self.sdk_configuration.security,
             ),
             request=req,
             error_status_codes=["400", "404", "422", "4XX", "500", "5XX"],
@@ -1005,7 +1015,7 @@ class StatisticsAPI(BaseSDK):
 
         raise errors.SDKDefaultError("Unexpected response received", http_res)
 
-    def list_timeseries_statsdb_0_1_ns_ns_id_ts_get(
+    def list_timeseries(
         self,
         *,
         ns_id: str,
@@ -1040,7 +1050,7 @@ class StatisticsAPI(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.ListTimeseriesStatsdb01NsNsIDTsGetRequest(
+        request = models.ListTimeseriesRequest(
             ns_id=ns_id,
             start=start,
             limit=limit,
@@ -1059,6 +1069,7 @@ class StatisticsAPI(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
@@ -1075,9 +1086,9 @@ class StatisticsAPI(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="List_timeseries_statsdb_0_1_ns__ns_id__ts_get",
+                operation_id="list_timeseries",
                 oauth2_scopes=None,
-                security_source=None,
+                security_source=self.sdk_configuration.security,
             ),
             request=req,
             error_status_codes=["400", "404", "422", "4XX", "500", "5XX"],
@@ -1107,7 +1118,7 @@ class StatisticsAPI(BaseSDK):
 
         raise errors.SDKDefaultError("Unexpected response received", http_res)
 
-    async def list_timeseries_statsdb_0_1_ns_ns_id_ts_get_async(
+    async def list_timeseries_async(
         self,
         *,
         ns_id: str,
@@ -1142,7 +1153,7 @@ class StatisticsAPI(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.ListTimeseriesStatsdb01NsNsIDTsGetRequest(
+        request = models.ListTimeseriesRequest(
             ns_id=ns_id,
             start=start,
             limit=limit,
@@ -1161,6 +1172,7 @@ class StatisticsAPI(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
@@ -1177,9 +1189,9 @@ class StatisticsAPI(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="List_timeseries_statsdb_0_1_ns__ns_id__ts_get",
+                operation_id="list_timeseries",
                 oauth2_scopes=None,
-                security_source=None,
+                security_source=self.sdk_configuration.security,
             ),
             request=req,
             error_status_codes=["400", "404", "422", "4XX", "500", "5XX"],
@@ -1209,7 +1221,7 @@ class StatisticsAPI(BaseSDK):
 
         raise errors.SDKDefaultError("Unexpected response received", http_res)
 
-    def get_indicator_metadata_statsdb_0_1_ns_ns_id_indicators_ind_id_get(
+    def get_namespace_indicator(
         self,
         *,
         ns_id: str,
@@ -1242,7 +1254,7 @@ class StatisticsAPI(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetIndicatorMetadataStatsdb01NsNsIDIndicatorsIndIDGetRequest(
+        request = models.GetNamespaceIndicatorRequest(
             ns_id=ns_id,
             ind_id=ind_id,
             apikey=apikey,
@@ -1260,6 +1272,7 @@ class StatisticsAPI(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
@@ -1276,9 +1289,9 @@ class StatisticsAPI(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="Get_indicator_metadata_statsdb_0_1_ns__ns_id__indicators__ind_id__get",
+                operation_id="get_namespace_indicator",
                 oauth2_scopes=None,
-                security_source=None,
+                security_source=self.sdk_configuration.security,
             ),
             request=req,
             error_status_codes=["404", "422", "4XX", "500", "5XX"],
@@ -1308,7 +1321,7 @@ class StatisticsAPI(BaseSDK):
 
         raise errors.SDKDefaultError("Unexpected response received", http_res)
 
-    async def get_indicator_metadata_statsdb_0_1_ns_ns_id_indicators_ind_id_get_async(
+    async def get_namespace_indicator_async(
         self,
         *,
         ns_id: str,
@@ -1341,7 +1354,7 @@ class StatisticsAPI(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetIndicatorMetadataStatsdb01NsNsIDIndicatorsIndIDGetRequest(
+        request = models.GetNamespaceIndicatorRequest(
             ns_id=ns_id,
             ind_id=ind_id,
             apikey=apikey,
@@ -1359,6 +1372,7 @@ class StatisticsAPI(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
@@ -1375,9 +1389,9 @@ class StatisticsAPI(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="Get_indicator_metadata_statsdb_0_1_ns__ns_id__indicators__ind_id__get",
+                operation_id="get_namespace_indicator",
                 oauth2_scopes=None,
-                security_source=None,
+                security_source=self.sdk_configuration.security,
             ),
             request=req,
             error_status_codes=["404", "422", "4XX", "500", "5XX"],
@@ -1407,7 +1421,7 @@ class StatisticsAPI(BaseSDK):
 
         raise errors.SDKDefaultError("Unexpected response received", http_res)
 
-    def get_timeseries_record_metadata_statsdb_0_1_ns_ns_id_ts_ts_id_get(
+    def get_timeseries(
         self,
         *,
         ns_id: str,
@@ -1438,7 +1452,7 @@ class StatisticsAPI(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetTimeseriesRecordMetadataStatsdb01NsNsIDTsTsIDGetRequest(
+        request = models.GetTimeseriesRequest(
             ns_id=ns_id,
             ts_id=ts_id,
             apikey=apikey,
@@ -1456,6 +1470,7 @@ class StatisticsAPI(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
@@ -1472,9 +1487,9 @@ class StatisticsAPI(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="Get_timeseries_record_metadata_statsdb_0_1_ns__ns_id__ts__ts_id__get",
+                operation_id="get_timeseries",
                 oauth2_scopes=None,
-                security_source=None,
+                security_source=self.sdk_configuration.security,
             ),
             request=req,
             error_status_codes=["404", "422", "4XX", "500", "5XX"],
@@ -1504,7 +1519,7 @@ class StatisticsAPI(BaseSDK):
 
         raise errors.SDKDefaultError("Unexpected response received", http_res)
 
-    async def get_timeseries_record_metadata_statsdb_0_1_ns_ns_id_ts_ts_id_get_async(
+    async def get_timeseries_async(
         self,
         *,
         ns_id: str,
@@ -1535,7 +1550,7 @@ class StatisticsAPI(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetTimeseriesRecordMetadataStatsdb01NsNsIDTsTsIDGetRequest(
+        request = models.GetTimeseriesRequest(
             ns_id=ns_id,
             ts_id=ts_id,
             apikey=apikey,
@@ -1553,6 +1568,7 @@ class StatisticsAPI(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
@@ -1569,9 +1585,9 @@ class StatisticsAPI(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="Get_timeseries_record_metadata_statsdb_0_1_ns__ns_id__ts__ts_id__get",
+                operation_id="get_timeseries",
                 oauth2_scopes=None,
-                security_source=None,
+                security_source=self.sdk_configuration.security,
             ),
             request=req,
             error_status_codes=["404", "422", "4XX", "500", "5XX"],
@@ -1601,7 +1617,7 @@ class StatisticsAPI(BaseSDK):
 
         raise errors.SDKDefaultError("Unexpected response received", http_res)
 
-    def list_exportable_formats_statsdb_0_1_list_exportable_formats_get(
+    def list_export_formats(
         self,
         *,
         apikey: OptionalNullable[str] = UNSET,
@@ -1630,7 +1646,7 @@ class StatisticsAPI(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.ListExportableFormatsStatsdb01ListExportableFormatsGetRequest(
+        request = models.ListExportFormatsRequest(
             apikey=apikey,
         )
 
@@ -1646,6 +1662,7 @@ class StatisticsAPI(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
@@ -1662,9 +1679,9 @@ class StatisticsAPI(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="List_exportable_formats_statsdb_0_1_list_exportable_formats_get",
+                operation_id="list_export_formats",
                 oauth2_scopes=None,
-                security_source=None,
+                security_source=self.sdk_configuration.security,
             ),
             request=req,
             error_status_codes=["422", "4XX", "500", "5XX"],
@@ -1691,7 +1708,7 @@ class StatisticsAPI(BaseSDK):
 
         raise errors.SDKDefaultError("Unexpected response received", http_res)
 
-    async def list_exportable_formats_statsdb_0_1_list_exportable_formats_get_async(
+    async def list_export_formats_async(
         self,
         *,
         apikey: OptionalNullable[str] = UNSET,
@@ -1720,7 +1737,7 @@ class StatisticsAPI(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.ListExportableFormatsStatsdb01ListExportableFormatsGetRequest(
+        request = models.ListExportFormatsRequest(
             apikey=apikey,
         )
 
@@ -1736,6 +1753,7 @@ class StatisticsAPI(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
@@ -1752,9 +1770,9 @@ class StatisticsAPI(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="List_exportable_formats_statsdb_0_1_list_exportable_formats_get",
+                operation_id="list_export_formats",
                 oauth2_scopes=None,
-                security_source=None,
+                security_source=self.sdk_configuration.security,
             ),
             request=req,
             error_status_codes=["422", "4XX", "500", "5XX"],
@@ -1781,7 +1799,7 @@ class StatisticsAPI(BaseSDK):
 
         raise errors.SDKDefaultError("Unexpected response received", http_res)
 
-    def export_timeseries_data_statsdb_0_1_ns_ns_id_ts_ts_id_export_fileext_get(
+    def export_timeseries_file(
         self,
         *,
         ns_id: str,
@@ -1791,11 +1809,9 @@ class StatisticsAPI(BaseSDK):
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
-        accept_header_override: Optional[
-            ExportTimeseriesDataStatsdb01NsNsIdTsTsIdExportFileextGetAcceptEnum
-        ] = None,
+        accept_header_override: Optional[ExportTimeseriesFileAcceptEnum] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ExportTimeseriesDataStatsdb01NsNsIDTsTsIDExportFileextGetResponse:
+    ) -> models.ExportTimeseriesFileResponse:
         r"""Export Timeseries Data
 
         Export data as file.
@@ -1820,13 +1836,11 @@ class StatisticsAPI(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = (
-            models.ExportTimeseriesDataStatsdb01NsNsIDTsTsIDExportFileextGetRequest(
-                ns_id=ns_id,
-                ts_id=ts_id,
-                fileext=fileext,
-                apikey=apikey,
-            )
+        request = models.ExportTimeseriesFileRequest(
+            ns_id=ns_id,
+            ts_id=ts_id,
+            fileext=fileext,
+            apikey=apikey,
         )
 
         req = self._build_request(
@@ -1843,6 +1857,7 @@ class StatisticsAPI(BaseSDK):
             if accept_header_override is not None
             else "application/json;q=1, text/csv;q=0.8, application/octet-stream;q=0.5, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;q=0",
             http_headers=http_headers,
+            security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
@@ -1859,9 +1874,9 @@ class StatisticsAPI(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="Export_timeseries_data_statsdb_0_1_ns__ns_id__ts__ts_id__export__fileext__get",
+                operation_id="export_timeseries_file",
                 oauth2_scopes=None,
-                security_source=None,
+                security_source=self.sdk_configuration.security,
             ),
             request=req,
             error_status_codes=["400", "404", "422", "4XX", "500", "5XX"],
@@ -1871,11 +1886,11 @@ class StatisticsAPI(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/octet-stream"):
-            return models.ExportTimeseriesDataStatsdb01NsNsIDTsTsIDExportFileextGetResponse(
+            return models.ExportTimeseriesFileResponse(
                 result=http_res, headers=utils.get_response_headers(http_res.headers)
             )
         if utils.match_response(http_res, "200", "text/csv"):
-            return models.ExportTimeseriesDataStatsdb01NsNsIDTsTsIDExportFileextGetResponse(
+            return models.ExportTimeseriesFileResponse(
                 result=http_res, headers=utils.get_response_headers(http_res.headers)
             )
         if utils.match_response(
@@ -1883,11 +1898,11 @@ class StatisticsAPI(BaseSDK):
             "200",
             "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
         ):
-            return models.ExportTimeseriesDataStatsdb01NsNsIDTsTsIDExportFileextGetResponse(
+            return models.ExportTimeseriesFileResponse(
                 result=http_res, headers=utils.get_response_headers(http_res.headers)
             )
         if utils.match_response(http_res, "200", "application/json"):
-            return models.ExportTimeseriesDataStatsdb01NsNsIDTsTsIDExportFileextGetResponse(
+            return models.ExportTimeseriesFileResponse(
                 result=http_res, headers=utils.get_response_headers(http_res.headers)
             )
         if utils.match_response(http_res, ["400", "404"], "application/json"):
@@ -1920,7 +1935,7 @@ class StatisticsAPI(BaseSDK):
             "Unexpected response received", http_res, http_res_text
         )
 
-    async def export_timeseries_data_statsdb_0_1_ns_ns_id_ts_ts_id_export_fileext_get_async(
+    async def export_timeseries_file_async(
         self,
         *,
         ns_id: str,
@@ -1930,11 +1945,9 @@ class StatisticsAPI(BaseSDK):
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
-        accept_header_override: Optional[
-            ExportTimeseriesDataStatsdb01NsNsIdTsTsIdExportFileextGetAcceptEnum
-        ] = None,
+        accept_header_override: Optional[ExportTimeseriesFileAcceptEnum] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ExportTimeseriesDataStatsdb01NsNsIDTsTsIDExportFileextGetResponse:
+    ) -> models.ExportTimeseriesFileResponse:
         r"""Export Timeseries Data
 
         Export data as file.
@@ -1959,13 +1972,11 @@ class StatisticsAPI(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = (
-            models.ExportTimeseriesDataStatsdb01NsNsIDTsTsIDExportFileextGetRequest(
-                ns_id=ns_id,
-                ts_id=ts_id,
-                fileext=fileext,
-                apikey=apikey,
-            )
+        request = models.ExportTimeseriesFileRequest(
+            ns_id=ns_id,
+            ts_id=ts_id,
+            fileext=fileext,
+            apikey=apikey,
         )
 
         req = self._build_request_async(
@@ -1982,6 +1993,7 @@ class StatisticsAPI(BaseSDK):
             if accept_header_override is not None
             else "application/json;q=1, text/csv;q=0.8, application/octet-stream;q=0.5, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;q=0",
             http_headers=http_headers,
+            security=self.sdk_configuration.security,
             allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
@@ -1998,9 +2010,9 @@ class StatisticsAPI(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="Export_timeseries_data_statsdb_0_1_ns__ns_id__ts__ts_id__export__fileext__get",
+                operation_id="export_timeseries_file",
                 oauth2_scopes=None,
-                security_source=None,
+                security_source=self.sdk_configuration.security,
             ),
             request=req,
             error_status_codes=["400", "404", "422", "4XX", "500", "5XX"],
@@ -2010,11 +2022,11 @@ class StatisticsAPI(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/octet-stream"):
-            return models.ExportTimeseriesDataStatsdb01NsNsIDTsTsIDExportFileextGetResponse(
+            return models.ExportTimeseriesFileResponse(
                 result=http_res, headers=utils.get_response_headers(http_res.headers)
             )
         if utils.match_response(http_res, "200", "text/csv"):
-            return models.ExportTimeseriesDataStatsdb01NsNsIDTsTsIDExportFileextGetResponse(
+            return models.ExportTimeseriesFileResponse(
                 result=http_res, headers=utils.get_response_headers(http_res.headers)
             )
         if utils.match_response(
@@ -2022,11 +2034,11 @@ class StatisticsAPI(BaseSDK):
             "200",
             "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
         ):
-            return models.ExportTimeseriesDataStatsdb01NsNsIDTsTsIDExportFileextGetResponse(
+            return models.ExportTimeseriesFileResponse(
                 result=http_res, headers=utils.get_response_headers(http_res.headers)
             )
         if utils.match_response(http_res, "200", "application/json"):
-            return models.ExportTimeseriesDataStatsdb01NsNsIDTsTsIDExportFileextGetResponse(
+            return models.ExportTimeseriesFileResponse(
                 result=http_res, headers=utils.get_response_headers(http_res.headers)
             )
         if utils.match_response(http_res, ["400", "404"], "application/json"):

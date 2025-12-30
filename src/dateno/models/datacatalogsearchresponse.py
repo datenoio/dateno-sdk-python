@@ -8,7 +8,7 @@ from dateno.utils import validate_const
 import pydantic
 from pydantic.functional_validators import AfterValidator
 from typing import List, Literal, Optional
-from typing_extensions import Annotated, TypedDict
+from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class DataCatalogSearchResponseTypedDict(TypedDict):
@@ -16,9 +16,9 @@ class DataCatalogSearchResponseTypedDict(TypedDict):
 
     meta: SearchMetaTypedDict
     r"""Pagination metadata for list/search endpoints."""
-    data: List[DataCatalogSearchItemTypedDict]
     source: Literal["api"]
     r"""API version / source identifier"""
+    data: NotRequired[List[DataCatalogSearchItemTypedDict]]
 
 
 class DataCatalogSearchResponse(BaseModel):
@@ -27,10 +27,10 @@ class DataCatalogSearchResponse(BaseModel):
     meta: SearchMeta
     r"""Pagination metadata for list/search endpoints."""
 
-    data: List[DataCatalogSearchItem]
-
     source: Annotated[
         Annotated[Optional[Literal["api"]], AfterValidator(validate_const("api"))],
         pydantic.Field(alias="source"),
     ] = "api"
     r"""API version / source identifier"""
+
+    data: Optional[List[DataCatalogSearchItem]] = None

@@ -3,15 +3,15 @@
 from __future__ import annotations
 from .namespace import Namespace, NamespaceTypedDict
 from dateno.types import BaseModel
-from typing import List
-from typing_extensions import TypedDict
+from typing import List, Optional
+from typing_extensions import NotRequired, TypedDict
 
 
 class PageNamespaceTypedDict(TypedDict):
     totals: int
     start: int
     limit: int
-    items: List[NamespaceTypedDict]
+    items: NotRequired[List[NamespaceTypedDict]]
 
 
 class PageNamespace(BaseModel):
@@ -21,4 +21,4 @@ class PageNamespace(BaseModel):
 
     limit: int
 
-    items: List[Namespace]
+    items: Optional[List[Namespace]] = None

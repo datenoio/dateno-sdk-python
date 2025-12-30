@@ -21,7 +21,6 @@ class DataCatalogTypedDict(TypedDict):
     link: str
     catalog_type: str
     api_status: str
-    coverage: List[LocationOutputTypedDict]
     owner: OrganizationOutputTypedDict
     software: SoftwareTypedDict
     status: str
@@ -31,9 +30,10 @@ class DataCatalogTypedDict(TypedDict):
     langs: NotRequired[List[SpokenLanguageTypedDict]]
     tags: NotRequired[List[str]]
     content_types: NotRequired[List[str]]
-    endpoints: NotRequired[Nullable[List[EndpointTypedDict]]]
+    coverage: NotRequired[List[LocationOutputTypedDict]]
+    endpoints: NotRequired[List[EndpointTypedDict]]
     identifiers: NotRequired[List[IdentifierTypedDict]]
-    topics: NotRequired[Nullable[List[TopicTypedDict]]]
+    topics: NotRequired[List[TopicTypedDict]]
 
 
 class DataCatalog(BaseModel):
@@ -48,8 +48,6 @@ class DataCatalog(BaseModel):
     catalog_type: str
 
     api_status: str
-
-    coverage: List[LocationOutput]
 
     owner: OrganizationOutput
 
@@ -69,11 +67,13 @@ class DataCatalog(BaseModel):
 
     content_types: Optional[List[str]] = None
 
-    endpoints: OptionalNullable[List[Endpoint]] = UNSET
+    coverage: Optional[List[LocationOutput]] = None
+
+    endpoints: Optional[List[Endpoint]] = None
 
     identifiers: Optional[List[Identifier]] = None
 
-    topics: OptionalNullable[List[Topic]] = UNSET
+    topics: Optional[List[Topic]] = None
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
@@ -84,11 +84,12 @@ class DataCatalog(BaseModel):
             "langs",
             "tags",
             "content_types",
+            "coverage",
             "endpoints",
             "identifiers",
             "topics",
         ]
-        nullable_fields = ["properties", "endpoints", "topics"]
+        nullable_fields = ["properties"]
         null_default_fields = []
 
         serialized = handler(self)

@@ -5,26 +5,25 @@ from .httpclient import AsyncHttpClient, ClientOwner, HttpClient, close_clients
 from .sdkconfiguration import SDKConfiguration
 from .utils.logger import Logger, get_default_logger
 from .utils.retries import RetryConfig
-from dateno import utils
+from dateno import models, utils
 from dateno._hooks import SDKHooks
 from dateno.types import OptionalNullable, UNSET
 import httpx
 import importlib
 import sys
-from typing import Dict, Optional, TYPE_CHECKING, cast
+from typing import Any, Callable, Dict, Optional, TYPE_CHECKING, Union, cast
 import weakref
 
 if TYPE_CHECKING:
     from dateno.data_catalogs_api import DataCatalogsAPI
+    from dateno.raw_data_access import RawDataAccess
     from dateno.search_api import SearchAPI
     from dateno.service import Service
     from dateno.statistics_api import StatisticsAPI
 
 
 class SDK(BaseSDK):
-    r"""Dateno API: API access to open datasets worldwide. [Register here](https://my.dateno.io) to get your personal API key.
-
-
+    r"""Dateno API:
     The Dateno API gives you a set of tools (called endpoints) that allow you to interact with a registry of data catalogs. This means you can access and explore different collections of datasets. Additionally, the API provides a search index, which helps you quickly find specific datasets based on your search criteria.
 
     ### Authentication Required
@@ -51,6 +50,7 @@ class SDK(BaseSDK):
     r"""Endpoints for fetching data from Dateno registry of data catalogs.
     https://dateno.io/registry - Dateno catalog registry
     """
+    raw_data_access: "RawDataAccess"
     statistics_api: "StatisticsAPI"
     search_api: "SearchAPI"
     r"""Endpoints for searching datasets.
@@ -59,6 +59,7 @@ class SDK(BaseSDK):
     service: "Service"
     _sub_sdk_map = {
         "data_catalogs_api": ("dateno.data_catalogs_api", "DataCatalogsAPI"),
+        "raw_data_access": ("dateno.raw_data_access", "RawDataAccess"),
         "statistics_api": ("dateno.statistics_api", "StatisticsAPI"),
         "search_api": ("dateno.search_api", "SearchAPI"),
         "service": ("dateno.service", "Service"),
@@ -66,6 +67,7 @@ class SDK(BaseSDK):
 
     def __init__(
         self,
+        api_key_query: Union[str, Callable[[], str]],
         server_idx: Optional[int] = None,
         server_url: Optional[str] = None,
         url_params: Optional[Dict[str, str]] = None,
@@ -77,6 +79,7 @@ class SDK(BaseSDK):
     ) -> None:
         r"""Instantiates the SDK configuring it with the provided parameters.
 
+        :param api_key_query: The api_key_query required for authentication
         :param server_idx: The index of the server to use for all methods
         :param server_url: The server URL to use for all methods
         :param url_params: Parameters to optionally template the server URL with
@@ -106,6 +109,13 @@ class SDK(BaseSDK):
             type(async_client), AsyncHttpClient
         ), "The provided async_client must implement the AsyncHttpClient protocol."
 
+        security: Any = None
+        if callable(api_key_query):
+            # pylint: disable=unnecessary-lambda-assignment
+            security = lambda: models.Security(api_key_query=api_key_query())
+        else:
+            security = models.Security(api_key_query=api_key_query)
+
         if server_url is not None:
             if url_params is not None:
                 server_url = utils.template_url(server_url, url_params)
@@ -117,6 +127,7 @@ class SDK(BaseSDK):
                 client_supplied=client_supplied,
                 async_client=async_client,
                 async_client_supplied=async_client_supplied,
+                security=security,
                 server_url=server_url,
                 server_idx=server_idx,
                 retry_config=retry_config,

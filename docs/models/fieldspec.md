@@ -9,5 +9,5 @@
 | `ftype`                  | *str*                    | :heavy_check_mark:       | N/A                      | BOOL                     |
 | `is_array`               | *Optional[bool]*         | :heavy_minus_sign:       | N/A                      | true                     |
 | `is_dim`                 | *Optional[bool]*         | :heavy_minus_sign:       | N/A                      | true                     |
-| `semtype`                | *Optional[str]*          | :heavy_minus_sign:       | N/A                      |                          |
-| `description`            | *Optional[str]*          | :heavy_minus_sign:       | N/A                      | Company location address |
+| `semtype`                | *OptionalNullable[str]*  | :heavy_minus_sign:       | N/A                      | geo                      |
+| `description`            | *OptionalNullable[str]*  | :heavy_minus_sign:       | N/A                      | Company location address |
