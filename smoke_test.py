@@ -3,7 +3,7 @@
 SDK smoke tests (curl-like coverage)
 
 Env:
-  DATENO_SERVER_URL   default: https://apiv2.dateno.io
+  DATENO_SERVER_URL   default: https://api.test.dateno.io
   DATENO_APIKEY       required for almost all endpoints
 
 Run:
@@ -48,7 +48,7 @@ def _assert(cond: bool, msg: str) -> None:
 
 
 def main() -> int:
-    server_url = _env("DATENO_SERVER_URL", "https://apiv2.dateno.io")
+    server_url = _env("DATENO_SERVER_URL", "https://api.test.dateno.io")
     apikey = _env("DATENO_APIKEY")
 
     if not apikey:
