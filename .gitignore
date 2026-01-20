@@ -11,3 +11,22 @@ pyrightconfig.json
 .speakeasy/reports
 .env
 .env.local
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# pytest/coverage
+.coverage
+htmlcov/
+coverage.xml
+
+# build artifacts
+*.egg-info/
+dist/
+build/
+
+# IDE
+.vscode/
+.idea/

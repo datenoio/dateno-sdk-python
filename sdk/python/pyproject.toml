@@ -17,6 +17,8 @@ dev = [
     "mypy ==1.15.0",
     "pylint ==3.2.3",
     "pyright ==1.1.398",
+    "pytest>=8.0",
+    "pytest-cov>=5.0",
 ]
 
 [tool.setuptools.packages.find]
@@ -30,8 +32,13 @@ requires = ["setuptools>=80", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [tool.pytest.ini_options]
-asyncio_default_fixture_loop_scope = "function"
+minversion = "8.0"
+testpaths = ["tests"]
 pythonpath = ["src"]
+markers = [
+  "integration: tests that call real DATENO API (network)",
+]
+addopts = "-ra"
 
 [tool.mypy]
 disable_error_code = "misc"
