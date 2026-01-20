@@ -30,3 +30,5 @@ build/
 # IDE
 .vscode/
 .idea/
+# big artifacts
+/dateno_api-*.tar
