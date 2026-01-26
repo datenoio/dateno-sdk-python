@@ -13,7 +13,7 @@ from .types import (
 )
 from .registration import init_hooks
 from typing import List, Optional, Tuple
-from dateno.sdkconfiguration import SDKConfiguration
+from sdk.python.src.dateno.sdkconfiguration import SDKConfiguration
 
 
 class SDKHooks(Hooks):

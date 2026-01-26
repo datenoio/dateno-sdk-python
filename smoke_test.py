@@ -56,7 +56,8 @@ def main() -> int:
         return 2
 
     # --- SDK init (apikey via query only; bearer intentionally omitted) ---
-    from dateno import SDK, models
+    from dateno.sdk import SDK
+    from dateno import models
 
     sdk = SDK(
         server_url=server_url,

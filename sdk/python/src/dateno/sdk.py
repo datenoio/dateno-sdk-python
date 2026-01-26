@@ -5,9 +5,9 @@ from .httpclient import AsyncHttpClient, ClientOwner, HttpClient, close_clients
 from .sdkconfiguration import SDKConfiguration
 from .utils.logger import Logger, get_default_logger
 from .utils.retries import RetryConfig
-from dateno import models, utils
-from dateno._hooks import SDKHooks
-from dateno.types import OptionalNullable, UNSET
+from sdk.python.src.dateno import models, utils
+from sdk.python.src.dateno._hooks import SDKHooks
+from sdk.python.src.dateno.types import OptionalNullable, UNSET
 import httpx
 import importlib
 import sys
@@ -15,11 +15,11 @@ from typing import Any, Callable, Dict, Optional, TYPE_CHECKING, Union, cast
 import weakref
 
 if TYPE_CHECKING:
-    from dateno.data_catalogs_api import DataCatalogsAPI
-    from dateno.raw_data_access import RawDataAccess
-    from dateno.search_api import SearchAPI
-    from dateno.service import Service
-    from dateno.statistics_api import StatisticsAPI
+    from sdk.python.src.dateno.data_catalogs_api import DataCatalogsAPI
+    from sdk.python.src.dateno.raw_data_access import RawDataAccess
+    from sdk.python.src.dateno.search_api import SearchAPI
+    from sdk.python.src.dateno.service import Service
+    from sdk.python.src.dateno.statistics_api import StatisticsAPI
 
 
 class SDK(BaseSDK):

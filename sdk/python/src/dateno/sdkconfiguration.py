@@ -9,8 +9,8 @@ from ._version import (
 from .httpclient import AsyncHttpClient, HttpClient
 from .utils import Logger, RetryConfig, remove_suffix
 from dataclasses import dataclass
-from dateno import models
-from dateno.types import OptionalNullable, UNSET
+from sdk.python.src.dateno import models
+from sdk.python.src.dateno.types import OptionalNullable, UNSET
 from pydantic import Field
 from typing import Callable, Dict, Optional, Tuple, Union
 
