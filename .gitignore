@@ -13,9 +13,14 @@ pyrightconfig.json
 .env.local
 # Python
 __pycache__/
-*.py[cod]
-*.pyo
-*.pyd
+*.pyc
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+dist/
+build/
+.venv/
 
 # pytest/coverage
 .coverage
@@ -32,3 +37,5 @@ build/
 .idea/
 # big artifacts
 /dateno_api-*.tar
+*.egg-info/
+
