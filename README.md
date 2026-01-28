@@ -86,8 +86,8 @@ SDK(api_key_query="YOUR_API_KEY")
 ```python
 from dateno import SDK
 
-with SDK(api_key_query="YOUR_API_KEY") as sdk:
-    catalog = sdk.data_catalogs_api.get_catalog_by_id("cdi00001616")
+with SDK(api_key_query="VhFBdk0NSod7RiYw2fwbcHYz7SZ3ye4u") as sdk:
+    catalog = sdk.data_catalogs_api.get_catalog_by_id(catalog_id="cdi00001616")
     print(catalog)
 ```
 
@@ -98,11 +98,13 @@ import asyncio
 from dateno import SDK
 
 async def main():
-    async with SDK(api_key_query="YOUR_API_KEY") as sdk:
-        catalog = await sdk.data_catalogs_api.get_catalog_by_id_async("cdi00001616")
+    async with SDK(api_key_query="VhFBdk0NSod7RiYw2fwbcHYz7SZ3ye4u") as sdk:
+        catalog = await sdk.data_catalogs_api.get_catalog_by_id_async(catalog_id="cdi00001616")
         print(catalog)
 
-asyncio.run(main())
+#asyncio.run(main())
+# В Jupyter:
+await main()
 ```
 
 ---
@@ -116,6 +118,48 @@ asyncio.run(main())
 - Service
 
 All responses are returned as **Pydantic models**.
+
+
+---
+
+## Search limits and pagination
+
+The search endpoints support pagination via `limit` and `offset`.
+
+⚠️ **Important limitation**
+
+For dataset search requests (`search_datasets`), the Dateno API enforces a
+**maximum `limit` of 500 items per request**.
+
+If a value greater than `500` is provided, the server will **silently clamp**
+the result size to `500`.
+
+### Example: paginated dataset search
+
+```python
+from dateno import SDK
+
+PAGE_SIZE = 500
+offset = 0
+
+with SDK(api_key_query="YOUR_API_KEY") as sdk:
+    while True:
+        resp = sdk.search_api.search_datasets(
+            q="environment",
+            limit=PAGE_SIZE,
+            offset=offset,
+        )
+
+        hits = resp.hits.hits
+        if not hits:
+            break
+
+        for hit in hits:
+            print(hit.id, hit.source.dataset.title)
+
+        offset += PAGE_SIZE
+```
+To retrieve large result sets, always use pagination with offset.
 
 ---
 
