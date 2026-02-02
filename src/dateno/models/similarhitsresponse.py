@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from .similarhit import SimilarHit, SimilarHitTypedDict
 from .similartotal import SimilarTotal, SimilarTotalTypedDict
+from pydantic import Field
 from dateno.types import BaseModel
 from typing import List, Optional
 from typing_extensions import NotRequired, TypedDict
@@ -22,4 +23,4 @@ class SimilarHitsResponse(BaseModel):
 
     total: SimilarTotal
     max_score: Optional[float] = None
-    hits: List[SimilarHit] = []
+    hits: List[SimilarHit] = Field(default_factory=list)
