@@ -5,7 +5,9 @@ from . import errors, models, utils
 from ._hooks import HookContext
 from .types import OptionalNullable, UNSET
 from .utils.unmarshal_json_response import unmarshal_json_response
-from typing import Any, List, Mapping, Optional
+from typing import AsyncIterator, Iterator, List, Mapping, Optional, Union
+
+ErrorData = Union[errors.ErrorResponseData, errors.HTTPValidationErrorData]
 
 
 class DataCatalogsAPI(BaseSDK):
@@ -36,6 +38,12 @@ class DataCatalogsAPI(BaseSDK):
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
+
+        Example:
+            catalog = sdk.data_catalogs_api.get_catalog_by_id(
+                catalog_id="cdi00001616"
+            )
+            print(catalog.id)
         """
         base_url = None
         url_variables = None
@@ -90,7 +98,7 @@ class DataCatalogsAPI(BaseSDK):
             retry_config=retry_config,
         )
 
-        response_data: Any = None
+        response_data: Optional[ErrorData] = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(models.DataCatalog, http_res)
         if utils.match_response(http_res, ["400", "404"], "application/json"):
@@ -111,7 +119,10 @@ class DataCatalogsAPI(BaseSDK):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
 
-        raise errors.SDKDefaultError("Unexpected response received", http_res)
+        http_res_text = utils.stream_to_text(http_res)
+        raise errors.SDKDefaultError(
+            "Unexpected response received", http_res, http_res_text
+        )
 
     async def get_catalog_by_id_async(
         self,
@@ -136,6 +147,12 @@ class DataCatalogsAPI(BaseSDK):
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
+
+        Example:
+            catalog = await sdk.data_catalogs_api.get_catalog_by_id_async(
+                catalog_id="cdi00001616"
+            )
+            print(catalog.id)
         """
         base_url = None
         url_variables = None
@@ -190,7 +207,7 @@ class DataCatalogsAPI(BaseSDK):
             retry_config=retry_config,
         )
 
-        response_data: Any = None
+        response_data: Optional[ErrorData] = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(models.DataCatalog, http_res)
         if utils.match_response(http_res, ["400", "404"], "application/json"):
@@ -211,7 +228,10 @@ class DataCatalogsAPI(BaseSDK):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
 
-        raise errors.SDKDefaultError("Unexpected response received", http_res)
+        http_res_text = await utils.stream_to_text_async(http_res)
+        raise errors.SDKDefaultError(
+            "Unexpected response received", http_res, http_res_text
+        )
 
     def list_catalogs(
         self,
@@ -237,8 +257,8 @@ class DataCatalogsAPI(BaseSDK):
         Intro: [Dateno catalog registry](https://dateno.io/registry/).
 
         :param q:
-        :param limit:
-        :param offset:
+        :param limit: Max items per page.
+        :param offset: Pagination offset (0-based).
         :param software:
         :param owner_type:
         :param catalog_type:
@@ -249,6 +269,13 @@ class DataCatalogsAPI(BaseSDK):
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
+
+        Example:
+            res = sdk.data_catalogs_api.list_catalogs(
+                q="climate", limit=20, offset=0
+            )
+            for item in res.data or []:
+                print(item.id)
         """
         base_url = None
         url_variables = None
@@ -310,7 +337,7 @@ class DataCatalogsAPI(BaseSDK):
             retry_config=retry_config,
         )
 
-        response_data: Any = None
+        response_data: Optional[ErrorData] = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(models.DataCatalogSearchResponse, http_res)
         if utils.match_response(http_res, "404", "application/json"):
@@ -331,7 +358,10 @@ class DataCatalogsAPI(BaseSDK):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
 
-        raise errors.SDKDefaultError("Unexpected response received", http_res)
+        http_res_text = utils.stream_to_text(http_res)
+        raise errors.SDKDefaultError(
+            "Unexpected response received", http_res, http_res_text
+        )
 
     async def list_catalogs_async(
         self,
@@ -357,8 +387,8 @@ class DataCatalogsAPI(BaseSDK):
         Intro: [Dateno catalog registry](https://dateno.io/registry/).
 
         :param q:
-        :param limit:
-        :param offset:
+        :param limit: Max items per page.
+        :param offset: Pagination offset (0-based).
         :param software:
         :param owner_type:
         :param catalog_type:
@@ -369,6 +399,13 @@ class DataCatalogsAPI(BaseSDK):
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
+
+        Example:
+            res = await sdk.data_catalogs_api.list_catalogs_async(
+                q="climate", limit=20, offset=0
+            )
+            for item in res.data or []:
+                print(item.id)
         """
         base_url = None
         url_variables = None
@@ -430,7 +467,7 @@ class DataCatalogsAPI(BaseSDK):
             retry_config=retry_config,
         )
 
-        response_data: Any = None
+        response_data: Optional[ErrorData] = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(models.DataCatalogSearchResponse, http_res)
         if utils.match_response(http_res, "404", "application/json"):
@@ -451,4 +488,175 @@ class DataCatalogsAPI(BaseSDK):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
 
-        raise errors.SDKDefaultError("Unexpected response received", http_res)
+        http_res_text = await utils.stream_to_text_async(http_res)
+        raise errors.SDKDefaultError(
+            "Unexpected response received", http_res, http_res_text
+        )
+
+    def iter_list_catalogs(
+        self,
+        *,
+        q: Optional[str] = "",
+        limit: Optional[int] = 10,
+        offset: Optional[int] = 0,
+        software: Optional[str] = None,
+        owner_type: Optional[str] = None,
+        catalog_type: Optional[str] = None,
+        owner_country: Optional[List[str]] = None,
+        coverage_country: Optional[List[str]] = None,
+        apikey: OptionalNullable[str] = UNSET,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> Iterator[models.DataCatalogSearchResponse]:
+        """Iterate over pages of catalog search results."""
+        page_limit = 10 if limit is None else limit
+        if page_limit <= 0:
+            raise ValueError("limit must be a positive integer for pagination")
+
+        current_offset = 0 if offset is None else offset
+
+        while True:
+            page = self.list_catalogs(
+                q=q,
+                limit=page_limit,
+                offset=current_offset,
+                software=software,
+                owner_type=owner_type,
+                catalog_type=catalog_type,
+                owner_country=owner_country,
+                coverage_country=coverage_country,
+                apikey=apikey,
+                retries=retries,
+                server_url=server_url,
+                timeout_ms=timeout_ms,
+                http_headers=http_headers,
+            )
+
+            items = getattr(page, "data", None) or []
+            if not items:
+                break
+
+            yield page
+            current_offset += page_limit
+
+    async def iter_list_catalogs_async(
+        self,
+        *,
+        q: Optional[str] = "",
+        limit: Optional[int] = 10,
+        offset: Optional[int] = 0,
+        software: Optional[str] = None,
+        owner_type: Optional[str] = None,
+        catalog_type: Optional[str] = None,
+        owner_country: Optional[List[str]] = None,
+        coverage_country: Optional[List[str]] = None,
+        apikey: OptionalNullable[str] = UNSET,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> AsyncIterator[models.DataCatalogSearchResponse]:
+        """Iterate over pages of catalog search results (async)."""
+        page_limit = 10 if limit is None else limit
+        if page_limit <= 0:
+            raise ValueError("limit must be a positive integer for pagination")
+
+        current_offset = 0 if offset is None else offset
+
+        while True:
+            page = await self.list_catalogs_async(
+                q=q,
+                limit=page_limit,
+                offset=current_offset,
+                software=software,
+                owner_type=owner_type,
+                catalog_type=catalog_type,
+                owner_country=owner_country,
+                coverage_country=coverage_country,
+                apikey=apikey,
+                retries=retries,
+                server_url=server_url,
+                timeout_ms=timeout_ms,
+                http_headers=http_headers,
+            )
+
+            items = getattr(page, "data", None) or []
+            if not items:
+                break
+
+            yield page
+            current_offset += page_limit
+
+    def paginate_list_catalogs(
+        self,
+        *,
+        q: Optional[str] = "",
+        limit: Optional[int] = 10,
+        offset: Optional[int] = 0,
+        software: Optional[str] = None,
+        owner_type: Optional[str] = None,
+        catalog_type: Optional[str] = None,
+        owner_country: Optional[List[str]] = None,
+        coverage_country: Optional[List[str]] = None,
+        apikey: OptionalNullable[str] = UNSET,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> Iterator[models.DataCatalogSearchItem]:
+        """Iterate over individual catalog search items."""
+        for page in self.iter_list_catalogs(
+            q=q,
+            limit=limit,
+            offset=offset,
+            software=software,
+            owner_type=owner_type,
+            catalog_type=catalog_type,
+            owner_country=owner_country,
+            coverage_country=coverage_country,
+            apikey=apikey,
+            retries=retries,
+            server_url=server_url,
+            timeout_ms=timeout_ms,
+            http_headers=http_headers,
+        ):
+            for item in page.data or []:
+                yield item
+
+    async def paginate_list_catalogs_async(
+        self,
+        *,
+        q: Optional[str] = "",
+        limit: Optional[int] = 10,
+        offset: Optional[int] = 0,
+        software: Optional[str] = None,
+        owner_type: Optional[str] = None,
+        catalog_type: Optional[str] = None,
+        owner_country: Optional[List[str]] = None,
+        coverage_country: Optional[List[str]] = None,
+        apikey: OptionalNullable[str] = UNSET,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> AsyncIterator[models.DataCatalogSearchItem]:
+        """Iterate over individual catalog search items (async)."""
+        async for page in self.iter_list_catalogs_async(
+            q=q,
+            limit=limit,
+            offset=offset,
+            software=software,
+            owner_type=owner_type,
+            catalog_type=catalog_type,
+            owner_country=owner_country,
+            coverage_country=coverage_country,
+            apikey=apikey,
+            retries=retries,
+            server_url=server_url,
+            timeout_ms=timeout_ms,
+            http_headers=http_headers,
+        ):
+            for item in page.data or []:
+                yield item

@@ -4,7 +4,7 @@ from decimal import Decimal
 import functools
 import json
 import typing
-from typing import Any, Dict, List, Tuple, Union, get_args
+from typing import Any, AsyncIterator, Dict, Iterable, List, Tuple, Union, get_args
 import typing_extensions
 from typing_extensions import get_origin
 
@@ -203,6 +203,57 @@ def stream_to_text(stream: httpx.Response) -> str:
 
 async def stream_to_text_async(stream: httpx.Response) -> str:
     return "".join([chunk async for chunk in stream.aiter_text()])
+
+
+STREAM_TEXT_LIMIT = 10_000
+
+
+def _read_text_from_bytes(chunks: Iterable[bytes], limit: int) -> str:
+    if limit <= 0:
+        return ""
+
+    data = bytearray()
+    for chunk in chunks:
+        if not chunk:
+            continue
+        remaining = limit - len(data)
+        if remaining <= 0:
+            break
+        data.extend(chunk[:remaining])
+        if len(data) >= limit:
+            break
+    return data.decode("utf-8", errors="replace")
+
+
+async def _read_text_from_bytes_async(
+    chunks: AsyncIterator[bytes], limit: int
+) -> str:
+    if limit <= 0:
+        return ""
+
+    data = bytearray()
+    async for chunk in chunks:
+        if not chunk:
+            continue
+        remaining = limit - len(data)
+        if remaining <= 0:
+            break
+        data.extend(chunk[:remaining])
+        if len(data) >= limit:
+            break
+    return data.decode("utf-8", errors="replace")
+
+
+def stream_to_text_limit(
+    stream: httpx.Response, limit: int = STREAM_TEXT_LIMIT
+) -> str:
+    return _read_text_from_bytes(stream.iter_bytes(), limit)
+
+
+async def stream_to_text_async_limit(
+    stream: httpx.Response, limit: int = STREAM_TEXT_LIMIT
+) -> str:
+    return await _read_text_from_bytes_async(stream.aiter_bytes(), limit)
 
 
 def stream_to_bytes(stream: httpx.Response) -> bytes:

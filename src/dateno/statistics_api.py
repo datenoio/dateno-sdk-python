@@ -6,7 +6,9 @@ from dateno._hooks import HookContext
 from dateno.types import OptionalNullable, UNSET
 from dateno.utils.unmarshal_json_response import unmarshal_json_response
 from enum import Enum
-from typing import Any, Dict, Mapping, Optional
+from typing import AsyncIterator, Dict, Iterator, Mapping, Optional, Union
+
+ErrorData = Union[errors.ErrorResponseData, errors.HTTPValidationErrorData]
 
 
 class ExportTimeseriesFileAcceptEnum(str, Enum):
@@ -41,6 +43,11 @@ class StatisticsAPI(BaseSDK):
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
+
+        Example:
+            page = sdk.statistics_api.list_namespaces(limit=10)
+            for ns in page.items or []:
+                print(ns.id, ns.name)
         """
         base_url = None
         url_variables = None
@@ -96,7 +103,7 @@ class StatisticsAPI(BaseSDK):
             retry_config=retry_config,
         )
 
-        response_data: Any = None
+        response_data: Optional[ErrorData] = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(models.PageNamespace, http_res)
         if utils.match_response(http_res, "422", "application/json"):
@@ -114,7 +121,10 @@ class StatisticsAPI(BaseSDK):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
 
-        raise errors.SDKDefaultError("Unexpected response received", http_res)
+        http_res_text = utils.stream_to_text(http_res)
+        raise errors.SDKDefaultError(
+            "Unexpected response received", http_res, http_res_text
+        )
 
     async def list_namespaces_async(
         self,
@@ -138,6 +148,11 @@ class StatisticsAPI(BaseSDK):
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
+
+        Example:
+            page = await sdk.statistics_api.list_namespaces_async(limit=10)
+            for ns in page.items or []:
+                print(ns.id, ns.name)
         """
         base_url = None
         url_variables = None
@@ -193,7 +208,7 @@ class StatisticsAPI(BaseSDK):
             retry_config=retry_config,
         )
 
-        response_data: Any = None
+        response_data: Optional[ErrorData] = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(models.PageNamespace, http_res)
         if utils.match_response(http_res, "422", "application/json"):
@@ -211,7 +226,130 @@ class StatisticsAPI(BaseSDK):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
 
-        raise errors.SDKDefaultError("Unexpected response received", http_res)
+        http_res_text = await utils.stream_to_text_async(http_res)
+        raise errors.SDKDefaultError(
+            "Unexpected response received", http_res, http_res_text
+        )
+
+    def iter_list_namespaces(
+        self,
+        *,
+        start: Optional[int] = 0,
+        limit: Optional[int] = 100,
+        apikey: OptionalNullable[str] = UNSET,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> Iterator[models.PageNamespace]:
+        """Iterate over pages of namespaces."""
+        page_limit = 100 if limit is None else limit
+        if page_limit <= 0:
+            raise ValueError("limit must be a positive integer for pagination")
+
+        current_start = 0 if start is None else start
+
+        while True:
+            page = self.list_namespaces(
+                start=current_start,
+                limit=page_limit,
+                apikey=apikey,
+                retries=retries,
+                server_url=server_url,
+                timeout_ms=timeout_ms,
+                http_headers=http_headers,
+            )
+
+            items = getattr(page, "items", None) or []
+            if not items:
+                break
+
+            yield page
+            current_start += page_limit
+
+    async def iter_list_namespaces_async(
+        self,
+        *,
+        start: Optional[int] = 0,
+        limit: Optional[int] = 100,
+        apikey: OptionalNullable[str] = UNSET,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> AsyncIterator[models.PageNamespace]:
+        """Iterate over pages of namespaces (async)."""
+        page_limit = 100 if limit is None else limit
+        if page_limit <= 0:
+            raise ValueError("limit must be a positive integer for pagination")
+
+        current_start = 0 if start is None else start
+
+        while True:
+            page = await self.list_namespaces_async(
+                start=current_start,
+                limit=page_limit,
+                apikey=apikey,
+                retries=retries,
+                server_url=server_url,
+                timeout_ms=timeout_ms,
+                http_headers=http_headers,
+            )
+
+            items = getattr(page, "items", None) or []
+            if not items:
+                break
+
+            yield page
+            current_start += page_limit
+
+    def paginate_list_namespaces(
+        self,
+        *,
+        start: Optional[int] = 0,
+        limit: Optional[int] = 100,
+        apikey: OptionalNullable[str] = UNSET,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> Iterator[models.Namespace]:
+        """Iterate over individual namespaces."""
+        for page in self.iter_list_namespaces(
+            start=start,
+            limit=limit,
+            apikey=apikey,
+            retries=retries,
+            server_url=server_url,
+            timeout_ms=timeout_ms,
+            http_headers=http_headers,
+        ):
+            for item in page.items or []:
+                yield item
+
+    async def paginate_list_namespaces_async(
+        self,
+        *,
+        start: Optional[int] = 0,
+        limit: Optional[int] = 100,
+        apikey: OptionalNullable[str] = UNSET,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> AsyncIterator[models.Namespace]:
+        """Iterate over individual namespaces (async)."""
+        async for page in self.iter_list_namespaces_async(
+            start=start,
+            limit=limit,
+            apikey=apikey,
+            retries=retries,
+            server_url=server_url,
+            timeout_ms=timeout_ms,
+            http_headers=http_headers,
+        ):
+            for item in page.items or []:
+                yield item
 
     def get_namespace(
         self,
@@ -233,6 +371,10 @@ class StatisticsAPI(BaseSDK):
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
+
+        Example:
+            ts = sdk.statistics_api.get_timeseries(ns_id="wb", ts_id="TS_ID")
+            print(ts.id, ts.name)
         """
         base_url = None
         url_variables = None
@@ -287,7 +429,7 @@ class StatisticsAPI(BaseSDK):
             retry_config=retry_config,
         )
 
-        response_data: Any = None
+        response_data: Optional[ErrorData] = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(models.Namespace, http_res)
         if utils.match_response(http_res, "404", "application/json"):
@@ -308,7 +450,10 @@ class StatisticsAPI(BaseSDK):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
 
-        raise errors.SDKDefaultError("Unexpected response received", http_res)
+        http_res_text = utils.stream_to_text(http_res)
+        raise errors.SDKDefaultError(
+            "Unexpected response received", http_res, http_res_text
+        )
 
     async def get_namespace_async(
         self,
@@ -330,6 +475,12 @@ class StatisticsAPI(BaseSDK):
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
+
+        Example:
+            ts = await sdk.statistics_api.get_timeseries_async(
+                ns_id="wb", ts_id="TS_ID"
+            )
+            print(ts.id, ts.name)
         """
         base_url = None
         url_variables = None
@@ -384,7 +535,7 @@ class StatisticsAPI(BaseSDK):
             retry_config=retry_config,
         )
 
-        response_data: Any = None
+        response_data: Optional[ErrorData] = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(models.Namespace, http_res)
         if utils.match_response(http_res, "404", "application/json"):
@@ -405,7 +556,10 @@ class StatisticsAPI(BaseSDK):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
 
-        raise errors.SDKDefaultError("Unexpected response received", http_res)
+        http_res_text = await utils.stream_to_text_async(http_res)
+        raise errors.SDKDefaultError(
+            "Unexpected response received", http_res, http_res_text
+        )
 
     def list_namespace_tables(
         self,
@@ -487,7 +641,7 @@ class StatisticsAPI(BaseSDK):
             retry_config=retry_config,
         )
 
-        response_data: Any = None
+        response_data: Optional[ErrorData] = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(models.PageTableListItem, http_res)
         if utils.match_response(http_res, ["400", "404"], "application/json"):
@@ -508,7 +662,10 @@ class StatisticsAPI(BaseSDK):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
 
-        raise errors.SDKDefaultError("Unexpected response received", http_res)
+        http_res_text = utils.stream_to_text(http_res)
+        raise errors.SDKDefaultError(
+            "Unexpected response received", http_res, http_res_text
+        )
 
     async def list_namespace_tables_async(
         self,
@@ -590,7 +747,7 @@ class StatisticsAPI(BaseSDK):
             retry_config=retry_config,
         )
 
-        response_data: Any = None
+        response_data: Optional[ErrorData] = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(models.PageTableListItem, http_res)
         if utils.match_response(http_res, ["400", "404"], "application/json"):
@@ -611,7 +768,10 @@ class StatisticsAPI(BaseSDK):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
 
-        raise errors.SDKDefaultError("Unexpected response received", http_res)
+        http_res_text = await utils.stream_to_text_async(http_res)
+        raise errors.SDKDefaultError(
+            "Unexpected response received", http_res, http_res_text
+        )
 
     def get_namespace_table(
         self,
@@ -688,7 +848,7 @@ class StatisticsAPI(BaseSDK):
             retry_config=retry_config,
         )
 
-        response_data: Any = None
+        response_data: Optional[ErrorData] = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(models.TableWithSchema, http_res)
         if utils.match_response(http_res, "404", "application/json"):
@@ -709,7 +869,10 @@ class StatisticsAPI(BaseSDK):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
 
-        raise errors.SDKDefaultError("Unexpected response received", http_res)
+        http_res_text = utils.stream_to_text(http_res)
+        raise errors.SDKDefaultError(
+            "Unexpected response received", http_res, http_res_text
+        )
 
     async def get_namespace_table_async(
         self,
@@ -786,7 +949,7 @@ class StatisticsAPI(BaseSDK):
             retry_config=retry_config,
         )
 
-        response_data: Any = None
+        response_data: Optional[ErrorData] = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(models.TableWithSchema, http_res)
         if utils.match_response(http_res, "404", "application/json"):
@@ -807,7 +970,10 @@ class StatisticsAPI(BaseSDK):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
 
-        raise errors.SDKDefaultError("Unexpected response received", http_res)
+        http_res_text = await utils.stream_to_text_async(http_res)
+        raise errors.SDKDefaultError(
+            "Unexpected response received", http_res, http_res_text
+        )
 
     def list_indicators(
         self,
@@ -889,7 +1055,7 @@ class StatisticsAPI(BaseSDK):
             retry_config=retry_config,
         )
 
-        response_data: Any = None
+        response_data: Optional[ErrorData] = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(models.PageIndicator, http_res)
         if utils.match_response(http_res, ["400", "404"], "application/json"):
@@ -910,7 +1076,10 @@ class StatisticsAPI(BaseSDK):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
 
-        raise errors.SDKDefaultError("Unexpected response received", http_res)
+        http_res_text = utils.stream_to_text(http_res)
+        raise errors.SDKDefaultError(
+            "Unexpected response received", http_res, http_res_text
+        )
 
     async def list_indicators_async(
         self,
@@ -992,7 +1161,7 @@ class StatisticsAPI(BaseSDK):
             retry_config=retry_config,
         )
 
-        response_data: Any = None
+        response_data: Optional[ErrorData] = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(models.PageIndicator, http_res)
         if utils.match_response(http_res, ["400", "404"], "application/json"):
@@ -1013,7 +1182,138 @@ class StatisticsAPI(BaseSDK):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
 
-        raise errors.SDKDefaultError("Unexpected response received", http_res)
+        http_res_text = await utils.stream_to_text_async(http_res)
+        raise errors.SDKDefaultError(
+            "Unexpected response received", http_res, http_res_text
+        )
+
+    def iter_list_indicators(
+        self,
+        *,
+        ns_id: str,
+        start: Optional[int] = 0,
+        limit: Optional[int] = 100,
+        apikey: OptionalNullable[str] = UNSET,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> Iterator[models.PageIndicator]:
+        """Iterate over pages of indicators for a namespace."""
+        page_limit = 100 if limit is None else limit
+        if page_limit <= 0:
+            raise ValueError("limit must be a positive integer for pagination")
+
+        current_start = 0 if start is None else start
+
+        while True:
+            page = self.list_indicators(
+                ns_id=ns_id,
+                start=current_start,
+                limit=page_limit,
+                apikey=apikey,
+                retries=retries,
+                server_url=server_url,
+                timeout_ms=timeout_ms,
+                http_headers=http_headers,
+            )
+
+            items = getattr(page, "items", None) or []
+            if not items:
+                break
+
+            yield page
+            current_start += page_limit
+
+    async def iter_list_indicators_async(
+        self,
+        *,
+        ns_id: str,
+        start: Optional[int] = 0,
+        limit: Optional[int] = 100,
+        apikey: OptionalNullable[str] = UNSET,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> AsyncIterator[models.PageIndicator]:
+        """Iterate over pages of indicators for a namespace (async)."""
+        page_limit = 100 if limit is None else limit
+        if page_limit <= 0:
+            raise ValueError("limit must be a positive integer for pagination")
+
+        current_start = 0 if start is None else start
+
+        while True:
+            page = await self.list_indicators_async(
+                ns_id=ns_id,
+                start=current_start,
+                limit=page_limit,
+                apikey=apikey,
+                retries=retries,
+                server_url=server_url,
+                timeout_ms=timeout_ms,
+                http_headers=http_headers,
+            )
+
+            items = getattr(page, "items", None) or []
+            if not items:
+                break
+
+            yield page
+            current_start += page_limit
+
+    def paginate_list_indicators(
+        self,
+        *,
+        ns_id: str,
+        start: Optional[int] = 0,
+        limit: Optional[int] = 100,
+        apikey: OptionalNullable[str] = UNSET,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> Iterator[models.Indicator]:
+        """Iterate over individual indicators for a namespace."""
+        for page in self.iter_list_indicators(
+            ns_id=ns_id,
+            start=start,
+            limit=limit,
+            apikey=apikey,
+            retries=retries,
+            server_url=server_url,
+            timeout_ms=timeout_ms,
+            http_headers=http_headers,
+        ):
+            for item in page.items or []:
+                yield item
+
+    async def paginate_list_indicators_async(
+        self,
+        *,
+        ns_id: str,
+        start: Optional[int] = 0,
+        limit: Optional[int] = 100,
+        apikey: OptionalNullable[str] = UNSET,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> AsyncIterator[models.Indicator]:
+        """Iterate over individual indicators for a namespace (async)."""
+        async for page in self.iter_list_indicators_async(
+            ns_id=ns_id,
+            start=start,
+            limit=limit,
+            apikey=apikey,
+            retries=retries,
+            server_url=server_url,
+            timeout_ms=timeout_ms,
+            http_headers=http_headers,
+        ):
+            for item in page.items or []:
+                yield item
 
     def list_timeseries(
         self,
@@ -1095,7 +1395,7 @@ class StatisticsAPI(BaseSDK):
             retry_config=retry_config,
         )
 
-        response_data: Any = None
+        response_data: Optional[ErrorData] = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(models.PageTimeseries, http_res)
         if utils.match_response(http_res, ["400", "404"], "application/json"):
@@ -1116,7 +1416,10 @@ class StatisticsAPI(BaseSDK):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
 
-        raise errors.SDKDefaultError("Unexpected response received", http_res)
+        http_res_text = utils.stream_to_text(http_res)
+        raise errors.SDKDefaultError(
+            "Unexpected response received", http_res, http_res_text
+        )
 
     async def list_timeseries_async(
         self,
@@ -1198,7 +1501,7 @@ class StatisticsAPI(BaseSDK):
             retry_config=retry_config,
         )
 
-        response_data: Any = None
+        response_data: Optional[ErrorData] = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(models.PageTimeseries, http_res)
         if utils.match_response(http_res, ["400", "404"], "application/json"):
@@ -1219,7 +1522,138 @@ class StatisticsAPI(BaseSDK):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
 
-        raise errors.SDKDefaultError("Unexpected response received", http_res)
+        http_res_text = await utils.stream_to_text_async(http_res)
+        raise errors.SDKDefaultError(
+            "Unexpected response received", http_res, http_res_text
+        )
+
+    def iter_list_timeseries(
+        self,
+        *,
+        ns_id: str,
+        start: Optional[int] = 0,
+        limit: Optional[int] = 100,
+        apikey: OptionalNullable[str] = UNSET,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> Iterator[models.PageTimeseries]:
+        """Iterate over pages of timeseries for a namespace."""
+        page_limit = 100 if limit is None else limit
+        if page_limit <= 0:
+            raise ValueError("limit must be a positive integer for pagination")
+
+        current_start = 0 if start is None else start
+
+        while True:
+            page = self.list_timeseries(
+                ns_id=ns_id,
+                start=current_start,
+                limit=page_limit,
+                apikey=apikey,
+                retries=retries,
+                server_url=server_url,
+                timeout_ms=timeout_ms,
+                http_headers=http_headers,
+            )
+
+            items = getattr(page, "items", None) or []
+            if not items:
+                break
+
+            yield page
+            current_start += page_limit
+
+    async def iter_list_timeseries_async(
+        self,
+        *,
+        ns_id: str,
+        start: Optional[int] = 0,
+        limit: Optional[int] = 100,
+        apikey: OptionalNullable[str] = UNSET,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> AsyncIterator[models.PageTimeseries]:
+        """Iterate over pages of timeseries for a namespace (async)."""
+        page_limit = 100 if limit is None else limit
+        if page_limit <= 0:
+            raise ValueError("limit must be a positive integer for pagination")
+
+        current_start = 0 if start is None else start
+
+        while True:
+            page = await self.list_timeseries_async(
+                ns_id=ns_id,
+                start=current_start,
+                limit=page_limit,
+                apikey=apikey,
+                retries=retries,
+                server_url=server_url,
+                timeout_ms=timeout_ms,
+                http_headers=http_headers,
+            )
+
+            items = getattr(page, "items", None) or []
+            if not items:
+                break
+
+            yield page
+            current_start += page_limit
+
+    def paginate_list_timeseries(
+        self,
+        *,
+        ns_id: str,
+        start: Optional[int] = 0,
+        limit: Optional[int] = 100,
+        apikey: OptionalNullable[str] = UNSET,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> Iterator[models.Timeseries]:
+        """Iterate over individual timeseries for a namespace."""
+        for page in self.iter_list_timeseries(
+            ns_id=ns_id,
+            start=start,
+            limit=limit,
+            apikey=apikey,
+            retries=retries,
+            server_url=server_url,
+            timeout_ms=timeout_ms,
+            http_headers=http_headers,
+        ):
+            for item in page.items or []:
+                yield item
+
+    async def paginate_list_timeseries_async(
+        self,
+        *,
+        ns_id: str,
+        start: Optional[int] = 0,
+        limit: Optional[int] = 100,
+        apikey: OptionalNullable[str] = UNSET,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> AsyncIterator[models.Timeseries]:
+        """Iterate over individual timeseries for a namespace (async)."""
+        async for page in self.iter_list_timeseries_async(
+            ns_id=ns_id,
+            start=start,
+            limit=limit,
+            apikey=apikey,
+            retries=retries,
+            server_url=server_url,
+            timeout_ms=timeout_ms,
+            http_headers=http_headers,
+        ):
+            for item in page.items or []:
+                yield item
 
     def get_namespace_indicator(
         self,
@@ -1298,7 +1732,7 @@ class StatisticsAPI(BaseSDK):
             retry_config=retry_config,
         )
 
-        response_data: Any = None
+        response_data: Optional[ErrorData] = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(models.Indicator, http_res)
         if utils.match_response(http_res, "404", "application/json"):
@@ -1319,7 +1753,10 @@ class StatisticsAPI(BaseSDK):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
 
-        raise errors.SDKDefaultError("Unexpected response received", http_res)
+        http_res_text = utils.stream_to_text(http_res)
+        raise errors.SDKDefaultError(
+            "Unexpected response received", http_res, http_res_text
+        )
 
     async def get_namespace_indicator_async(
         self,
@@ -1398,7 +1835,7 @@ class StatisticsAPI(BaseSDK):
             retry_config=retry_config,
         )
 
-        response_data: Any = None
+        response_data: Optional[ErrorData] = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(models.Indicator, http_res)
         if utils.match_response(http_res, "404", "application/json"):
@@ -1419,7 +1856,10 @@ class StatisticsAPI(BaseSDK):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
 
-        raise errors.SDKDefaultError("Unexpected response received", http_res)
+        http_res_text = await utils.stream_to_text_async(http_res)
+        raise errors.SDKDefaultError(
+            "Unexpected response received", http_res, http_res_text
+        )
 
     def get_timeseries(
         self,
@@ -1496,7 +1936,7 @@ class StatisticsAPI(BaseSDK):
             retry_config=retry_config,
         )
 
-        response_data: Any = None
+        response_data: Optional[ErrorData] = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(models.TimeseriesWithSchema, http_res)
         if utils.match_response(http_res, "404", "application/json"):
@@ -1517,7 +1957,10 @@ class StatisticsAPI(BaseSDK):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
 
-        raise errors.SDKDefaultError("Unexpected response received", http_res)
+        http_res_text = utils.stream_to_text(http_res)
+        raise errors.SDKDefaultError(
+            "Unexpected response received", http_res, http_res_text
+        )
 
     async def get_timeseries_async(
         self,
@@ -1594,7 +2037,7 @@ class StatisticsAPI(BaseSDK):
             retry_config=retry_config,
         )
 
-        response_data: Any = None
+        response_data: Optional[ErrorData] = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(models.TimeseriesWithSchema, http_res)
         if utils.match_response(http_res, "404", "application/json"):
@@ -1615,7 +2058,10 @@ class StatisticsAPI(BaseSDK):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
 
-        raise errors.SDKDefaultError("Unexpected response received", http_res)
+        http_res_text = await utils.stream_to_text_async(http_res)
+        raise errors.SDKDefaultError(
+            "Unexpected response received", http_res, http_res_text
+        )
 
     def list_export_formats(
         self,
@@ -1688,7 +2134,7 @@ class StatisticsAPI(BaseSDK):
             retry_config=retry_config,
         )
 
-        response_data: Any = None
+        response_data: Optional[ErrorData] = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(Dict[str, str], http_res)
         if utils.match_response(http_res, "422", "application/json"):
@@ -1706,7 +2152,10 @@ class StatisticsAPI(BaseSDK):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
 
-        raise errors.SDKDefaultError("Unexpected response received", http_res)
+        http_res_text = utils.stream_to_text(http_res)
+        raise errors.SDKDefaultError(
+            "Unexpected response received", http_res, http_res_text
+        )
 
     async def list_export_formats_async(
         self,
@@ -1779,7 +2228,7 @@ class StatisticsAPI(BaseSDK):
             retry_config=retry_config,
         )
 
-        response_data: Any = None
+        response_data: Optional[ErrorData] = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(Dict[str, str], http_res)
         if utils.match_response(http_res, "422", "application/json"):
@@ -1797,7 +2246,10 @@ class StatisticsAPI(BaseSDK):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
 
-        raise errors.SDKDefaultError("Unexpected response received", http_res)
+        http_res_text = await utils.stream_to_text_async(http_res)
+        raise errors.SDKDefaultError(
+            "Unexpected response received", http_res, http_res_text
+        )
 
     def export_timeseries_file(
         self,
@@ -1884,7 +2336,7 @@ class StatisticsAPI(BaseSDK):
             retry_config=retry_config,
         )
 
-        response_data: Any = None
+        response_data: Optional[ErrorData] = None
         if utils.match_response(http_res, "200", "application/octet-stream"):
             return models.ExportTimeseriesFileResponse(
                 result=http_res, headers=utils.get_response_headers(http_res.headers)
@@ -1906,31 +2358,31 @@ class StatisticsAPI(BaseSDK):
                 result=http_res, headers=utils.get_response_headers(http_res.headers)
             )
         if utils.match_response(http_res, ["400", "404"], "application/json"):
-            http_res_text = utils.stream_to_text(http_res)
+            http_res_text = utils.stream_to_text_limit(http_res)
             response_data = unmarshal_json_response(
                 errors.ErrorResponseData, http_res, http_res_text
             )
             raise errors.ErrorResponse(response_data, http_res, http_res_text)
         if utils.match_response(http_res, "422", "application/json"):
-            http_res_text = utils.stream_to_text(http_res)
+            http_res_text = utils.stream_to_text_limit(http_res)
             response_data = unmarshal_json_response(
                 errors.HTTPValidationErrorData, http_res, http_res_text
             )
             raise errors.HTTPValidationError(response_data, http_res, http_res_text)
         if utils.match_response(http_res, "500", "application/json"):
-            http_res_text = utils.stream_to_text(http_res)
+            http_res_text = utils.stream_to_text_limit(http_res)
             response_data = unmarshal_json_response(
                 errors.ErrorResponseData, http_res, http_res_text
             )
             raise errors.ErrorResponse(response_data, http_res, http_res_text)
         if utils.match_response(http_res, "4XX", "*"):
-            http_res_text = utils.stream_to_text(http_res)
+            http_res_text = utils.stream_to_text_limit(http_res)
             raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
-            http_res_text = utils.stream_to_text(http_res)
+            http_res_text = utils.stream_to_text_limit(http_res)
             raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
 
-        http_res_text = utils.stream_to_text(http_res)
+        http_res_text = utils.stream_to_text_limit(http_res)
         raise errors.SDKDefaultError(
             "Unexpected response received", http_res, http_res_text
         )
@@ -2020,7 +2472,7 @@ class StatisticsAPI(BaseSDK):
             retry_config=retry_config,
         )
 
-        response_data: Any = None
+        response_data: Optional[ErrorData] = None
         if utils.match_response(http_res, "200", "application/octet-stream"):
             return models.ExportTimeseriesFileResponse(
                 result=http_res, headers=utils.get_response_headers(http_res.headers)
@@ -2042,31 +2494,31 @@ class StatisticsAPI(BaseSDK):
                 result=http_res, headers=utils.get_response_headers(http_res.headers)
             )
         if utils.match_response(http_res, ["400", "404"], "application/json"):
-            http_res_text = await utils.stream_to_text_async(http_res)
+            http_res_text = await utils.stream_to_text_async_limit(http_res)
             response_data = unmarshal_json_response(
                 errors.ErrorResponseData, http_res, http_res_text
             )
             raise errors.ErrorResponse(response_data, http_res, http_res_text)
         if utils.match_response(http_res, "422", "application/json"):
-            http_res_text = await utils.stream_to_text_async(http_res)
+            http_res_text = await utils.stream_to_text_async_limit(http_res)
             response_data = unmarshal_json_response(
                 errors.HTTPValidationErrorData, http_res, http_res_text
             )
             raise errors.HTTPValidationError(response_data, http_res, http_res_text)
         if utils.match_response(http_res, "500", "application/json"):
-            http_res_text = await utils.stream_to_text_async(http_res)
+            http_res_text = await utils.stream_to_text_async_limit(http_res)
             response_data = unmarshal_json_response(
                 errors.ErrorResponseData, http_res, http_res_text
             )
             raise errors.ErrorResponse(response_data, http_res, http_res_text)
         if utils.match_response(http_res, "4XX", "*"):
-            http_res_text = await utils.stream_to_text_async(http_res)
+            http_res_text = await utils.stream_to_text_async_limit(http_res)
             raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
-            http_res_text = await utils.stream_to_text_async(http_res)
+            http_res_text = await utils.stream_to_text_async_limit(http_res)
             raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
 
-        http_res_text = await utils.stream_to_text_async(http_res)
+        http_res_text = await utils.stream_to_text_async_limit(http_res)
         raise errors.SDKDefaultError(
             "Unexpected response received", http_res, http_res_text
         )

@@ -5,7 +5,9 @@ from dateno import errors, models, utils
 from dateno._hooks import HookContext
 from dateno.types import OptionalNullable, UNSET
 from dateno.utils.unmarshal_json_response import unmarshal_json_response
-from typing import Any, List, Mapping, Optional, Union
+from typing import AsyncIterator, Iterator, List, Mapping, Optional, Union
+
+ErrorData = Union[errors.ErrorResponseData, errors.HTTPValidationErrorData]
 
 
 class SearchAPI(BaseSDK):
@@ -87,7 +89,7 @@ class SearchAPI(BaseSDK):
             retry_config=retry_config,
         )
 
-        response_data: Any = None
+        response_data: Optional[ErrorData] = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(models.SearchIndexEntry, http_res)
         if utils.match_response(http_res, "404", "application/json"):
@@ -108,7 +110,10 @@ class SearchAPI(BaseSDK):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
 
-        raise errors.SDKDefaultError("Unexpected response received", http_res)
+        http_res_text = utils.stream_to_text(http_res)
+        raise errors.SDKDefaultError(
+            "Unexpected response received", http_res, http_res_text
+        )
 
     async def get_dataset_by_entry_id_async(
         self,
@@ -184,7 +189,7 @@ class SearchAPI(BaseSDK):
             retry_config=retry_config,
         )
 
-        response_data: Any = None
+        response_data: Optional[ErrorData] = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(models.SearchIndexEntry, http_res)
         if utils.match_response(http_res, "404", "application/json"):
@@ -205,7 +210,10 @@ class SearchAPI(BaseSDK):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
 
-        raise errors.SDKDefaultError("Unexpected response received", http_res)
+        http_res_text = await utils.stream_to_text_async(http_res)
+        raise errors.SDKDefaultError(
+            "Unexpected response received", http_res, http_res_text
+        )
 
     def search_datasets(
         self,
@@ -226,8 +234,8 @@ class SearchAPI(BaseSDK):
 
         :param q: Free-text search query, e.g. 'Atlantic salmon'
         :param filters: List of filters formatted as `\"field\"=\"value\"` (quotes optional). Example: `\"source.catalog_type\"=\"Geoportal\"`
-        :param limit:
-        :param offset:
+        :param limit: Max results per page (use with offset; max 500).
+        :param offset: Pagination offset (0-based).
         :param facets: If true, response includes aggregations/facets
         :param sort_by: Comma-separated fields for sorting. Example: `_score` or `scores.feature_score`
         :param apikey:
@@ -235,6 +243,11 @@ class SearchAPI(BaseSDK):
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
+
+        Example:
+            resp = sdk.search_api.search_datasets(q="environment", limit=100, offset=0)
+            for hit in resp.hits.hits:
+                print(hit.id)
         """
         base_url = None
         url_variables = None
@@ -294,7 +307,7 @@ class SearchAPI(BaseSDK):
             retry_config=retry_config,
         )
 
-        response_data: Any = None
+        response_data: Optional[ErrorData] = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(models.SearchQueryResponse, http_res)
         if utils.match_response(http_res, "400", "application/json"):
@@ -315,7 +328,10 @@ class SearchAPI(BaseSDK):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
 
-        raise errors.SDKDefaultError("Unexpected response received", http_res)
+        http_res_text = utils.stream_to_text(http_res)
+        raise errors.SDKDefaultError(
+            "Unexpected response received", http_res, http_res_text
+        )
 
     async def search_datasets_async(
         self,
@@ -336,8 +352,8 @@ class SearchAPI(BaseSDK):
 
         :param q: Free-text search query, e.g. 'Atlantic salmon'
         :param filters: List of filters formatted as `\"field\"=\"value\"` (quotes optional). Example: `\"source.catalog_type\"=\"Geoportal\"`
-        :param limit:
-        :param offset:
+        :param limit: Max results per page (use with offset; max 500).
+        :param offset: Pagination offset (0-based).
         :param facets: If true, response includes aggregations/facets
         :param sort_by: Comma-separated fields for sorting. Example: `_score` or `scores.feature_score`
         :param apikey:
@@ -345,6 +361,13 @@ class SearchAPI(BaseSDK):
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
+
+        Example:
+            resp = await sdk.search_api.search_datasets_async(
+                q="environment", limit=100, offset=0
+            )
+            for hit in resp.hits.hits:
+                print(hit.id)
         """
         base_url = None
         url_variables = None
@@ -404,7 +427,7 @@ class SearchAPI(BaseSDK):
             retry_config=retry_config,
         )
 
-        response_data: Any = None
+        response_data: Optional[ErrorData] = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(models.SearchQueryResponse, http_res)
         if utils.match_response(http_res, "400", "application/json"):
@@ -425,7 +448,178 @@ class SearchAPI(BaseSDK):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
 
-        raise errors.SDKDefaultError("Unexpected response received", http_res)
+        http_res_text = await utils.stream_to_text_async(http_res)
+        raise errors.SDKDefaultError(
+            "Unexpected response received", http_res, http_res_text
+        )
+
+    def iter_search_datasets(
+        self,
+        *,
+        q: Optional[str] = "",
+        filters: Optional[List[str]] = None,
+        limit: Optional[int] = 20,
+        offset: Optional[int] = 0,
+        facets: Optional[bool] = True,
+        sort_by: Optional[str] = "_score",
+        apikey: OptionalNullable[str] = UNSET,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> Iterator[models.SearchQueryResponse]:
+        r"""Iterate over pages of dataset search results.
+
+        This helper increments `offset` by `limit` and stops when the response
+        contains no hits.
+        """
+        page_limit = 20 if limit is None else limit
+        if page_limit <= 0:
+            raise ValueError("limit must be a positive integer for pagination")
+
+        current_offset = 0 if offset is None else offset
+
+        while True:
+            page = self.search_datasets(
+                q=q,
+                filters=filters,
+                limit=page_limit,
+                offset=current_offset,
+                facets=facets,
+                sort_by=sort_by,
+                apikey=apikey,
+                retries=retries,
+                server_url=server_url,
+                timeout_ms=timeout_ms,
+                http_headers=http_headers,
+            )
+
+            hits = getattr(page.hits, "hits", None) or []
+            if not hits:
+                break
+
+            yield page
+            current_offset += page_limit
+
+    async def iter_search_datasets_async(
+        self,
+        *,
+        q: Optional[str] = "",
+        filters: Optional[List[str]] = None,
+        limit: Optional[int] = 20,
+        offset: Optional[int] = 0,
+        facets: Optional[bool] = True,
+        sort_by: Optional[str] = "_score",
+        apikey: OptionalNullable[str] = UNSET,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> AsyncIterator[models.SearchQueryResponse]:
+        r"""Iterate over pages of dataset search results (async).
+
+        This helper increments `offset` by `limit` and stops when the response
+        contains no hits.
+        """
+        page_limit = 20 if limit is None else limit
+        if page_limit <= 0:
+            raise ValueError("limit must be a positive integer for pagination")
+
+        current_offset = 0 if offset is None else offset
+
+        while True:
+            page = await self.search_datasets_async(
+                q=q,
+                filters=filters,
+                limit=page_limit,
+                offset=current_offset,
+                facets=facets,
+                sort_by=sort_by,
+                apikey=apikey,
+                retries=retries,
+                server_url=server_url,
+                timeout_ms=timeout_ms,
+                http_headers=http_headers,
+            )
+
+            hits = getattr(page.hits, "hits", None) or []
+            if not hits:
+                break
+
+            yield page
+            current_offset += page_limit
+
+    def paginate_search_datasets(
+        self,
+        *,
+        q: Optional[str] = "",
+        filters: Optional[List[str]] = None,
+        limit: Optional[int] = 20,
+        offset: Optional[int] = 0,
+        facets: Optional[bool] = True,
+        sort_by: Optional[str] = "_score",
+        apikey: OptionalNullable[str] = UNSET,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> Iterator[models.Hit]:
+        r"""Iterate over individual dataset hits.
+
+        This helper yields each hit and transparently paginates using
+        `limit`/`offset`.
+        """
+        for page in self.iter_search_datasets(
+            q=q,
+            filters=filters,
+            limit=limit,
+            offset=offset,
+            facets=facets,
+            sort_by=sort_by,
+            apikey=apikey,
+            retries=retries,
+            server_url=server_url,
+            timeout_ms=timeout_ms,
+            http_headers=http_headers,
+        ):
+            for hit in page.hits.hits:
+                yield hit
+
+    async def paginate_search_datasets_async(
+        self,
+        *,
+        q: Optional[str] = "",
+        filters: Optional[List[str]] = None,
+        limit: Optional[int] = 20,
+        offset: Optional[int] = 0,
+        facets: Optional[bool] = True,
+        sort_by: Optional[str] = "_score",
+        apikey: OptionalNullable[str] = UNSET,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> AsyncIterator[models.Hit]:
+        r"""Iterate over individual dataset hits (async).
+
+        This helper yields each hit and transparently paginates using
+        `limit`/`offset`.
+        """
+        async for page in self.iter_search_datasets_async(
+            q=q,
+            filters=filters,
+            limit=limit,
+            offset=offset,
+            facets=facets,
+            sort_by=sort_by,
+            apikey=apikey,
+            retries=retries,
+            server_url=server_url,
+            timeout_ms=timeout_ms,
+            http_headers=http_headers,
+        ):
+            for hit in page.hits.hits:
+                yield hit
 
     def search_datasets_dsl(
         self,
@@ -520,7 +714,7 @@ class SearchAPI(BaseSDK):
             retry_config=retry_config,
         )
 
-        response_data: Any = None
+        response_data: Optional[ErrorData] = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(models.SearchQueryResponse, http_res)
         if utils.match_response(http_res, "400", "application/json"):
@@ -541,7 +735,10 @@ class SearchAPI(BaseSDK):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
 
-        raise errors.SDKDefaultError("Unexpected response received", http_res)
+        http_res_text = utils.stream_to_text(http_res)
+        raise errors.SDKDefaultError(
+            "Unexpected response received", http_res, http_res_text
+        )
 
     async def search_datasets_dsl_async(
         self,
@@ -636,7 +833,7 @@ class SearchAPI(BaseSDK):
             retry_config=retry_config,
         )
 
-        response_data: Any = None
+        response_data: Optional[ErrorData] = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(models.SearchQueryResponse, http_res)
         if utils.match_response(http_res, "400", "application/json"):
@@ -657,7 +854,10 @@ class SearchAPI(BaseSDK):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
 
-        raise errors.SDKDefaultError("Unexpected response received", http_res)
+        http_res_text = await utils.stream_to_text_async(http_res)
+        raise errors.SDKDefaultError(
+            "Unexpected response received", http_res, http_res_text
+        )
 
     def list_search_facets(
         self,
@@ -730,7 +930,7 @@ class SearchAPI(BaseSDK):
             retry_config=retry_config,
         )
 
-        response_data: Any = None
+        response_data: Optional[ErrorData] = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(List[models.FacetInfo], http_res)
         if utils.match_response(http_res, "422", "application/json"):
@@ -748,7 +948,10 @@ class SearchAPI(BaseSDK):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
 
-        raise errors.SDKDefaultError("Unexpected response received", http_res)
+        http_res_text = utils.stream_to_text(http_res)
+        raise errors.SDKDefaultError(
+            "Unexpected response received", http_res, http_res_text
+        )
 
     async def list_search_facets_async(
         self,
@@ -821,7 +1024,7 @@ class SearchAPI(BaseSDK):
             retry_config=retry_config,
         )
 
-        response_data: Any = None
+        response_data: Optional[ErrorData] = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(List[models.FacetInfo], http_res)
         if utils.match_response(http_res, "422", "application/json"):
@@ -839,7 +1042,10 @@ class SearchAPI(BaseSDK):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
 
-        raise errors.SDKDefaultError("Unexpected response received", http_res)
+        http_res_text = await utils.stream_to_text_async(http_res)
+        raise errors.SDKDefaultError(
+            "Unexpected response received", http_res, http_res_text
+        )
 
     def get_search_facet_values(
         self,
@@ -918,7 +1124,7 @@ class SearchAPI(BaseSDK):
             retry_config=retry_config,
         )
 
-        response_data: Any = None
+        response_data: Optional[ErrorData] = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(models.FacetValuesResponse, http_res)
         if utils.match_response(http_res, "400", "application/json"):
@@ -939,7 +1145,10 @@ class SearchAPI(BaseSDK):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
 
-        raise errors.SDKDefaultError("Unexpected response received", http_res)
+        http_res_text = utils.stream_to_text(http_res)
+        raise errors.SDKDefaultError(
+            "Unexpected response received", http_res, http_res_text
+        )
 
     async def get_search_facet_values_async(
         self,
@@ -1018,7 +1227,7 @@ class SearchAPI(BaseSDK):
             retry_config=retry_config,
         )
 
-        response_data: Any = None
+        response_data: Optional[ErrorData] = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(models.FacetValuesResponse, http_res)
         if utils.match_response(http_res, "400", "application/json"):
@@ -1039,7 +1248,10 @@ class SearchAPI(BaseSDK):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
 
-        raise errors.SDKDefaultError("Unexpected response received", http_res)
+        http_res_text = await utils.stream_to_text_async(http_res)
+        raise errors.SDKDefaultError(
+            "Unexpected response received", http_res, http_res_text
+        )
 
     def get_similar_datasets(
         self,
@@ -1059,12 +1271,18 @@ class SearchAPI(BaseSDK):
 
         :param entry_id: Seed entry ID to search similar for
         :param limit: Number of results to return (1..100)
-        :param fields: Fields used for Elasticsearch more_like_this (repeatable query param).
+        :param fields: Fields to compare for similarity (repeatable query param).
+            If None, backend defaults are used.
         :param apikey:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
+
+        Example:
+            resp = sdk.search_api.get_similar_datasets(entry_id="ENTRY_ID", limit=5)
+            for hit in resp.hits:
+                print(hit.id)
         """
         base_url = None
         url_variables = None
@@ -1121,7 +1339,7 @@ class SearchAPI(BaseSDK):
             retry_config=retry_config,
         )
 
-        response_data: Any = None
+        response_data: Optional[ErrorData] = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(models.SimilarHitsResponse, http_res)
         if utils.match_response(http_res, ["400", "404"], "application/json"):
@@ -1142,7 +1360,10 @@ class SearchAPI(BaseSDK):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
 
-        raise errors.SDKDefaultError("Unexpected response received", http_res)
+        http_res_text = utils.stream_to_text(http_res)
+        raise errors.SDKDefaultError(
+            "Unexpected response received", http_res, http_res_text
+        )
 
     async def get_similar_datasets_async(
         self,
@@ -1162,12 +1383,20 @@ class SearchAPI(BaseSDK):
 
         :param entry_id: Seed entry ID to search similar for
         :param limit: Number of results to return (1..100)
-        :param fields: Fields used for Elasticsearch more_like_this (repeatable query param).
+        :param fields: Fields to compare for similarity (repeatable query param).
+            If None, backend defaults are used.
         :param apikey:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
+
+        Example:
+            resp = await sdk.search_api.get_similar_datasets_async(
+                entry_id="ENTRY_ID", limit=5
+            )
+            for hit in resp.hits:
+                print(hit.id)
         """
         base_url = None
         url_variables = None
@@ -1224,7 +1453,7 @@ class SearchAPI(BaseSDK):
             retry_config=retry_config,
         )
 
-        response_data: Any = None
+        response_data: Optional[ErrorData] = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(models.SimilarHitsResponse, http_res)
         if utils.match_response(http_res, ["400", "404"], "application/json"):
@@ -1245,4 +1474,7 @@ class SearchAPI(BaseSDK):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
 
-        raise errors.SDKDefaultError("Unexpected response received", http_res)
+        http_res_text = await utils.stream_to_text_async(http_res)
+        raise errors.SDKDefaultError(
+            "Unexpected response received", http_res, http_res_text
+        )

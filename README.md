@@ -86,7 +86,7 @@ SDK(api_key_query="YOUR_API_KEY")
 ```python
 from dateno import SDK
 
-with SDK(api_key_query="VhFBdk0NSod7RiYw2fwbcHYz7SZ3ye4u") as sdk:
+with SDK(api_key_query="YOUR_API_KEY") as sdk:
     catalog = sdk.data_catalogs_api.get_catalog_by_id(catalog_id="cdi00001616")
     print(catalog)
 ```
@@ -98,7 +98,7 @@ import asyncio
 from dateno import SDK
 
 async def main():
-    async with SDK(api_key_query="VhFBdk0NSod7RiYw2fwbcHYz7SZ3ye4u") as sdk:
+    async with SDK(api_key_query="YOUR_API_KEY") as sdk:
         catalog = await sdk.data_catalogs_api.get_catalog_by_id_async(catalog_id="cdi00001616")
         print(catalog)
 
@@ -134,30 +134,34 @@ For dataset search requests (`search_datasets`), the Dateno API enforces a
 If a value greater than `500` is provided, the server will **silently clamp**
 the result size to `500`.
 
-### Example: paginated dataset search
+### Example: paginated dataset search (helper)
 
 ```python
 from dateno import SDK
 
 PAGE_SIZE = 500
-offset = 0
 
 with SDK(api_key_query="YOUR_API_KEY") as sdk:
-    while True:
-        resp = sdk.search_api.search_datasets(
-            q="environment",
-            limit=PAGE_SIZE,
-            offset=offset,
-        )
+    for hit in sdk.search_api.paginate_search_datasets(
+        q="environment",
+        limit=PAGE_SIZE,
+    ):
+        print(hit.id, hit.source.dataset.title)
+```
 
-        hits = resp.hits.hits
-        if not hits:
-            break
+### Example: iterate over pages
 
-        for hit in hits:
-            print(hit.id, hit.source.dataset.title)
+```python
+from dateno import SDK
 
-        offset += PAGE_SIZE
+PAGE_SIZE = 500
+
+with SDK(api_key_query="YOUR_API_KEY") as sdk:
+    for page in sdk.search_api.iter_search_datasets(
+        q="environment",
+        limit=PAGE_SIZE,
+    ):
+        print("page hits:", len(page.hits.hits))
 ```
 To retrieve large result sets, always use pagination with offset.
 
@@ -185,7 +189,7 @@ pytest
 Integration tests:
 
 ```bash
-DATENO_SERVER_URL=https://api.test.dateno.io DATENO_APIKEY=... pytest -m integration
+DATENO_SERVER_URL=https://api.dateno.io DATENO_APIKEY=... pytest -m integration
 ```
 
 ---

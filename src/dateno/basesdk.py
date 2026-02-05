@@ -277,7 +277,10 @@ class BaseSDK:
                     http_res = result
                 else:
                     logger.debug("Raising unexpected SDK error")
-                    raise errors.SDKDefaultError("Unexpected error occurred", http_res)
+                    http_res_text = utils.stream_to_text(http_res)
+                    raise errors.SDKDefaultError(
+                        "Unexpected error occurred", http_res, http_res_text
+                    )
 
             return http_res
 
@@ -349,7 +352,10 @@ class BaseSDK:
                     http_res = result
                 else:
                     logger.debug("Raising unexpected SDK error")
-                    raise errors.SDKDefaultError("Unexpected error occurred", http_res)
+                    http_res_text = await utils.stream_to_text_async(http_res)
+                    raise errors.SDKDefaultError(
+                        "Unexpected error occurred", http_res, http_res_text
+                    )
 
             return http_res
 

@@ -5,7 +5,9 @@ from dateno import errors, models, utils
 from dateno._hooks import HookContext
 from dateno.types import OptionalNullable, UNSET
 from dateno.utils.unmarshal_json_response import unmarshal_json_response
-from typing import Any, Mapping, Optional
+from typing import Mapping, Optional, Union
+
+ErrorData = Union[errors.ErrorResponseData, errors.HTTPValidationErrorData]
 
 
 class RawDataAccess(BaseSDK):
@@ -33,6 +35,12 @@ class RawDataAccess(BaseSDK):
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
+
+        Example:
+            entry = sdk.raw_data_access.get_raw_entry_by_id(
+                entry_id="ENTRY_ID"
+            )
+            print(entry.id)
         """
         base_url = None
         url_variables = None
@@ -87,7 +95,7 @@ class RawDataAccess(BaseSDK):
             retry_config=retry_config,
         )
 
-        response_data: Any = None
+        response_data: Optional[ErrorData] = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(models.SearchIndexEntry, http_res)
         if utils.match_response(http_res, "404", "application/json"):
@@ -108,7 +116,10 @@ class RawDataAccess(BaseSDK):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
 
-        raise errors.SDKDefaultError("Unexpected response received", http_res)
+        http_res_text = utils.stream_to_text(http_res)
+        raise errors.SDKDefaultError(
+            "Unexpected response received", http_res, http_res_text
+        )
 
     async def get_raw_entry_by_id_async(
         self,
@@ -134,6 +145,12 @@ class RawDataAccess(BaseSDK):
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
         :param http_headers: Additional headers to set or replace on requests.
+
+        Example:
+            entry = await sdk.raw_data_access.get_raw_entry_by_id_async(
+                entry_id="ENTRY_ID"
+            )
+            print(entry.id)
         """
         base_url = None
         url_variables = None
@@ -188,7 +205,7 @@ class RawDataAccess(BaseSDK):
             retry_config=retry_config,
         )
 
-        response_data: Any = None
+        response_data: Optional[ErrorData] = None
         if utils.match_response(http_res, "200", "application/json"):
             return unmarshal_json_response(models.SearchIndexEntry, http_res)
         if utils.match_response(http_res, "404", "application/json"):
@@ -209,4 +226,7 @@ class RawDataAccess(BaseSDK):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.SDKDefaultError("API error occurred", http_res, http_res_text)
 
-        raise errors.SDKDefaultError("Unexpected response received", http_res)
+        http_res_text = await utils.stream_to_text_async(http_res)
+        raise errors.SDKDefaultError(
+            "Unexpected response received", http_res, http_res_text
+        )

@@ -1,12 +1,13 @@
 # tests/unit/utils/test_utils_unit.py
 from __future__ import annotations
 
-from typing import Any, Callable
+from typing import Any, Callable, Type
 
 import pytest
 import httpx
 
 import dateno.utils as utils
+import dateno.utils.retries as retries_mod
 
 
 def _require_attr(name: str) -> Any:
@@ -148,3 +149,151 @@ def test_retry_calls_function_and_returns_value() -> None:
 
     assert result == "ok"
     assert calls == ["called"]
+
+
+def _make_retries(retry_connection_errors: bool) -> Any:
+    BackoffStrategy = _require_attr("BackoffStrategy")
+    RetryConfig = _require_attr("RetryConfig")
+    Retries = _require_attr("Retries")
+
+    backoff = BackoffStrategy(
+        initial_interval=0,
+        max_interval=0,
+        exponent=1.0,
+        max_elapsed_time=5000,
+    )
+    config = RetryConfig(
+        strategy="backoff",
+        backoff=backoff,
+        retry_connection_errors=retry_connection_errors,
+    )
+    return Retries(config, ["500"])
+
+
+def _patch_retry_sleep(monkeypatch) -> None:
+    monkeypatch.setattr(retries_mod.random, "uniform", lambda *_: 0)
+    monkeypatch.setattr(retries_mod.time, "sleep", lambda *_: None)
+
+
+@pytest.mark.parametrize("exc_type", [httpx.ConnectError, httpx.ReadTimeout])
+def test_retry_retries_connection_errors_when_enabled(
+    monkeypatch, exc_type: Type[Exception]
+) -> None:
+    """
+    `retry()` should retry connection errors when the flag is enabled.
+    """
+    if not hasattr(utils, "retry"):
+        pytest.skip("retry utilities not available")
+
+    retry = utils.retry
+    retries = _make_retries(True)
+    _patch_retry_sleep(monkeypatch)
+
+    calls = {"count": 0}
+    request = httpx.Request("GET", "https://example.invalid")
+
+    def fn():
+        calls["count"] += 1
+        if calls["count"] == 1:
+            raise exc_type("boom", request=request)
+        return httpx.Response(200)
+
+    res = retry(fn, retries)
+
+    assert res.status_code == 200
+    assert calls["count"] == 2
+
+
+@pytest.mark.parametrize("exc_type", [httpx.ConnectError, httpx.ReadTimeout])
+def test_retry_does_not_retry_connection_errors_when_disabled(
+    monkeypatch, exc_type: Type[Exception]
+) -> None:
+    """
+    `retry()` should not retry connection errors when the flag is disabled.
+    """
+    if not hasattr(utils, "retry"):
+        pytest.skip("retry utilities not available")
+
+    retry = utils.retry
+    retries = _make_retries(False)
+    _patch_retry_sleep(monkeypatch)
+
+    calls = {"count": 0}
+    request = httpx.Request("GET", "https://example.invalid")
+
+    def fn():
+        calls["count"] += 1
+        raise exc_type("boom", request=request)
+
+    with pytest.raises(exc_type):
+        retry(fn, retries)
+
+    assert calls["count"] == 1
+
+
+@pytest.mark.anyio
+@pytest.mark.parametrize("exc_type", [httpx.ConnectError, httpx.ReadTimeout])
+async def test_retry_async_retries_connection_errors_when_enabled(
+    monkeypatch, exc_type: Type[Exception]
+) -> None:
+    """
+    `retry_async()` should retry connection errors when the flag is enabled.
+    """
+    if not hasattr(utils, "retry_async"):
+        pytest.skip("retry utilities not available")
+
+    async def _noop_sleep(_):
+        return None
+
+    monkeypatch.setattr(retries_mod.random, "uniform", lambda *_: 0)
+    monkeypatch.setattr(retries_mod.asyncio, "sleep", _noop_sleep)
+
+    retry_async = utils.retry_async
+    retries = _make_retries(True)
+
+    calls = {"count": 0}
+    request = httpx.Request("GET", "https://example.invalid")
+
+    async def fn():
+        calls["count"] += 1
+        if calls["count"] == 1:
+            raise exc_type("boom", request=request)
+        return httpx.Response(200)
+
+    res = await retry_async(fn, retries)
+
+    assert res.status_code == 200
+    assert calls["count"] == 2
+
+
+@pytest.mark.anyio
+@pytest.mark.parametrize("exc_type", [httpx.ConnectError, httpx.ReadTimeout])
+async def test_retry_async_does_not_retry_connection_errors_when_disabled(
+    monkeypatch, exc_type: Type[Exception]
+) -> None:
+    """
+    `retry_async()` should not retry connection errors when the flag is disabled.
+    """
+    if not hasattr(utils, "retry_async"):
+        pytest.skip("retry utilities not available")
+
+    async def _noop_sleep(_):
+        return None
+
+    monkeypatch.setattr(retries_mod.random, "uniform", lambda *_: 0)
+    monkeypatch.setattr(retries_mod.asyncio, "sleep", _noop_sleep)
+
+    retry_async = utils.retry_async
+    retries = _make_retries(False)
+
+    calls = {"count": 0}
+    request = httpx.Request("GET", "https://example.invalid")
+
+    async def fn():
+        calls["count"] += 1
+        raise exc_type("boom", request=request)
+
+    with pytest.raises(exc_type):
+        await retry_async(fn, retries)
+
+    assert calls["count"] == 1

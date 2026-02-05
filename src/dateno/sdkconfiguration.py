@@ -20,6 +20,9 @@ SERVERS = [
 ]
 """Contains the list of servers available to the SDK"""
 
+DEFAULT_TIMEOUT_MS = 30000
+"""Default request timeout in milliseconds."""
+
 
 @dataclass
 class SDKConfiguration:
@@ -37,7 +40,7 @@ class SDKConfiguration:
     gen_version: str = __gen_version__
     user_agent: str = __user_agent__
     retry_config: OptionalNullable[RetryConfig] = Field(default_factory=lambda: UNSET)
-    timeout_ms: Optional[int] = None
+    timeout_ms: Optional[int] = DEFAULT_TIMEOUT_MS
 
     def get_server_details(self) -> Tuple[str, Dict[str, str]]:
         if self.server_url is not None and self.server_url:

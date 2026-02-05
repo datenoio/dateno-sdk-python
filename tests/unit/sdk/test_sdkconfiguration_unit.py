@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import pytest
 
-from dateno.sdkconfiguration import SDKConfiguration, SERVERS
+from dateno.sdkconfiguration import DEFAULT_TIMEOUT_MS, SDKConfiguration, SERVERS
 from dateno.types import UNSET
 
 
@@ -33,6 +33,21 @@ def _mk_cfg(**overrides) -> SDKConfiguration:
     )
     base.update(overrides)
     return SDKConfiguration(**base)
+
+
+def test_timeout_ms_default_value() -> None:
+    """
+    SDKConfiguration must default to a non-None timeout.
+    """
+    cfg = SDKConfiguration(
+        client=None,
+        client_supplied=True,
+        async_client=None,
+        async_client_supplied=True,
+        debug_logger=None,
+    )
+
+    assert cfg.timeout_ms == DEFAULT_TIMEOUT_MS
 
 
 def test_retry_config_default_is_unset() -> None:

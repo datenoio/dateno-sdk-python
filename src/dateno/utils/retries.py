@@ -5,7 +5,7 @@ import random
 import time
 from datetime import datetime
 from email.utils import parsedate_to_datetime
-from typing import List, Optional
+from typing import Awaitable, Callable, List, Optional
 
 import httpx
 
@@ -123,7 +123,7 @@ def _get_sleep_interval(
     return min(sleep, max_interval / 1000)
 
 
-def retry(func, retries: Retries):
+def retry(func: Callable[[], httpx.Response], retries: Retries) -> httpx.Response:
     if retries.config.strategy == "backoff":
 
         def do_request() -> httpx.Response:
@@ -145,15 +145,15 @@ def retry(func, retries: Retries):
                         if res.status_code == parsed_code:
                             raise TemporaryError(res)
             except httpx.ConnectError as exception:
-                if retries.config.retry_connection_errors:
-                    raise
+                if not retries.config.retry_connection_errors:
+                    raise PermanentError(exception) from exception
 
-                raise PermanentError(exception) from exception
+                raise
             except httpx.TimeoutException as exception:
-                if retries.config.retry_connection_errors:
-                    raise
+                if not retries.config.retry_connection_errors:
+                    raise PermanentError(exception) from exception
 
-                raise PermanentError(exception) from exception
+                raise
             except TemporaryError:
                 raise
             except Exception as exception:
@@ -172,7 +172,9 @@ def retry(func, retries: Retries):
     return func()
 
 
-async def retry_async(func, retries: Retries):
+async def retry_async(
+    func: Callable[[], Awaitable[httpx.Response]], retries: Retries
+) -> httpx.Response:
     if retries.config.strategy == "backoff":
 
         async def do_request() -> httpx.Response:
@@ -194,15 +196,15 @@ async def retry_async(func, retries: Retries):
                         if res.status_code == parsed_code:
                             raise TemporaryError(res)
             except httpx.ConnectError as exception:
-                if retries.config.retry_connection_errors:
-                    raise
+                if not retries.config.retry_connection_errors:
+                    raise PermanentError(exception) from exception
 
-                raise PermanentError(exception) from exception
+                raise
             except httpx.TimeoutException as exception:
-                if retries.config.retry_connection_errors:
-                    raise
+                if not retries.config.retry_connection_errors:
+                    raise PermanentError(exception) from exception
 
-                raise PermanentError(exception) from exception
+                raise
             except TemporaryError:
                 raise
             except Exception as exception:
@@ -222,12 +224,12 @@ async def retry_async(func, retries: Retries):
 
 
 def retry_with_backoff(
-    func,
+    func: Callable[[], httpx.Response],
     initial_interval=500,
     max_interval=60000,
     exponent=1.5,
     max_elapsed_time=3600000,
-):
+) -> httpx.Response:
     start = round(time.time() * 1000)
     retries = 0
 
@@ -252,12 +254,12 @@ def retry_with_backoff(
 
 
 async def retry_with_backoff_async(
-    func,
+    func: Callable[[], Awaitable[httpx.Response]],
     initial_interval=500,
     max_interval=60000,
     exponent=1.5,
     max_elapsed_time=3600000,
-):
+) -> httpx.Response:
     start = round(time.time() * 1000)
     retries = 0
 

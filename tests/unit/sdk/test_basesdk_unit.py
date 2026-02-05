@@ -363,7 +363,7 @@ def test_do_request_error_calls_hooks_and_raises_sdk_default_error(monkeypatch) 
         security_source=None,
     )
 
-    with pytest.raises(errors.SDKDefaultError):
+    with pytest.raises(errors.SDKDefaultError) as exc_info:
         sdk.do_request(
             hook_ctx=hook_ctx,
             request=object(),
@@ -371,6 +371,7 @@ def test_do_request_error_calls_hooks_and_raises_sdk_default_error(monkeypatch) 
             retry_config=None,
         )
 
+    assert "boom" in str(exc_info.value)
     assert hooks.before_request_calls == 1
     assert hooks.after_error_calls == 1
     assert hooks.after_success_calls == 0
@@ -490,7 +491,7 @@ async def test_do_request_async_error_calls_hooks_and_raises_sdk_default_error(m
         security_source=None,
     )
 
-    with pytest.raises(errors.SDKDefaultError):
+    with pytest.raises(errors.SDKDefaultError) as exc_info:
         await sdk.do_request_async(
             hook_ctx=hook_ctx,
             request=object(),
@@ -498,6 +499,7 @@ async def test_do_request_async_error_calls_hooks_and_raises_sdk_default_error(m
             retry_config=None,
         )
 
+    assert "down" in str(exc_info.value)
     assert hooks.before_request_calls == 1
     assert hooks.after_error_calls == 1
     assert hooks.after_success_calls == 0

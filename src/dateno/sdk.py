@@ -2,7 +2,7 @@
 
 from .basesdk import BaseSDK
 from .httpclient import AsyncHttpClient, ClientOwner, HttpClient, close_clients
-from .sdkconfiguration import SDKConfiguration
+from .sdkconfiguration import DEFAULT_TIMEOUT_MS, SDKConfiguration
 from .utils.logger import Logger, get_default_logger
 from .utils.retries import RetryConfig
 from . import models, utils
@@ -74,7 +74,7 @@ class SDK(BaseSDK):
         client: Optional[HttpClient] = None,
         async_client: Optional[AsyncHttpClient] = None,
         retry_config: OptionalNullable[RetryConfig] = UNSET,
-        timeout_ms: Optional[int] = None,
+        timeout_ms: Optional[int] = DEFAULT_TIMEOUT_MS,
         debug_logger: Optional[Logger] = None,
     ) -> None:
         r"""Instantiates the SDK configuring it with the provided parameters.
@@ -87,6 +87,7 @@ class SDK(BaseSDK):
         :param async_client: The Async HTTP client to use for all asynchronous methods
         :param retry_config: The retry configuration to use for all supported methods
         :param timeout_ms: Optional request timeout applied to each operation in milliseconds
+            (defaults to 30000; pass None to disable)
         """
         client_supplied = True
         if client is None:
