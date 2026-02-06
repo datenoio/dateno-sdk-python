@@ -77,6 +77,21 @@ The SDK uses API key authentication via query parameter.
 SDK(api_key_query="YOUR_API_KEY")
 ```
 
+## Client identification header
+
+The SDK automatically sends `Dateno-Client: sdk-python/<version>` on each request.
+You can override it per call using `http_headers`:
+
+```python
+from dateno import SDK
+
+with SDK(api_key_query="YOUR_API_KEY") as sdk:
+    sdk.search_api.get_dataset_by_entry_id(
+        entry_id="c4a88574-7a2a-4048-bc9f-07de0559e7b7",
+        http_headers={"Dateno-Client": "myapp/1.2.3"},
+    )
+```
+
 ---
 
 ## Quick Start

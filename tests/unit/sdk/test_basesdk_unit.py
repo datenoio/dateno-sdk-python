@@ -7,6 +7,7 @@ import httpx
 import pytest
 
 import dateno.basesdk as basesdk_mod
+from dateno._hooks import SDKHooks
 from dateno.basesdk import BaseSDK
 from dateno import errors
 
@@ -331,6 +332,82 @@ def test_do_request_success_calls_hooks_and_returns_response(monkeypatch) -> Non
     assert hooks.before_request_calls == 1
     assert hooks.after_error_calls == 0
     assert hooks.after_success_calls == 1
+
+
+def test_default_dateno_client_header_hook_sets_header(monkeypatch) -> None:
+    patch_match_response(monkeypatch)
+
+    cfg = mk_cfg(server_url="https://example.invalid")
+    cfg.debug_logger = _FakeDebugLogger()
+
+    hooks = SDKHooks()
+    _install_hooks(cfg, hooks)
+
+    response = make_httpx_response(200, body=b'{"ok":true}')
+    client = _FakeSyncClient(response)
+    cfg.client = client
+
+    sdk = BaseSDK(cfg)
+
+    hook_ctx = _FakeHookCtx(
+        config=cfg,
+        base_url="https://example.invalid",
+        operation_id="unit_test_op",
+        oauth2_scopes=[],
+        security_source=None,
+    )
+
+    request = httpx.Request("GET", "https://example.invalid/request")
+    res = sdk.do_request(
+        hook_ctx=hook_ctx,
+        request=request,
+        error_status_codes=["4XX", "5XX"],
+        retry_config=None,
+    )
+
+    assert res.status_code == 200
+    sent_request = client.send_calls[0]["request"]
+    assert sent_request.headers.get("Dateno-Client") == f"sdk-python/{cfg.sdk_version}"
+
+
+def test_default_dateno_client_header_hook_respects_existing_header(monkeypatch) -> None:
+    patch_match_response(monkeypatch)
+
+    cfg = mk_cfg(server_url="https://example.invalid")
+    cfg.debug_logger = _FakeDebugLogger()
+
+    hooks = SDKHooks()
+    _install_hooks(cfg, hooks)
+
+    response = make_httpx_response(200, body=b'{"ok":true}')
+    client = _FakeSyncClient(response)
+    cfg.client = client
+
+    sdk = BaseSDK(cfg)
+
+    hook_ctx = _FakeHookCtx(
+        config=cfg,
+        base_url="https://example.invalid",
+        operation_id="unit_test_op",
+        oauth2_scopes=[],
+        security_source=None,
+    )
+
+    request = httpx.Request(
+        "GET",
+        "https://example.invalid/request",
+        headers={"Dateno-Client": "custom/1"},
+    )
+    res = sdk.do_request(
+        hook_ctx=hook_ctx,
+        request=request,
+        error_status_codes=["4XX", "5XX"],
+        retry_config=None,
+    )
+
+    assert res.status_code == 200
+    sent_request = client.send_calls[0]["request"]
+    assert sent_request.headers.get("Dateno-Client") == "custom/1"
 
 
 def test_do_request_error_calls_hooks_and_raises_sdk_default_error(monkeypatch) -> None:

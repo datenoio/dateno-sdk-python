@@ -16,6 +16,21 @@ with SDK(
 
 </br>
 
+The SDK also sends a `Dateno-Client` header by default. You can override it per request:
+
+```python
+from dateno import SDK
+
+with SDK(api_key_query="<YOUR_API_KEY_HERE>") as sdk:
+    res = sdk.search_api.get_dataset_by_entry_id(
+        entry_id="c4a88574-7a2a-4048-bc9f-07de0559e7b7",
+        http_headers={"Dateno-Client": "myapp/1.2.3"},
+    )
+    print(res)
+```
+
+</br>
+
 The same SDK client can also be used to make asynchronous requests by importing asyncio.
 
 ```python
